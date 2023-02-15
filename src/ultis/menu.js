@@ -1,6 +1,6 @@
 import icons from './icons'
 
-const { MdOutlineLibraryMusic } = icons
+const { MdOutlineLibraryMusic, BiDisc, GiChart, FiRadio, MdOutlineFeed } = icons
 export const sidebarMenu = [
   {
     path: 'mymusic',
@@ -11,22 +11,22 @@ export const sidebarMenu = [
     path: '',
     text: 'Khám Phá',
     end: true,
-    icon: <MdOutlineLibraryMusic size={20} />
+    icon: <BiDisc size={20} />
   },
   {
     path: 'zing-chart',
     text: '#zingchart',
-    icon: <MdOutlineLibraryMusic size={20} />
+    icon: <GiChart size={20} />
   },
   {
     path: 'radio',
     text: 'Radio',
-    icon: <MdOutlineLibraryMusic size={20} />,
+    icon: <FiRadio size={20} />,
     popup: true
   },
   {
     path: 'follow',
     text: 'Theo Dõi',
-    icon: <MdOutlineLibraryMusic size={20} />
+    icon: <MdOutlineFeed size={20} />
   },
 ]

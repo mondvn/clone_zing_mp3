@@ -1,6 +1,10 @@
+import Header from "../../components/Header";
+
 function Home() {
   return (
-    <div>Home</div>
+    <div className="overflow-y-auto mt-[70px]">
+      Home
+    </div>
   )
 }
 
