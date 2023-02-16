@@ -16,9 +16,10 @@ module.exports = {
         'input-bg': '#FFFFFF1A',
       },
       colors: {
-        'primary-color': '#FFFFFF',
-        'slider-color': '#a0a0a0',
+        'primary-text-color': '#FFFFFF',
+        'slider-text-color': '#a0a0a0',
         'button-header-color': '#C273ED',
+        'player-text-color': '#FFFFFF80'
       },
       borderColor: {
         'player-border-color': '#353535',
@@ -60,6 +61,9 @@ module.exports = {
         'slide-left': 'slide-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;',
         'slide-left-2': 'slide-left-2 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;',
       },
+    },
+    screens: {
+      '1600': '1600px',
     },
   },
   plugins: [],

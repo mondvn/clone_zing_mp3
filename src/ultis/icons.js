@@ -1,26 +1,43 @@
+import { AiOutlineHeart } from 'react-icons/ai'
 import { BiDisc } from 'react-icons/bi'
-import { BsArrowLeft, BsArrowRight } from 'react-icons/bs'
-import { FiRadio, FiSearch, FiSettings } from 'react-icons/fi'
+import { CiRepeat } from 'react-icons/ci'
+import { BsArrowLeft, BsArrowRight, BsThreeDots, BsPlayCircle } from 'react-icons/bs'
+import { FaRandom } from 'react-icons/fa'
+import { FiRadio, FiSearch, FiSettings, FiPauseCircle } from 'react-icons/fi'
+import { MdOutlineLibraryMusic, MdOutlineFeed, MdSkipNext, MdSkipPrevious } from 'react-icons/md'
 import { GiChart } from 'react-icons/gi'
-import { MdOutlineLibraryMusic, MdOutlineFeed } from 'react-icons/md'
-import { VscClose, VscDesktopDownload } from 'react-icons/vsc'
 import { RiVipDiamondLine } from 'react-icons/ri'
-import { TbShirt } from 'react-icons/tb'
+import { RxShuffle } from 'react-icons/rx'
+import { SlHeart } from 'react-icons/sl'
+import { TbShirt, TbRepeat } from 'react-icons/tb'
+import { VscClose, VscDesktopDownload } from 'react-icons/vsc'
+
 
 const icons = {
-  MdOutlineLibraryMusic,
+  AiOutlineHeart,
   BiDisc,
-  GiChart,
-  FiRadio,
-  MdOutlineFeed,
   BsArrowLeft,
   BsArrowRight,
+  BsThreeDots,
+  BsPlayCircle,
+  CiRepeat,
+  FaRandom,
+  FiPauseCircle,
+  FiRadio,
   FiSearch,
+  FiSettings,
+  GiChart,
+  MdOutlineFeed,
+  MdOutlineLibraryMusic,
+  MdSkipPrevious,
+  MdSkipNext,
+  RiVipDiamondLine,
+  RxShuffle,
+  TbShirt,
+  TbRepeat,
   VscClose,
   VscDesktopDownload,
-  FiSettings,
-  RiVipDiamondLine,
-  TbShirt,
+  SlHeart,
 }
 
 export default icons

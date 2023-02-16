@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { getArrSlider } from '../ultis/fn'
-import * as action from '../store/actions'
+import * as actions from '../store/actions'
 
 const Slider = () => {
   const { banner } = useSelector(state => state.app)
@@ -50,7 +50,8 @@ const Slider = () => {
 
   const handleClickBanner = (item) => {
     if (item.type === 1) {
-      dispatch(action.setCurSongId(item.encodeId))
+      dispatch(actions.setCurSongId(item.encodeId))
+      dispatch(actions.play(true))
     }
 
   }
