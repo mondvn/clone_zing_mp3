@@ -13,13 +13,13 @@ const Player = () => {
   const [songInfo, setSongInfo] = useState(null)
   const [songSource, setSongSource] = useState(null)
 
-  console.log(audioElement)
-  console.log({ isPlaying })
+  // console.log(audioElement)
+  // console.log({ isPlaying })
   useEffect(() => {
     const fetchDetailSong = async () => {
       const [res1, res2] = await Promise.all([
-        apis.getInfoSong(curSongId),
-        apis.getSong(curSongId)
+        apis.apiGetInfoSong(curSongId),
+        apis.apiGetSong(curSongId)
       ])
       if (res1.data.err === 0) {
         setSongInfo(res1.data.data)
@@ -33,17 +33,17 @@ const Player = () => {
   }, [curSongId])
 
   useEffect(() => {
-    var promise = audioElement.play();
+    // var promise = audioElement.play();
 
-    if (promise !== undefined) {
-      promise.then(_ => {
-        audioElement.play()
-        audioElement.volume('10')
-      }).catch(error => {
-        // Autoplay was prevented.
-        // Show a "Play" button so that user can start playback.
-      });
-    }
+    // if (promise !== undefined) {
+    //   promise.then(_ => {
+    //     audioElement.play()
+    //     audioElement.volume('10')
+    //   }).catch(error => {
+    //     // Autoplay was prevented.
+    //     // Show a "Play" button so that user can start playback.
+    //   });
+    // }
   }, [curSongId])
 
   const handleTogglePlayMusic = () => {
