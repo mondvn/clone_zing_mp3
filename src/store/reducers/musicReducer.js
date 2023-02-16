@@ -6,11 +6,11 @@ const initState = {
 
 const musicReducer = (state = initState, action) => {
   switch (action.type) {
-    // case actionTypes.GET_HOME:
-    // return {
-    //   ...state,
-    //   banner: action.homeData?.find(item => item.sectionType === 'banner').items || null
-    // }
+    case actionTypes.SET_CURRENT_SONG_ID:
+      return {
+        ...state,
+        curSongId: action.songId || null
+      }
 
     default:
       return state

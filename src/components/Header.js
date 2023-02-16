@@ -7,7 +7,7 @@ const { BsArrowLeft, BsArrowRight, VscDesktopDownload, TbShirt, RiVipDiamondLine
 
 const Header = () => {
   return (
-    <div className='h-[70px] px-[59px] flex items-center fixed w-[calc(100%-569px)] justify-between bg-[#1e1e1e]'>
+    <div className='h-[70px] px-[59px] flex items-center fixed w-[calc(100%-569px)] justify-between bg-[#1e1e1e] z-50 backdrop-blur-[50px] shadow-[0_3px_5px_rgba(0,0,0,0.08)]'>
       <div className='flex items-center gap-5'>
         <div className='flex gap-5 text-[#616161]'>
           <span><BsArrowLeft size={24} /></span>
