@@ -3,7 +3,7 @@ import { Header, SidebarLeft, SidebarRight } from '../../components'
 
 function Public() {
   return (
-    <div className='w-full flex bg-[#292929]'>
+    <div className='w-full flex bg-[#1e1e1e]'>
       <div className='w-[240px] flex-none'>
         <SidebarLeft />
       </div>
