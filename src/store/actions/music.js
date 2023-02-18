@@ -9,3 +9,7 @@ export const togglePlayMusic = (flag) => ({
   type: actionTypes.TOGGLE_PLAY_MUSIC,
   flag
 })
+export const togglePlayOnAlbum = (flag) => ({
+  type: actionTypes.TOGGLE_PLAY_ON_ALBUM,
+  flag
+})
