@@ -23,9 +23,10 @@ const Player = () => {
 
   const dispatch = useDispatch()
   const thumbRef = useRef()
+  const trackRef = useRef()
 
-  console.log('[Player Component]: Re-render')
-  console.log('[Player Component] - isPlaying:', isPlaying)
+  // console.log('[Player Component]: Re-render')
+  // console.log('[Player Component] - isPlaying:', isPlaying)
 
 
   useEffect(() => {
@@ -58,18 +59,17 @@ const Player = () => {
   }, [audio])
 
 
-  // Xử lý thành progress bar
+  // Xử lý thanh process và hiển thị current time
   useEffect(() => {
     if (isPlaying) {
-      // Xử lý thanh process và hiển thị current time
-      // intervalId = setInterval(() => {
-      //   let percent = Math.round(audio.currentTime * 100 / songInfo?.duration)
-      //   thumbRef.current.style.cssText = `right: ${100 - percent}%`
-      //   setCurTime(audio.currentTime)
-      // }, 200)
+      intervalId = setInterval(() => {
+        let percent = Math.round(audio.currentTime * 100 / songInfo?.duration)
+        thumbRef.current.style.cssText = `right: ${100 - percent}%`
+        setCurTime(audio.currentTime)
+      }, 200)
     }
     return () => {
-      // intervalId && clearInterval(intervalId)
+      intervalId && clearInterval(intervalId)
 
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -90,7 +90,22 @@ const Player = () => {
   }
 
   const handleClickProgressbar = (e) => {
-    console.log(e)
+    // Lấy tọa độ trackRef
+    const trackRect = trackRef.current.getBoundingClientRect()
+    const percent = (e.clientX - trackRect.left) / trackRect.width
+    console.log({ percent })
+
+    // Xét lại progress bar
+    thumbRef.current.style.cssText = `right: ${(1 - percent) * 100}%`
+    // Xét lại thời gian bài hát
+    audio.currentTime = songInfo?.duration * percent
+    // Xét lại thời gian bài hát progress bar
+    setCurTime(audio.currentTime)
+
+
+
+
+
   }
 
   return (
@@ -159,7 +174,8 @@ const Player = () => {
           </div>
           <div
             onClick={handleClickProgressbar}
-            className='relative flex-1 w-full h-[3px] hover:h-[6px] bg-black-#FFFFFF80 rounded-l-full rounded-r-full'>
+            ref={trackRef}
+            className='relative flex-1 w-full h-[3px] hover:h-[8px] bg-black-#FFFFFF80 rounded-l-full rounded-r-full'>
             <div ref={thumbRef} className='absolute top-0 left-0 h-full bg-white rounded-l-full rounded-r-full'></div>
           </div>
           <div className='flex-none font-medium'>
