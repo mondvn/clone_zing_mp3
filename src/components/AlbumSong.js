@@ -26,7 +26,7 @@ const AlbumSong = ({ song }) => {
         />
         <div className='flex flex-col justify-between'>
           <div className='flex justify-start text-sm text-primary-text-color gap-[6px]'>
-            {song?.title?.length > 30 ? `${song?.title?.slice(0, 30)}...` : song?.title}
+            {song?.title?.length > 24 ? `${song?.title?.slice(0, 24)}...` : song?.title}
             <div className={`${!song?.isWorldWide ? 'block' : 'hidden'} flex text-yellow-300`}><RiVipCrown2Line size={16} /></div>
           </div>
           <h3 className=''>{song?.artistsNames?.length > 34 ? `${song?.artistsNames?.slice(0, 34)}...` : song?.artistsNames}</h3>
