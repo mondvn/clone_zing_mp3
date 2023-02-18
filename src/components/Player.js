@@ -13,12 +13,19 @@ var intervalId
 
 const Player = () => {
 
+
   const { curSongId, isPlaying } = useSelector(state => state.music)
   const [songInfo, setSongInfo] = useState(null)
   const [audio, setAudio] = useState(new Audio())
   const [curTime, setCurTime] = useState(0)
+  const [firstTimeRender, setFirstTimeRender] = useState(true)
+
+
   const dispatch = useDispatch()
   const thumbRef = useRef()
+
+  console.log('[Player Component]: Re-render')
+  console.log('[Player Component] - isPlaying:', isPlaying)
 
 
   useEffect(() => {
@@ -43,7 +50,9 @@ const Player = () => {
 
   useEffect(() => {
     audio.load()
-    dispatch(actions.togglePlayMusic(true))
+
+    // Xử lý khi reload lại trang, isPlaying không bị mặc định thành true
+    if (!firstTimeRender) dispatch(actions.togglePlayMusic(true))
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [audio])
@@ -70,9 +79,11 @@ const Player = () => {
   useEffect(() => {
     isPlaying ? audio.play() : audio.pause()
 
+    // Xử lý khi reload lại trang, isPlaying không bị mặc định thành true
+    if (isPlaying) setFirstTimeRender(false)
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isPlaying])
-
 
   const handleTogglePlayMusic = () => {
     isPlaying ? dispatch(actions.togglePlayMusic(false)) : dispatch(actions.togglePlayMusic(true))

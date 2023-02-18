@@ -10,7 +10,7 @@ const { CiMusicNote1, RiVipCrown2Line } = icons
 const AlbumSong = ({ song }) => {
   const dispatch = useDispatch()
 
-  console.log('AlbumSong component', song)
+  // console.log('AlbumSong component', song)
   return (
     <div
       onClick={() => {
