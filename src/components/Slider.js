@@ -3,11 +3,15 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { getArrSlider } from '../ultis/fn'
 import * as actions from '../store/actions'
+import { useNavigate } from 'react-router-dom'
 
 const Slider = () => {
   const { banner } = useSelector(state => state.app)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
+
+  // Animation for banner
   useEffect(() => {
     const sliderElements = document.getElementsByClassName('slider-item')
     let start = 0
@@ -49,9 +53,13 @@ const Slider = () => {
   }, [])
 
   const handleClickBanner = (item) => {
+    // console.log({ item })
     if (item.type === 1) {
       dispatch(actions.setCurSongId(item.encodeId))
-      dispatch(actions.play(true))
+      dispatch(actions.togglePlayMusic(false))
+    } else if (item.type === 4) {
+      const albumPath = item.link.split('.')[0]
+      navigate(albumPath)
     }
 
   }

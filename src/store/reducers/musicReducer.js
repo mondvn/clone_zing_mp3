@@ -12,7 +12,7 @@ const musicReducer = (state = initState, action) => {
         ...state,
         curSongId: action.songId || null
       }
-    case actionTypes.PLAY:
+    case actionTypes.TOGGLE_PLAY_MUSIC:
       return {
         ...state,
         isPlaying: action.flag

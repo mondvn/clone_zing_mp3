@@ -14,12 +14,14 @@ module.exports = {
         'button-primary-bg': '#9B4DE0',
         'button-bg': '#FFFFFF1A',
         'input-bg': '#FFFFFF1A',
+        'black-#ffffff1a': '#ffffff1a',
       },
       colors: {
         'primary-text-color': '#FFFFFF',
         'slider-text-color': '#a0a0a0',
         'button-header-color': '#C273ED',
-        'player-text-color': '#FFFFFF80'
+        'player-text-color': '#FFFFFF80',
+        'black-#FFFFFF80': '#FFFFFF80',
       },
       borderColor: {
         'player-border-color': '#353535',

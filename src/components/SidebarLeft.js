@@ -3,14 +3,13 @@ import React from 'react'
 import logoDark from '../assets/images/logo-dark.svg'
 import liveTag from '../assets/images/live-tag.svg'
 import { sidebarMenu } from '../ultis/menu'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import path from '../ultis/path'
 
 const notActiveStyle = 'py-2 px-[25px] font-bold text-[13px] text-[#A0A0A0] flex justify-start items-center hover:text-primary-text-color'
 const activeStyle = 'py-2 px-[25px] font-bold text-[13px] text-[#FFFFFF] flex justify-start items-center bg-[hsla(0,0%,100%,0.1)] border-l-[3px] border-[#994cdd]'
 
 const SidebarLeft = () => {
-  const navigate = useNavigate()
 
   return (
     <div className='flex flex-col bg-[hsla(0,0%,100%,0.05)] h-full'>

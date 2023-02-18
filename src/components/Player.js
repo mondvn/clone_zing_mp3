@@ -1,53 +1,85 @@
-import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useEffect, useRef, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import moment from 'moment'
+import { toast } from 'react-toastify'
 
 import icons from '../ultis/icons'
-
 import * as apis from '../apis'
+import * as actions from '../store/actions'
 
 const { SlHeart, BsThreeDots, BsPlayCircle, MdSkipPrevious, MdSkipNext, TbRepeat, FiPauseCircle, RxShuffle } = icons
 
+var intervalId
+
 const Player = () => {
-  const audioElement = new Audio('https://mp3-s1-zmp3.zmdcdn.me/46565f45e2050b5b5214/2680165431153675061?authen=exp=1676733044~acl=/46565f45e2050b5b5214/*~hmac=8a878b7a9bffce74b70b4b1fb6138d3d&fs=MTY3NjU2MDI0NDmUsICyNnx3ZWJWNnwwfDM0LjIwMS4xMDQdUngMTk3')
+
   const { curSongId, isPlaying } = useSelector(state => state.music)
   const [songInfo, setSongInfo] = useState(null)
-  const [songSource, setSongSource] = useState(null)
+  const [audio, setAudio] = useState(new Audio())
+  const [curTime, setCurTime] = useState(0)
+  const dispatch = useDispatch()
+  const thumbRef = useRef()
 
-  // console.log(audioElement)
-  // console.log({ isPlaying })
+
   useEffect(() => {
     const fetchDetailSong = async () => {
       const [res1, res2] = await Promise.all([
         apis.apiGetInfoSong(curSongId),
         apis.apiGetSong(curSongId)
       ])
-      if (res1.data.err === 0) {
+      if (res2.data.err === 0 && res1.data.err === 0) {
+        // audio.pause()
         setSongInfo(res1.data.data)
-      }
-      if (res2.data.err === 0) {
-        setSongSource(res2.data.data['128'])
+        setAudio(new Audio(res2.data.data['128']))
+      } else {
+        toast.warn(res2.data.msg)
       }
     }
 
     fetchDetailSong()
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [curSongId])
 
   useEffect(() => {
-    // var promise = audioElement.play();
+    audio.load()
+    dispatch(actions.togglePlayMusic(true))
 
-    // if (promise !== undefined) {
-    //   promise.then(_ => {
-    //     audioElement.play()
-    //     audioElement.volume('10')
-    //   }).catch(error => {
-    //     // Autoplay was prevented.
-    //     // Show a "Play" button so that user can start playback.
-    //   });
-    // }
-  }, [curSongId])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [audio])
+
+
+  // Xử lý thành progress bar
+  useEffect(() => {
+    if (isPlaying) {
+      // Xử lý thanh process và hiển thị current time
+      // intervalId = setInterval(() => {
+      //   let percent = Math.round(audio.currentTime * 100 / songInfo?.duration)
+      //   thumbRef.current.style.cssText = `right: ${100 - percent}%`
+      //   setCurTime(audio.currentTime)
+      // }, 200)
+    }
+    return () => {
+      // intervalId && clearInterval(intervalId)
+
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isPlaying])
+
+  // Xử lý Bật/ tắt nhạc
+  useEffect(() => {
+    isPlaying ? audio.play() : audio.pause()
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isPlaying])
+
 
   const handleTogglePlayMusic = () => {
-    // setIsPlaying(prev => !prev)
+    isPlaying ? dispatch(actions.togglePlayMusic(false)) : dispatch(actions.togglePlayMusic(true))
+  }
+
+  const handleClickProgressbar = (e) => {
+    console.log(e)
   }
 
   return (
@@ -110,8 +142,19 @@ const Player = () => {
             </div>
           </span>
         </div>
-        <div className='flex justify-center items-center mb-[5px]'>
-          progress bar
+        <div className='flex w-full justify-center items-center mb-[5px] gap-[10px] text-xs'>
+          <div className='text-black-#FFFFFF80 flex-none font-medium'>
+            {moment.utc(curTime * 1000).format("mm:ss")}
+          </div>
+          <div
+            onClick={handleClickProgressbar}
+            className='relative flex-1 w-full h-[3px] hover:h-[6px] bg-black-#FFFFFF80 rounded-l-full rounded-r-full'>
+            <div ref={thumbRef} className='absolute top-0 left-0 h-full bg-white rounded-l-full rounded-r-full'></div>
+          </div>
+          <div className='flex-none font-medium'>
+            {/* 03:33 */}
+            {moment.utc(songInfo?.duration * 1000).format("mm:ss")}
+          </div>
         </div>
       </div>
       <div className='w-[30%] flex-auto flex items-center'>
