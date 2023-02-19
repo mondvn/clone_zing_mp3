@@ -23,6 +23,10 @@ module.exports = {
         'button-header-color': '#C273ED',
         'player-text-color': '#FFFFFF80',
         'black-#FFFFFF80': '#FFFFFF80',
+        'black-#32323d': '#32323d',
+        'blue-#5a4be7': '#5a4be7',
+        'pink-#c86dd7': '#c86dd7',
+        'yellow-#ffdb00': '#ffdb00',
       },
       borderColor: {
         'player-border-color': '#353535',

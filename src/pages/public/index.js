@@ -3,3 +3,8 @@ export { default as Login } from './Login'
 export { default as Public } from './Public'
 export { default as MyMusic } from './MyMusic'
 export { default as Album } from './Album'
+
+export { default as Hub } from './Hub'
+export { default as MusicVideo } from './MusicVideo'
+export { default as NewMusic } from './NewMusic'
+export { default as Top100 } from './Top100'

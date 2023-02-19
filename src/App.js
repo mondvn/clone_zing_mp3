@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { Home, Public, Login, MyMusic, Album } from './pages/public'
+import { Home, Public, Login, MyMusic, Album, Hub, NewMusic, Top100, MusicVideo } from './pages/public'
 import path from './ultis/path'
 import * as actions from './store/actions'
 
@@ -25,6 +25,12 @@ function App() {
             <Route path={path.MY_MUSIC} element={<MyMusic />} />
             <Route path={path.ALBUM__TITLE__PID} element={<Album />} />
             <Route path={path.PLAYLIST__TITLE__PID} element={<Album />} />
+
+            <Route path={path.HUB} element={<Hub />} />
+            <Route path={path.NEW_MUSIC} element={<NewMusic />} />
+            <Route path={path.TOP_100} element={<Top100 />} />
+            <Route path={path.MUSIC_VIDEO} element={<MusicVideo />} />
+
           </Route>
         </Routes>
       </div>
