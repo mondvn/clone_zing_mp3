@@ -15,6 +15,7 @@ module.exports = {
         'button-bg': '#FFFFFF1A',
         'input-bg': '#FFFFFF1A',
         'black-#ffffff1a': '#ffffff1a',
+        'black-#ffffff33': '#ffffff33',
       },
       colors: {
         'primary-text-color': '#FFFFFF',
