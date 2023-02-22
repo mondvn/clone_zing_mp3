@@ -2,8 +2,8 @@ import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation } from "swiper";
 
-const HomeBanner = ({ banner }) => {
-  console.log(banner)
+const HomeBanner = ({ banners }) => {
+  // console.log(banners)
   return (
     <div className='pt-[30px]'>
       <Swiper
@@ -16,15 +16,15 @@ const HomeBanner = ({ banner }) => {
           disableOnInteraction: false,
         }}
         navigation={true}
-        modules={[Navigation]}
+        modules={[Autoplay, Navigation]}
         className="mySwiper"
       >
-        {banner?.map((item, index) => (
+        {banners?.map((item, index) => (
           <SwiperSlide>
             <img
-              src={item.banner}
+              src={item?.banner}
               alt='banner'
-              key={item.encodeId}
+              key={item?.encodeId}
               className='object-contain rounded-lg'
             />
           </SwiperSlide>

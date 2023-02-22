@@ -1,30 +1,43 @@
 import { useSelector } from 'react-redux';
-import { HomeBanner, HomeCommonSlider, HomeSlider } from '../../components';
+
+import { HomeBanner, HomeCommonSlider, HomeNewReleaseChart, HomeRadioSlider, HomeSlider } from '../../components';
 
 function Home() {
 
   const { homeData } = useSelector(state => state.app)
-  // console.log(homeData)
+  console.log(homeData)
 
   return (
     <div className='mx-[59px]'>
-      {/* <div className="pt-[30px] h-full">
-        <HomeSlider />
-      </div> */}
       {homeData?.map((item, index) => {
-        if (item?.viewType === "slider" && item?.sectionType !== "banner") {
-          return (
-            <HomeCommonSlider
-              key={index}
-              slider={item}
-            />
-          )
-        }
-        else if (item?.sectionType === "banner") {
+        if (item?.sectionType === "banner") {
           return (
             <HomeBanner
               key={index}
-              banner={item.items}
+              banners={item?.items}
+            />
+          )
+        } else if (item?.sectionType === "livestream") {
+          return (
+            <HomeRadioSlider
+              key={index}
+              radios={item?.items}
+              title={item?.title}
+            />
+          )
+        } else if (item?.sectionType === "newReleaseChart") {
+          return (
+            <HomeNewReleaseChart
+              key={index}
+              newReleaseCharts={item?.items}
+              title={item?.title}
+            />
+          )
+        } else if (item?.viewType === "slider" && item?.sectionType !== "banner" && item?.sectionType !== "livestream") {
+          return (
+            <HomeCommonSlider
+              key={index}
+              sliders={item}
             />
           )
         }
