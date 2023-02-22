@@ -1,5 +1,6 @@
 const actionTypes = {
   GET_HOME: 'GET_HOME',
+  GET_HOME_DATA: 'GET_HOME_DATA',
   SET_CURRENT_SONG_ID: 'SET_CURRENT_SONG_ID',
   // Music
   TOGGLE_PLAY_MUSIC: 'PLAY',

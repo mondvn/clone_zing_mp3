@@ -1,8 +1,13 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Routes, Route } from 'react-router-dom'
+
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 import { Home, Public, Login, MyMusic, Album, Hub, NewMusic, Top100, MusicVideo } from './pages/public'
 import path from './ultis/path'
@@ -12,6 +17,7 @@ function App() {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(actions.getHome())
+    dispatch(actions.getHomeData())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

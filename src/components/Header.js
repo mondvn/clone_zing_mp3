@@ -1,7 +1,7 @@
 import React from 'react'
 
 import icons from '../ultis/icons'
-import Search from './Search'
+import Search from './HeaderSearch'
 
 const { BsArrowLeft, BsArrowRight, VscDesktopDownload, TbShirt, RiVipDiamondLine, FiSettings } = icons
 

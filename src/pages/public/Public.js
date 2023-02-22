@@ -6,7 +6,7 @@ import { Header, Player, SidebarLeft, SidebarRight } from '../../components'
 function Public() {
   return (
     <div className='w-full h-screen flex bg-[#1e1e1e]'>
-      <div className='w-[240px] flex-none h-full'>
+      <div className='w-[240px] flex-none h-full '>
         <SidebarLeft />
       </div>
       <div className='flex-auto w-full h-full'>
@@ -14,7 +14,7 @@ function Public() {
           <header>
             <Header />
           </header>
-          <div className='mt-[70px] mb-[90px]'>
+          <div className='mt-[70px] pb-5 mb-[90px]'>
             <Outlet />
           </div>
         </Scrollbars>
