@@ -52,28 +52,26 @@ const HomeCommonSlider = ({ sliders }) => {
           className="mySwiper"
         >
           {sliders?.items?.map((item, index) => (
-            <div className='flex flex-col' key={item?.encodeId}>
-              <SwiperSlide>
-                <div className='flex flex-col'>
-                  <Link>
-                    <img
-                      className='w-full h-full rounded-md'
-                      src={item?.thumbnailM}
-                      alt='Hình nền slider'
-                    />
-                  </Link>
-                  <Link
-                    to={item?.link.split('.')[0]}
-                    className='mt-3 mb-1'
-                  >
-                    <h4 className='text-white text-sm font-bold line-clamp-2'>{item?.title}</h4>
-                  </Link>
-                  <h3 className='text-black-#FFFFFF80 text-sm font-normal line-clamp-2'>
-                    {item?.sortDescription}
-                  </h3>
-                </div>
-              </SwiperSlide>
-            </div>
+            <SwiperSlide key={item?.encodeId}>
+              <div className='flex flex-col'>
+                <Link>
+                  <img
+                    className='w-full h-full rounded-md'
+                    src={item?.thumbnailM}
+                    alt='Hình nền slider'
+                  />
+                </Link>
+                <Link
+                  to={item?.link.split('.')[0]}
+                  className='mt-3 mb-1'
+                >
+                  <h4 className='text-white text-sm font-bold line-clamp-2'>{item?.title}</h4>
+                </Link>
+                <h3 className='text-black-#FFFFFF80 text-sm font-normal line-clamp-2'>
+                  {item?.sortDescription}
+                </h3>
+              </div>
+            </SwiperSlide>
           ))}
         </Swiper>
       </div>

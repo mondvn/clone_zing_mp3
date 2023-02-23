@@ -10,54 +10,48 @@ function Home() {
   return (
     <div className='mx-[59px]'>
       {homeData?.map((item, index) => {
-        if (item?.sectionType === "banner") {
-          return (
-            <HomeBanner
-              key={index}
-              banners={item?.items}
-            />
-          )
+        switch (item.sectionType) {
+          case "banner":
+            return (
+              <HomeBanner
+                key={index}
+                banners={item?.items}
+              />
+            )
+          case "livestream":
+            return (
+              <HomeRadioSlider
+                key={index}
+                radios={item?.items}
+                title={item?.title}
+              />
+            )
+          case "newReleaseChart":
+            return (
+              <HomeNewReleaseChart
+                key={index}
+                newReleaseCharts={item?.items}
+                title={item?.title}
+              />
+            )
+          case "new-release":
+            return (
+              <HomeNewRelease
+                key={index}
+                newRelease={item?.items}
+                title={item?.title}
+              />
+            )
+          case "playlist":
+            return (
+              <HomeCommonSlider
+                key={index}
+                sliders={item}
+              />
+            )
+          default:
+            return null
         }
-        else if (item?.sectionType === "livestream") {
-          return (
-            <HomeRadioSlider
-              key={index}
-              radios={item?.items}
-              title={item?.title}
-            />
-          )
-        } else if (item?.sectionType === "newReleaseChart") {
-          return (
-            <HomeNewReleaseChart
-              key={index}
-              newReleaseCharts={item?.items}
-              title={item?.title}
-            />
-          )
-        } else if (item?.sectionType === "new-release") {
-          return (
-            <HomeNewRelease
-              key={index}
-              newRelease={item?.items}
-              title={item?.title}
-            />
-          )
-        } else if (item?.sectionType === "playlist") {
-          return (
-            <HomeCommonSlider
-              key={index}
-              sliders={item}
-            />
-          )
-        }
-        // else if (item?.viewType === "slider" && item?.sectionType !== "banner" && item?.sectionType !== "livestream") {
-        //   return (
-        //     <HomeCommonSlider
-        //       key={index}
-        //       sliders={item}
-        //     />
-        //   )
-        // }
       })}
     </div>
   )

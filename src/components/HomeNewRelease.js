@@ -78,8 +78,8 @@ const HomeNewRelease = ({ newRelease, title }) => {
           </Link>
         </header>
         <div className='grid grid-cols-3 gap-x-[28px] rounded-md'>
-          {data?.slice(0, 12).map((item) => (
-            <div className='flex p-[10px]' key={item?.alias}>
+          {data?.slice(0, 12).map((item, index) => (
+            <div className='flex p-[10px]' key={index}>
               <img
                 className='mr-[10px] h-[60px] w-[60px] rounded-sm object-contain'
                 src={item?.thumbnail}
