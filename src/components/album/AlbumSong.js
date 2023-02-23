@@ -2,8 +2,8 @@ import { memo } from 'react'
 import { useDispatch } from 'react-redux'
 import moment from 'moment'
 
-import icons from '../ultis/icons'
-import * as actions from '../store/actions'
+import icons from '../../ultis/icons'
+import * as actions from '../../store/actions'
 
 const { CiMusicNote1, RiVipCrown2Line } = icons
 

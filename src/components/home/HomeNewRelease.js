@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import moment from 'moment'
 import 'moment/locale/vi'
 
-import icons from '../ultis/icons'
+import icons from '../../ultis/icons'
 
 const { AiOutlineRight } = icons
 const activeStyle = 'text-white text-xs font-normal bg-pink-#9b4de0 px-6 py-[6px] border border-pink-#9b4de0 rounded-full uppercase hover:brightness-[0.9]'

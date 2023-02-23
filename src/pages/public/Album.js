@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import moment from 'moment'
 
 import * as apis from '../../apis'
-import { AlbumPlayList } from '../../components'
+import { AlbumPlayList } from '../../components/album'
 import icons from '../../ultis/icons'
 
 const { BsFillPlayFill, SlHeart, BsThreeDots } = icons

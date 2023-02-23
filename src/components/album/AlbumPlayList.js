@@ -2,7 +2,7 @@ import { memo } from 'react'
 import moment from 'moment'
 
 import { AlbumSong } from './'
-import icons from '../ultis/icons'
+import icons from '../../ultis/icons'
 
 const { BiSort, BsDot } = icons
 

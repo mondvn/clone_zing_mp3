@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-import { HomeBanner, HomeCommonSlider, HomeNewRelease, HomeNewReleaseChart, HomeRadioSlider, HomeSlider } from '../../components';
+import { HomeBanner, HomeCommonSlider, HomeNewRelease, HomeNewReleaseChart, HomeRadioSlider } from '../../components/home';
 
 function Home() {
 

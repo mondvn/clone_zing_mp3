@@ -4,7 +4,7 @@ import { Autoplay } from "swiper";
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
-import icons from '../ultis/icons'
+import icons from '../../ultis/icons'
 
 const { AiOutlineRight } = icons
 

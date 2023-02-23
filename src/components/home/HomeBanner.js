@@ -4,8 +4,8 @@ import { Autoplay, Navigation } from "swiper";
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
-import * as actions from '../store/actions'
-import icons from '../ultis/icons'
+import * as actions from '../../store/actions'
+import icons from '../../ultis/icons'
 
 const { AiOutlineRight, AiOutlineLeft } = icons
 

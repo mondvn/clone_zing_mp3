@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from "swiper";
 import { Link } from 'react-router-dom'
 
-import icons from '../ultis/icons'
+import icons from '../../ultis/icons'
 
 const { AiOutlineRight } = icons
 
