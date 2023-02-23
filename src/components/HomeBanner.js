@@ -20,11 +20,10 @@ const HomeBanner = ({ banners }) => {
         className="mySwiper"
       >
         {banners?.map((item, index) => (
-          <SwiperSlide>
+          <SwiperSlide key={item?.encodeId}>
             <img
               src={item?.banner}
               alt='banner'
-              key={item?.encodeId}
               className='object-contain rounded-lg'
             />
           </SwiperSlide>

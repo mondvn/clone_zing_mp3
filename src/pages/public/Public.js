@@ -9,17 +9,17 @@ function Public() {
       <div className='w-[240px] flex-none h-full '>
         <SidebarLeft />
       </div>
-      <div className='flex-auto w-full h-full'>
+      <div className='flex-auto w-full h-full pb-[90px]'>
+        <header>
+          <Header />
+        </header>
         <Scrollbars style={{ width: '100%', height: '100%' }}>
-          <header>
-            <Header />
-          </header>
-          <div className='mt-[70px] pb-5 mb-[90px]'>
+          <div className='mt-[70px] pb-5'>
             <Outlet />
           </div>
         </Scrollbars>
       </div>
-      <div className='w-[329px] hidden 1600:flex flex-none border border-green-500 animate-slide-left '>
+      <div className='w-[329px] flex-none border border-green-500 animate-slide-left '>
         <SidebarRight />
       </div>
       <div className='fixed h-[90px] bottom-0 right-0 left-0 px-5 bg-player-bg border-t border-player-border-color'>

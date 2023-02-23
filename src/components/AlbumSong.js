@@ -25,15 +25,15 @@ const AlbumSong = ({ song }) => {
           className='h-10 w-10 rounded-sm object-cover'
         />
         <div className='flex flex-col justify-between'>
-          <div className='flex justify-start text-sm text-primary-text-color gap-[6px]'>
-            {song?.title?.length > 24 ? `${song?.title?.slice(0, 24)}...` : song?.title}
+          <div className='flex justify-start text-sm text-primary-text-color gap-[6px] line-clamp-1'>
+            {song?.title}
             <div className={`${!song?.isWorldWide ? 'block' : 'hidden'} flex text-yellow-300`}><RiVipCrown2Line size={16} /></div>
           </div>
-          <h3 className=''>{song?.artistsNames?.length > 34 ? `${song?.artistsNames?.slice(0, 34)}...` : song?.artistsNames}</h3>
+          <h3 className='line-clamp-1'>{song?.artistsNames}</h3>
         </div>
       </div>
-      <div className='flex-1 flex-start'>
-        {song?.album?.title?.length > 45 ? `${song?.album?.title?.slice(0, 45)}...` : song?.album?.title}
+      <div className='flex-1 flex-start line-clamp-1'>
+        {song?.album?.title}
       </div>
       <div className='flex-none'>{moment.unix(song?.duration).format("mm:ss")}</div>
     </div>

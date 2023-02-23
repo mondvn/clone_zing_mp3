@@ -10,7 +10,7 @@ const activeStyle = 'text-white text-xs font-normal bg-pink-#9b4de0 px-6 py-[6px
 const notActiveStyle = 'text-white text-xs font-normal px-6 py-[6px] border border-black-#ffffff1a rounded-full uppercase hover:brightness-[0.9]'
 
 const HomeNewRelease = ({ newRelease, title }) => {
-  // console.log(newRelease)
+  console.log(newRelease)
   console.log('Home New Release: re-render')
   const [buttonActive, setButtonActive] = useState('all')
   const [data, setData] = useState([newRelease?.all])
@@ -27,6 +27,18 @@ const HomeNewRelease = ({ newRelease, title }) => {
       setData(newRelease?.others)
     }
   }
+
+  // const handleLinkString = (props = []) => {
+  //   console.log(props)
+  //   const linkArr = props.map((item, index) => (
+  //     <Link key={item.id}>{item.name}</Link>
+  //   ));
+  //   console.log('linkArr: ', linkArr)
+  //   const str = linkArr.join(",");
+  //   console.log('str: ', str)
+
+  //   return <div>{str}</div>;
+  // }
 
   // Xử lý lần đầu mount sẽ có dữ liệu luôn
   useEffect(() => {
@@ -67,18 +79,21 @@ const HomeNewRelease = ({ newRelease, title }) => {
         </header>
         <div className='grid grid-cols-3 gap-x-[28px] rounded-md'>
           {data?.slice(0, 12).map((item) => (
-            <div className='flex p-[10px]' key={item?.encodeId}>
+            <div className='flex p-[10px]' key={item?.alias}>
               <img
                 className='mr-[10px] h-[60px] w-[60px] rounded-sm object-contain'
                 src={item?.thumbnail}
                 alt='thumbnail'
               />
               <div className='flex flex-col justify-between text-xs font-medium text-black-#FFFFFF80'>
-                <span className='text-sm text-white font-medium'>{item?.title}</span>
-                <h3>
-                  {item?.artistsNames}
+                <span className='text-sm text-white font-medium line-clamp-1'>{item?.title}</span>
+                <h3 className='flex gap-1'>
+                  {item?.artists?.map((artist, index) => (
+                    (index === item?.artists?.length - 1) ? <Link key={artist?.id}>{artist?.name}</Link> : (<Link key={artist?.id}>{artist?.name}</Link>)
+                  ))}
+                  {/* {handleLinkString(item?.artists)} */}
                 </h3>
-                <span>{moment.unix(item?.releaseDate).fromNow()}</span>
+                <span className='capitalize'>{moment.unix(item?.releaseDate).fromNow()}</span>
               </div>
             </div>
           ))}

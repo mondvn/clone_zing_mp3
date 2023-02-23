@@ -17,7 +17,8 @@ function Home() {
               banners={item?.items}
             />
           )
-        } else if (item?.sectionType === "livestream") {
+        }
+        else if (item?.sectionType === "livestream") {
           return (
             <HomeRadioSlider
               key={index}
@@ -41,7 +42,7 @@ function Home() {
               title={item?.title}
             />
           )
-        } else if (item?.viewType === "slider" && item?.sectionType !== "banner" && item?.sectionType !== "livestream") {
+        } else if (item?.sectionType === "playlist") {
           return (
             <HomeCommonSlider
               key={index}
@@ -49,6 +50,14 @@ function Home() {
             />
           )
         }
+        // else if (item?.viewType === "slider" && item?.sectionType !== "banner" && item?.sectionType !== "livestream") {
+        //   return (
+        //     <HomeCommonSlider
+        //       key={index}
+        //       sliders={item}
+        //     />
+        //   )
+        // }
       })}
     </div>
   )

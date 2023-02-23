@@ -109,7 +109,7 @@ const Player = () => {
   const handleNextSong = () => { }
 
   return (
-    <div className='h-full flex'>
+    <div className='h-full flex z-50'>
       {/* Song Info */}
       <div className='w-[30%] flex-auto flex items-center'>
         <img src={songInfo?.thumbnail} alt='thumbnail' className='w-16 h-16 object-cover rounded-[5px] mr-3' />

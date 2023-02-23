@@ -29,36 +29,34 @@ const HomeRadioSlider = ({ radios, title }) => {
           className="mySwiper"
         >
           {radios?.map((item, index) => (
-            <div className='flex flex-col' key={item?.id}>
-              <SwiperSlide>
-                <div className='relative'>
-                  <img
-                    src={item?.program?.thumbnail}
-                    alt='thubnail theme'
-                    className='object-contain rounded-full'
-                  />
-                  <img
-                    src={item?.host?.thumbnail}
-                    alt='thubnail host'
-                    className='absolute top-[85.3%] left-[85.3%] translate-x-[-70%] translate-y-[-70%] w-10 object-contain rounded-full'
-                  />
-                  <span
-                    className='absolute bottom-0 left-[50%] translate-x-[-50%] translate-y-[50%] text-[7px] text-white bg-red-600 rounded-sm px-[2px] py-[1px]'
-                  >
-                    LIVE
-                  </span>
-                </div>
-                <div className='mt-5 flex flex-col justify-center items-center'>
-                  <h3 className='text-white text-base font-semibold'>{item?.host?.name}</h3>
-                  <h3 className='text-black-#FFFFFF80 text-xs font-normal'>
-                    {item?.activeUsers}
-                    <span> đang nghe</span>
-                  </h3>
-                </div>
+            <SwiperSlide className='flex flex-col' key={item?.encodeId}>
+              <div className='relative'>
+                <img
+                  src={item?.program?.thumbnail}
+                  alt='thubnail theme'
+                  className='object-contain rounded-full'
+                />
+                <img
+                  src={item?.host?.thumbnail}
+                  alt='thubnail host'
+                  className='absolute top-[85.3%] left-[85.3%] translate-x-[-70%] translate-y-[-70%] w-10 object-contain rounded-full'
+                />
+                <span
+                  className='absolute bottom-0 left-[50%] translate-x-[-50%] translate-y-[50%] text-[7px] text-white bg-red-600 rounded-sm px-[2px] py-[1px]'
+                >
+                  LIVE
+                </span>
+              </div>
+              <div className='mt-5 flex flex-col justify-center items-center'>
+                <h3 className='text-white text-base font-semibold'>{item?.host?.name}</h3>
+                <h3 className='text-black-#FFFFFF80 text-xs font-normal'>
+                  {item?.activeUsers}
+                  <span> đang nghe</span>
+                </h3>
+              </div>
 
 
-              </SwiperSlide>
-            </div>
+            </SwiperSlide>
           ))}
         </Swiper>
       </div>
