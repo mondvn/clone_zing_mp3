@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import moment from 'moment'
+import 'moment/locale/vi'
 
 import icons from '../ultis/icons'
 
@@ -9,34 +11,28 @@ const notActiveStyle = 'text-white text-xs font-normal px-6 py-[6px] border bord
 
 const HomeNewRelease = ({ newRelease, title }) => {
   // console.log(newRelease)
+  console.log('Home New Release: re-render')
   const [buttonActive, setButtonActive] = useState('all')
-  let data = [...newRelease?.all]
+  const [data, setData] = useState([newRelease?.all])
 
   const handleButtonFilter = (state) => {
     if (state === 'all') {
       setButtonActive('all')
-      data = [...newRelease?.all]
-      console.log(data)
+      setData(newRelease?.all)
     } else if (state === 'vn') {
       setButtonActive('vn')
-      data = [...newRelease?.vPop]
-      console.log(data)
+      setData(newRelease?.vPop)
     } else {
       setButtonActive('worldwide')
-      data = [...newRelease?.others]
-      console.log(data)
+      setData(newRelease?.others)
     }
   }
 
-  // useEffect(() => {
-  //   if (buttonActive === 'all') {
-  //     data = [...newRelease?.all]
-  //   } else if (buttonActive === 'vn') {
-  //     data = [...newRelease?.vPop]
-  //   } else {
-  //     data = [...newRelease?.others]
-  //   }
-  // }, [buttonActive])
+  // Xử lý lần đầu mount sẽ có dữ liệu luôn
+  useEffect(() => {
+    setData(newRelease?.all)
+  }, [newRelease])
+
   return (
     <div className='mt-12 mb-5'>
       <header className='flex mb-5 items-center justify-between'>
@@ -77,12 +73,12 @@ const HomeNewRelease = ({ newRelease, title }) => {
                 src={item?.thumbnail}
                 alt='thumbnail'
               />
-              <div className='flex flex-col justify-between text-xs text-black-#FFFFFF80'>
-                <span className='text-sm text-white'>{item?.title}</span>
+              <div className='flex flex-col justify-between text-xs font-medium text-black-#FFFFFF80'>
+                <span className='text-sm text-white font-medium'>{item?.title}</span>
                 <h3>
                   {item?.artistsNames}
                 </h3>
-                <span>{item?.releaseDate}</span>
+                <span>{moment.unix(item?.releaseDate).fromNow()}</span>
               </div>
             </div>
           ))}
