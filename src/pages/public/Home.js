@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-import { HomeBanner, HomeCommonSlider, HomeNewReleaseChart, HomeRadioSlider, HomeSlider } from '../../components';
+import { HomeBanner, HomeCommonSlider, HomeNewRelease, HomeNewReleaseChart, HomeRadioSlider, HomeSlider } from '../../components';
 
 function Home() {
 
@@ -30,6 +30,14 @@ function Home() {
             <HomeNewReleaseChart
               key={index}
               newReleaseCharts={item?.items}
+              title={item?.title}
+            />
+          )
+        } else if (item?.sectionType === "new-release") {
+          return (
+            <HomeNewRelease
+              key={index}
+              newRelease={item?.items}
               title={item?.title}
             />
           )

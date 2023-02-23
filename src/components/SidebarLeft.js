@@ -23,7 +23,6 @@ const SidebarLeft = () => {
       </Link>
       <div className='flex flex-col w-full h-full'>
         {/* Main Navbar */}
-
         <div className='flex flex-col'>
           {sidebarMainMenu.map((item) => (
             <NavLink

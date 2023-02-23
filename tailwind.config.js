@@ -23,10 +23,12 @@ module.exports = {
         'button-header-color': '#C273ED',
         'player-text-color': '#FFFFFF80',
         'black-#FFFFFF80': '#FFFFFF80',
+        'black-#ffffff1a': '#ffffff1a',
         'black-#32323d': '#32323d',
         'blue-#5a4be7': '#5a4be7',
         'pink-#c86dd7': '#c86dd7',
         'pink-#c273ed': '#c273ed',
+        'pink-#9b4de0': '#9b4de0',
         'yellow-#ffdb00': '#ffdb00',
       },
       borderColor: {
