@@ -27,7 +27,7 @@ const HomeNewReleaseChart = ({ newReleaseCharts, title }) => {
           spaceBetween={28}
           loop={true}
           autoplay={{
-            delay: 2500,
+            delay: 4000,
             disableOnInteraction: false,
           }}
           modules={[Autoplay]}

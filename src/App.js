@@ -6,8 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
+// import "swiper/css/navigation";
 
 import { Home, Public, Login, MyMusic, Album, Hub, NewMusic, Top100, MusicVideo } from './pages/public'
 import path from './ultis/path'
