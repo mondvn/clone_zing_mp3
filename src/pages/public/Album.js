@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import moment from 'moment'
 
 import * as apis from '../../apis'
-import { AlbumPlayList } from '../../components/album'
 import icons from '../../ultis/icons'
-import { useSelector } from 'react-redux'
+import * as actions from '../../store/actions'
+import { AlbumPlayList } from '../../components/album'
+
 
 const { BsFillPlayFill, BsPlayCircle, SlHeart, BsThreeDots } = icons
 
 const Album = () => {
   const { pid } = useParams()
+  const dispatch = useDispatch()
   const { isPlaying } = useSelector(state => state.music)
   const [playListData, setPlayListData] = useState(null)
 
@@ -26,10 +29,17 @@ const Album = () => {
     fetchDetailPlaylist()
   }, [pid])
 
+  const handleTogglePlayMusic = () => {
+    dispatch(actions.togglePlayMusic(!isPlaying))
+  }
+
   return (
     <div className='relative pt-[40px] flex flex-1 mx-[59px] h-full'>
       <div className='fixed flex flex-col w-[300px]'>
-        <div className='overflow-hidden rounded-lg cursor-pointer relative group'>
+        <div
+          className='overflow-hidden rounded-lg cursor-pointer relative group'
+          onClick={handleTogglePlayMusic}
+        >
           <img
             src={playListData?.thumbnailM}
             alt='thumbnail'
