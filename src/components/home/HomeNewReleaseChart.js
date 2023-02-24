@@ -9,7 +9,7 @@ import icons from '../../ultis/icons'
 const { AiOutlineRight } = icons
 
 const HomeNewReleaseChart = ({ newReleaseCharts, title }) => {
-  console.log(newReleaseCharts)
+  // console.log(newReleaseCharts)
   return (
     <div className='pt-[30px] flex flex-col'>
       <div className='flex mb-5 items-center justify-between'>

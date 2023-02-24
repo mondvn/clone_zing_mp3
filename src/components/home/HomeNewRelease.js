@@ -10,8 +10,8 @@ const activeStyle = 'text-white text-xs font-normal bg-pink-#9b4de0 px-6 py-[6px
 const notActiveStyle = 'text-white text-xs font-normal px-6 py-[6px] border border-black-#ffffff1a rounded-full uppercase hover:brightness-[0.9]'
 
 const HomeNewRelease = ({ newRelease, title }) => {
-  console.log(newRelease)
-  console.log('Home New Release: re-render')
+  // console.log(newRelease)
+  // console.log('Home New Release: re-render')
   const [buttonActive, setButtonActive] = useState('all')
   const [data, setData] = useState([newRelease?.all])
 

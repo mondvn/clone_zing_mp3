@@ -6,26 +6,25 @@ import { toast } from 'react-toastify'
 import icons from '../ultis/icons'
 import * as apis from '../apis'
 import * as actions from '../store/actions'
+import PlayerVolume from './PlayerVolume'
 
 const { SlHeart, BsThreeDots, BsPlayCircle, MdSkipPrevious, MdSkipNext, TbRepeat, FiPauseCircle,
   RxShuffle, MdMusicVideo, GiMicrophone, VscChromeRestore, SlVolumeOff, SlVolume2, MdOutlineQueueMusic } = icons
 
-var intervalId
-
 const Player = () => {
-  const { curSongId, isPlaying, isPlayingOnAlbum } = useSelector(state => state.music)
+  const { curSongId, isPlaying } = useSelector(state => state.music)
   const [songInfo, setSongInfo] = useState(null)
-  const [audio, setAudio] = useState(new Audio())
-  const [curTime, setCurTime] = useState(0)
   const [firstTimeRender, setFirstTimeRender] = useState(true)
+  const [percentage, setPercentage] = useState(0)
+  const [thumbMarginLeft, setThumbMarginLeft] = useState(0)
+  const [currentTime, setCurrentTime] = useState(0)
 
+  const rangeRef = useRef()
   const dispatch = useDispatch()
-  const thumbRef = useRef()
-  const trackRef = useRef()
+  const audioRef = useRef()
 
   // console.log('[Player Component]: Re-render')
-  // console.log('[Player Component] - isPlaying:', isPlaying)
-
+  console.log('[Player Component] - isPlaying:', isPlaying)
 
   // SideEffects
   // 1. Call 2 API lấy Song Info và Song Source
@@ -37,52 +36,28 @@ const Player = () => {
       ])
       // Nếu không API nào bị lỗi
       if (res2.data.err === 0 && res1.data.err === 0) {
+        console.log('Tesst laafn dau re-render')
         setSongInfo(res1.data.data)
-        setAudio(new Audio(res2.data.data['128']))
-        console.log(songInfo)
+        audioRef.current.src = res2.data.data['128']
+
+        // Xu ly lan dau loading khong bi play
+        if (!firstTimeRender) {
+          dispatch(actions.togglePlayMusic(true))
+        }
+        setFirstTimeRender(false)
       } else {
         toast.warn(res2.data.msg || res1.data.msg)
       }
     }
 
     fetchDetailSong()
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [curSongId])
 
-  // 2. Xử lý khi audio source thay đổi
-  useEffect(() => {
-    audio.load()
-
-    // Xử lý khi reload lại trang, isPlaying không bị mặc định thành true
-    if (!firstTimeRender) dispatch(actions.togglePlayMusic(true))
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [audio])
-
   // 3. Xử lý Bật/ tắt nhạc
   useEffect(() => {
-    isPlaying ? audio.play() : audio.pause()
+    isPlaying ? audioRef.current.play() : audioRef.current.pause()
 
-    // Xử lý khi reload lại trang, isPlaying không bị mặc định thành true
-    if (isPlaying) setFirstTimeRender(false)
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isPlaying])
-
-  // 4. Xử lý thanh process và hiển thị current time
-  useEffect(() => {
-    if (isPlaying) {
-      intervalId = setInterval(() => {
-        let percent = Math.round(audio.currentTime * 100 / songInfo?.duration)
-        thumbRef.current.style.cssText = `right: ${100 - percent}%`
-        setCurTime(audio.currentTime)
-      }, 200)
-    }
-    return () => {
-      intervalId && clearInterval(intervalId)
-
-    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isPlaying])
 
@@ -92,21 +67,26 @@ const Player = () => {
     isPlaying ? dispatch(actions.togglePlayMusic(false)) : dispatch(actions.togglePlayMusic(true))
   }
 
-  // 2. Xử lý click vào Progressbar
-  const handleClickProgressbar = (e) => {
-    // Lấy tọa độ trackRef
-    const trackRect = trackRef.current.getBoundingClientRect()
-    const percent = (e.clientX - trackRect.left) / trackRect.width
 
-    // Xét lại progress bar
-    thumbRef.current.style.cssText = `right: ${(1 - percent) * 100}%`
-    // Xét lại thời gian bài hát
-    audio.currentTime = songInfo?.duration * percent
-    // Xét lại thời gian bài hát progress bar
-    setCurTime(audio.currentTime)
+  const onChangeValueInput = (e) => {
+    // Căn cho thumb vào trong khung
+    const thumbWidth = 12
+    const centerThumb = thumbWidth * percentage / 100
+    setThumbMarginLeft(centerThumb)
+
+    const audio = audioRef.current
+    audio.currentTime = (audio.duration / 100) * e.target.value
+    setPercentage(e.target.value)
   }
-  // 3. Xử lý Next Song
-  const handleNextSong = () => { }
+
+  const getCurrentDuration = (e) => {
+    let percent
+    e.currentTarget.currentTime === 0 ? percent = 0 : percent = ((e.currentTarget.currentTime / e.currentTarget.duration) * 100).toFixed(2)
+    const time = e.currentTarget.currentTime.toFixed(2)
+
+    setPercentage(+percent)
+    setCurrentTime(time)
+  }
 
   return (
     <div className='h-full flex z-50'>
@@ -163,7 +143,6 @@ const Player = () => {
           {/* Next */}
           <span className='flex items-center justify-center w-8 h-8 hover:bg-[#2d2d2d] rounded-full'>
             <div
-              onClick={handleNextSong}
               className='px-[3px] py-[3px]'
             >
               <MdSkipNext size={26} />
@@ -182,16 +161,41 @@ const Player = () => {
         {/* Progressbar */}
         <div className='flex w-full justify-center items-center mb-[5px] gap-[10px] text-xs'>
           <div className='text-black-#FFFFFF80 flex-none font-medium'>
-            {moment.utc(curTime * 1000).format("mm:ss")}
+            {moment.utc(currentTime * 1000).format("mm:ss")}
           </div>
-          <div
-            onClick={handleClickProgressbar}
-            ref={trackRef}
-            className='relative flex-1 w-full h-[3px] hover:h-[6px] bg-black-#FFFFFF80 rounded-l-full rounded-r-full'>
-            <div ref={thumbRef} className='absolute top-0 left-0 h-full bg-white rounded-l-full rounded-r-full'></div>
+
+          <div className='flex-1 flex items-center relative w-full group'>
+            {/* Slider container::before */}
+            <div className='absolute bg-black-#FFFFFF80 w-[99%] group-hover:h-[6px] h-[3px] block rounded-[4px] top-1/2 left-0 transform translate-y-[-50%] pointer-events-none opacity-100 '></div>
+            {/* progress bar cover */}
+            <div
+              style={{
+                width: `${percentage}%`
+              }}
+              className='absolute bg-white w-[20%] group-hover:h-[6px] h-[3px] block rounded-[4px] top-1/2 transform translate-y-[-50%] pointer-events-none opacity-100 z-[1] select-none '></div>
+            {/* Thumb*/}
+            <div
+              style={{
+                left: `${percentage}%`,
+                marginLeft: `-${thumbMarginLeft}px`
+              }}
+              className='w-3 h-3 z-[3] group-hover:block hidden bg-white absolute rounded-full top-1/2 transform translate-x-[0px] translate-y-[-50%] pointer-events-none select-none'></div>
+            {/* Range */}
+            <input
+              type='range'
+              step='0.01'
+              ref={rangeRef}
+              value={percentage}
+              onChange={onChangeValueInput}
+              className='appearance-none h-[3px] w-full cursor-pointer opacity-0 my-0 mx-auto'
+            />
+            <audio
+              ref={audioRef}
+              onTimeUpdate={getCurrentDuration}
+            >
+            </audio>
           </div>
           <div className='flex-none font-medium'>
-            {/* 03:33 */}
             {moment.utc(songInfo?.duration * 1000).format("mm:ss")}
           </div>
         </div>
@@ -229,9 +233,7 @@ const Player = () => {
             </div>
           </div>
           {/* volume bar */}
-          <div className='relative w-[70px] h-[3px] hover:h-[6px] bg-black-#FFFFFF80 rounded-l-full rounded-r-full'>
-            <div className='absolute top-0 left-0 h-full bg-white rounded-l-full rounded-r-full'></div>
-          </div>
+          <PlayerVolume audioRef={audioRef} />
         </div>
         <div className='h-[33px] w-[1px] mx-5 bg-black-#ffffff1a'></div>
         {/* On/Of playlist music player */}

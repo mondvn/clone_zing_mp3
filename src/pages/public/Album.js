@@ -9,7 +9,7 @@ import icons from '../../ultis/icons'
 const { BsFillPlayFill, SlHeart, BsThreeDots } = icons
 
 const Album = () => {
-  const { title, pid } = useParams()
+  const { pid } = useParams()
   const [playListData, setPlayListData] = useState(null)
 
   useEffect(() => {
