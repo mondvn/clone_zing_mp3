@@ -1,10 +1,12 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, memo } from 'react'
 
 import icons from '../ultis/icons'
 
 const { MdMusicVideo, GiMicrophone, VscChromeRestore, SlVolume2, SlVolumeOff } = icons
 
 const PlayerVolume = ({ audioRef }) => {
+  console.log('Player volume: re-render')
+  console.log(audioRef)
   const [percentageVolume, setPercentageVolume] = useState(0)
   const [thumbVolumeMarginLeft, setThumbVolumeMarginLeft] = useState(0)
   const [lastVolumeValue, setLastVolumeValue] = useState(0)
@@ -69,7 +71,7 @@ const PlayerVolume = ({ audioRef }) => {
           className='px-[7px] py-[7px]'
           onClick={handleToggleVolume}
         >
-          {audioRef.current.volume === 0 ? <SlVolumeOff size={18} /> : <SlVolume2 size={18} />}
+          {audioRef?.current?.volume === 0 ? <SlVolumeOff size={18} /> : <SlVolume2 size={18} />}
         </div>
       </div>
       {/* volume bar */}
@@ -103,4 +105,4 @@ const PlayerVolume = ({ audioRef }) => {
   )
 }
 
-export default PlayerVolume
+export default memo(PlayerVolume)

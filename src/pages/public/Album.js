@@ -5,11 +5,13 @@ import moment from 'moment'
 import * as apis from '../../apis'
 import { AlbumPlayList } from '../../components/album'
 import icons from '../../ultis/icons'
+import { useSelector } from 'react-redux'
 
-const { BsFillPlayFill, SlHeart, BsThreeDots } = icons
+const { BsFillPlayFill, BsPlayCircle, SlHeart, BsThreeDots } = icons
 
 const Album = () => {
   const { pid } = useParams()
+  const { isPlaying } = useSelector(state => state.music)
   const [playListData, setPlayListData] = useState(null)
 
   useEffect(() => {
@@ -27,12 +29,34 @@ const Album = () => {
   return (
     <div className='relative pt-[40px] flex flex-1 mx-[59px] h-full'>
       <div className='fixed flex flex-col w-[300px]'>
-        <div>
+        <div className='overflow-hidden rounded-lg cursor-pointer relative group'>
           <img
             src={playListData?.thumbnailM}
             alt='thumbnail'
-            className='w-full object-contain rounded-md shadow-sm'
+            className='w-full object-contain rounded-lg shadow-sm transform transition duration-1000 scale-100  group-hover:scale-110 ease-in-out'
           />
+          {!isPlaying && <div className='absolute w-full h-full top-0 left-0 bg-[#00000080] hidden group-hover:block'></div>}
+          <div className={`absolute w-full h-full top-0 left-0 items-center justify-center ${!isPlaying ? 'hidden group-hover:flex' : 'flex'}`}>
+            <button className='text-white flex items-center justify-center'>
+              {/* <BsPlayCircle size={45} /> */}
+              {/* <div className='border border-white rounded-full w-11 h-11 flex items-center justify-center'>
+                <img
+                  src='https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif'
+                  alt='gif playing'
+                  className='w-5 h-5'
+                />
+              </div> */}
+              {!isPlaying ? <BsPlayCircle size={45} className='hover:brightness-[0.8]' /> :
+                <div className='border border-white rounded-full w-11 h-11 flex items-center justify-center'>
+                  <img
+                    src='https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif'
+                    alt='gif playing'
+                    className='w-5 h-5'
+                  />
+                </div>
+              }
+            </button>
+          </div>
         </div>
         <div className='mt-3 flex flex-col items-center justify-center'>
           <h3 className='font-bold text-[20px] text-primary-text-color'>{playListData?.title}</h3>
