@@ -8,8 +8,7 @@ import * as apis from '../apis'
 import * as actions from '../store/actions'
 import PlayerVolume from './PlayerVolume'
 
-const { SlHeart, BsThreeDots, BsPlayCircle, MdSkipPrevious, MdSkipNext, TbRepeat, FiPauseCircle,
-  RxShuffle, MdMusicVideo, GiMicrophone, VscChromeRestore, SlVolumeOff, SlVolume2, MdOutlineQueueMusic } = icons
+const { SlHeart, BsThreeDots, BsPlayCircle, MdSkipPrevious, MdSkipNext, TbRepeat, FiPauseCircle, RxShuffle, MdOutlineQueueMusic } = icons
 
 const Player = () => {
   const { curSongId, isPlaying } = useSelector(state => state.music)
@@ -202,39 +201,7 @@ const Player = () => {
       </div>
       {/* Control */}
       <div className='w-[30%] flex-auto flex items-center justify-end'>
-        {/* control buttons */}
-        <div className='flex items-center justify-between gap-[6px] text-white'>
-          <div
-            className='flex items-center justify-center w-8 h-8 hover:bg-[#2d2d2d] rounded-full'
-          >
-            <div className='px-[7px] py-[7px]'>
-              <MdMusicVideo size={18} />
-            </div>
-          </div>
-          <div
-            className='flex items-center justify-center w-8 h-8 hover:bg-[#2d2d2d] rounded-full'
-          >
-            <div className='px-[7px] py-[7px]'>
-              <GiMicrophone size={18} />
-            </div>
-          </div>
-          <div
-            className='flex items-center justify-center w-8 h-8 hover:bg-[#2d2d2d] rounded-full'
-          >
-            <div className='px-[7px] py-[7px]'>
-              <VscChromeRestore size={18} />
-            </div>
-          </div>
-          <div
-            className='flex items-center justify-center w-8 h-8 hover:bg-[#2d2d2d] rounded-full'
-          >
-            <div className='px-[7px] py-[7px]'>
-              <SlVolume2 size={18} />
-            </div>
-          </div>
-          {/* volume bar */}
-          <PlayerVolume audioRef={audioRef} />
-        </div>
+        <PlayerVolume audioRef={audioRef} />
         <div className='h-[33px] w-[1px] mx-5 bg-black-#ffffff1a'></div>
         {/* On/Of playlist music player */}
         <div>
