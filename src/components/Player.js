@@ -13,7 +13,6 @@ const { SlHeart, BsThreeDots, BsPlayCircle, MdSkipPrevious, MdSkipNext, TbRepeat
 const Player = () => {
   const { curSongId, isPlaying } = useSelector(state => state.music)
   const [songInfo, setSongInfo] = useState(null)
-  const [firstTimeRender, setFirstTimeRender] = useState(true)
   const [percentage, setPercentage] = useState(0)
   const [thumbMarginLeft, setThumbMarginLeft] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
@@ -35,15 +34,11 @@ const Player = () => {
       ])
       // Nếu không API nào bị lỗi
       if (res2.data.err === 0 && res1.data.err === 0) {
-        console.log('Tesst laafn dau re-render')
         setSongInfo(res1.data.data)
         audioRef.current.src = res2.data.data['128']
 
         // Xu ly lan dau loading khong bi play
-        if (!firstTimeRender) {
-          dispatch(actions.togglePlayMusic(true))
-        }
-        setFirstTimeRender(false)
+        if (!res1.data.data?.encodeId === curSongId) dispatch(actions.togglePlayMusic(true))
       } else {
         toast.warn(res2.data.msg || res1.data.msg)
       }
@@ -78,6 +73,7 @@ const Player = () => {
     setPercentage(e.target.value)
   }
 
+  // Hàm này sẽ chạy liên tục vì được gán với onTimeUpdate của Audio => re-render component liên tục
   const getCurrentDuration = (e) => {
     let percent
     e.currentTarget.currentTime === 0 ? percent = 0 : percent = ((e.currentTarget.currentTime / e.currentTarget.duration) * 100).toFixed(2)
@@ -85,6 +81,12 @@ const Player = () => {
 
     setPercentage(+percent)
     setCurrentTime(time)
+
+    // Xử lý khi hết bài hát
+    if (e.currentTarget.currentTime === e.currentTarget.duration) {
+      audioRef.current.currentTime = 0
+      dispatch(actions.togglePlayMusic(false))
+    }
   }
 
   return (

@@ -6,8 +6,9 @@ import icons from '../../ultis/icons'
 
 const { BiSort, BsDot } = icons
 
-const AlbumPlayList = ({ songs }) => {
+const AlbumPlayList = ({ songs, isAlbum }) => {
   // console.log({ songs })
+  console.log('AlbumPlayList Component re-render')
 
   return (
     <div className='flex flex-col w-full text-xs text-player-text-color mb-5'>
@@ -16,7 +17,7 @@ const AlbumPlayList = ({ songs }) => {
           <BiSort size={14} />
           BÀI HÁT
         </div>
-        <div>ALBUM</div>
+        {!isAlbum && <div>ALBUM</div>}
         <div>THỜI GIAN</div>
       </div>
       <div className='flex flex-col'>
@@ -24,6 +25,7 @@ const AlbumPlayList = ({ songs }) => {
           <AlbumSong
             key={item.encodeId}
             song={item}
+            isAlbum={isAlbum}
           />
         ))}
       </div>

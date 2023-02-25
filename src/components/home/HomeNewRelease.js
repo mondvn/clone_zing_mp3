@@ -16,29 +16,23 @@ const HomeNewRelease = ({ newRelease, title }) => {
   const [data, setData] = useState([newRelease?.all])
 
   const handleButtonFilter = (state) => {
-    if (state === 'all') {
-      setButtonActive('all')
-      setData(newRelease?.all)
-    } else if (state === 'vn') {
-      setButtonActive('vn')
-      setData(newRelease?.vPop)
-    } else {
-      setButtonActive('worldwide')
-      setData(newRelease?.others)
+    switch (state) {
+      case 'all':
+        setButtonActive('all')
+        setData(newRelease?.all)
+        break
+      case 'vn':
+        setButtonActive('vn')
+        setData(newRelease?.vPop)
+        break
+      case 'worldwide':
+        setButtonActive('worldwide')
+        setData(newRelease?.others)
+        break
+      default:
+        break;
     }
   }
-
-  // const handleLinkString = (props = []) => {
-  //   console.log(props)
-  //   const linkArr = props.map((item, index) => (
-  //     <Link key={item.id}>{item.name}</Link>
-  //   ));
-  //   console.log('linkArr: ', linkArr)
-  //   const str = linkArr.join(",");
-  //   console.log('str: ', str)
-
-  //   return <div>{str}</div>;
-  // }
 
   // Xử lý lần đầu mount sẽ có dữ liệu luôn
   useEffect(() => {
@@ -89,9 +83,8 @@ const HomeNewRelease = ({ newRelease, title }) => {
                 <span className='text-sm text-white font-medium line-clamp-1'>{item?.title}</span>
                 <h3 className='flex gap-1'>
                   {item?.artists?.map((artist, index) => (
-                    (index === item?.artists?.length - 1) ? <Link key={artist?.id}>{artist?.name}</Link> : (<Link key={artist?.id}>{artist?.name}</Link>)
+                    <Link key={artist?.id}>{artist?.name}</Link>
                   ))}
-                  {/* {handleLinkString(item?.artists)} */}
                 </h3>
                 <span className='capitalize'>{moment.unix(item?.releaseDate).fromNow()}</span>
               </div>
