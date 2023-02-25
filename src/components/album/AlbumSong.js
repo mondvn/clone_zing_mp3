@@ -25,7 +25,7 @@ const AlbumSong = ({ song, isAlbum }) => {
         <div className='relative h-10 w-10'
           onClick={() => {
             dispatch(actions.setCurSongId(song?.encodeId))
-            dispatch(actions.togglePlayMusic(!isPlaying))
+            dispatch(actions.togglePlayMusic(false))
           }}
         >
           <img src={song?.thumbnail}
@@ -43,6 +43,10 @@ const AlbumSong = ({ song, isAlbum }) => {
                     alt='gif playing'
                     className='w-5 h-5'
                   />
+                </div>}
+              {(song?.encodeId === curSongId && !isPlaying) &&
+                <div className='w-5 h-5 flex items-center justify-center'>
+                  <BsFillPlayFill size={24} />
                 </div>}
             </button>
             {song?.encodeId !== curSongId &&

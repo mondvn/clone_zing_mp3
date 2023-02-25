@@ -4,9 +4,9 @@ import icons from '../ultis/icons'
 
 const { MdMusicVideo, GiMicrophone, VscChromeRestore, SlVolume2, SlVolumeOff } = icons
 
-const PlayerVolume = ({ audioRef }) => {
+const PlayerVolume = ({ volume, setVolume }) => {
   console.log('Player volume: re-render')
-  console.log(audioRef)
+  console.log(volume)
   const [percentageVolume, setPercentageVolume] = useState(0)
   const [thumbVolumeMarginLeft, setThumbVolumeMarginLeft] = useState(0)
   const [lastVolumeValue, setLastVolumeValue] = useState(0)
@@ -14,8 +14,8 @@ const PlayerVolume = ({ audioRef }) => {
   const rangeVolumeRef = useRef()
 
   useEffect(() => {
-    setPercentageVolume(audioRef.current.volume * 100)
-  }, [audioRef])
+    setPercentageVolume(volume * 100)
+  }, [volume])
 
 
   const onChangeValueInputVolume = (e) => {
@@ -24,18 +24,18 @@ const PlayerVolume = ({ audioRef }) => {
     const centerThumb = thumbWidth * percentageVolume / 100
     setThumbVolumeMarginLeft(centerThumb)
 
-    audioRef.current.volume = e.target.value / 100
+    setVolume(e.target.value / 100)
     // console.log(e.target.value)
     setPercentageVolume(e.target.value)
   }
 
   const handleToggleVolume = () => {
-    if (audioRef.current.volume === 0) {
-      audioRef.current.volume = lastVolumeValue
+    if (volume === 0) {
+      setVolume(lastVolumeValue)
       setPercentageVolume(lastVolumeValue * 100)
     } else {
-      setLastVolumeValue(audioRef.current.volume)
-      audioRef.current.volume = 0
+      setLastVolumeValue(volume)
+      setVolume(0)
       setPercentageVolume(0)
 
     }
@@ -71,7 +71,7 @@ const PlayerVolume = ({ audioRef }) => {
           className='px-[7px] py-[7px]'
           onClick={handleToggleVolume}
         >
-          {audioRef?.current?.volume === 0 ? <SlVolumeOff size={18} /> : <SlVolume2 size={18} />}
+          {volume === 0 ? <SlVolumeOff size={18} /> : <SlVolume2 size={18} />}
         </div>
       </div>
       {/* volume bar */}

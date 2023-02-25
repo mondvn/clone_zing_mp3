@@ -16,13 +16,15 @@ const Player = () => {
   const [percentage, setPercentage] = useState(0)
   const [thumbMarginLeft, setThumbMarginLeft] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
+  const [volume, setVolume] = useState(0)
+  const [isFirstTime, setIsFirstTime] = useState(true)
 
   const rangeRef = useRef()
   const dispatch = useDispatch()
   const audioRef = useRef()
 
-  // console.log('[Player Component]: Re-render')
-  console.log('[Player Component] - isPlaying:', isPlaying)
+  console.log('[Player Component]: Re-render')
+  // console.log('[Player Component] - isPlaying:', isPlaying)
 
   // SideEffects
   // 1. Call 2 API lấy Song Info và Song Source
@@ -36,9 +38,6 @@ const Player = () => {
       if (res2.data.err === 0 && res1.data.err === 0) {
         setSongInfo(res1.data.data)
         audioRef.current.src = res2.data.data['128']
-
-        // Xu ly lan dau loading khong bi play
-        if (!res1.data.data?.encodeId === curSongId) dispatch(actions.togglePlayMusic(true))
       } else {
         toast.warn(res2.data.msg || res1.data.msg)
       }
@@ -48,10 +47,25 @@ const Player = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [curSongId])
 
-  // 3. Xử lý Bật/ tắt nhạc
+  // 2.Xử lý khi src thay đổi
+  useEffect(() => {
+    if (isFirstTime) {
+      dispatch(actions.togglePlayMusic(false))
+      setVolume(audioRef.current.volume = 0.5)
+    } else {
+      dispatch(actions.togglePlayMusic(true))
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [audioRef?.current?.src])
+
+  // 3. Mỗi lần audio volume thay đổi thì update
+  useEffect(() => {
+    audioRef.current.volume = volume
+  }, [volume])
+
+  // 4. Xử lý Bật/ tắt nhạc
   useEffect(() => {
     isPlaying ? audioRef.current.play() : audioRef.current.pause()
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isPlaying])
 
@@ -61,7 +75,7 @@ const Player = () => {
     isPlaying ? dispatch(actions.togglePlayMusic(false)) : dispatch(actions.togglePlayMusic(true))
   }
 
-
+  // 2. Xử lý sự kiện click vào progressbar
   const onChangeValueInput = (e) => {
     // Căn cho thumb vào trong khung
     const thumbWidth = 12
@@ -73,8 +87,9 @@ const Player = () => {
     setPercentage(e.target.value)
   }
 
-  // Hàm này sẽ chạy liên tục vì được gán với onTimeUpdate của Audio => re-render component liên tục
+  // 3.Hàm này sẽ chạy liên tục vì được gán với onTimeUpdate của Audio => re-render component liên tục
   const getCurrentDuration = (e) => {
+    setIsFirstTime(false)
     let percent
     e.currentTarget.currentTime === 0 ? percent = 0 : percent = ((e.currentTarget.currentTime / e.currentTarget.duration) * 100).toFixed(2)
     const time = e.currentTarget.currentTime.toFixed(2)
@@ -203,7 +218,7 @@ const Player = () => {
       </div>
       {/* Control */}
       <div className='w-[30%] flex-auto flex items-center justify-end'>
-        <PlayerVolume audioRef={audioRef} />
+        <PlayerVolume volume={volume} setVolume={setVolume} />
         <div className='h-[33px] w-[1px] mx-5 bg-black-#ffffff1a'></div>
         {/* On/Of playlist music player */}
         <div>
