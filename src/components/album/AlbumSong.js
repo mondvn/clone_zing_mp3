@@ -8,8 +8,9 @@ import { Link } from 'react-router-dom'
 
 const { CiMusicNote1, RiVipCrown2Line, BsFillPlayFill } = icons
 
-const AlbumSong = ({ song, isAlbum }) => {
+const AlbumSong = ({ song, isAlbum, pid }) => {
   console.log('AlbumSong Component re-render')
+  // console.log(isAlbum)
 
   const dispatch = useDispatch()
   const { curSongId, isPlaying } = useSelector(state => state.music)
@@ -25,6 +26,7 @@ const AlbumSong = ({ song, isAlbum }) => {
         <div className='relative h-10 w-10'
           onClick={() => {
             dispatch(actions.setCurSongId(song?.encodeId))
+            dispatch(actions.setCurPlaylistId(pid))
             dispatch(actions.togglePlayMusic(false))
           }}
         >

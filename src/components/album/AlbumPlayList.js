@@ -6,7 +6,7 @@ import icons from '../../ultis/icons'
 
 const { BiSort, BsDot } = icons
 
-const AlbumPlayList = ({ songs, isAlbum }) => {
+const AlbumPlayList = ({ songs, isAlbum, pid }) => {
   // console.log({ songs })
   console.log('AlbumPlayList Component re-render')
 
@@ -26,6 +26,7 @@ const AlbumPlayList = ({ songs, isAlbum }) => {
             key={item.encodeId}
             song={item}
             isAlbum={isAlbum}
+            pid={pid}
           />
         ))}
       </div>
