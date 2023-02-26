@@ -10,7 +10,6 @@ const { CiAlarmOn, BsThreeDots } = icons
 
 const PlayerPlaylist = () => {
   const { curSongId, curPlaylist } = useSelector(state => state.music)
-  console.log(curPlaylist)
 
   // console.log(curPlaylist)
   return (

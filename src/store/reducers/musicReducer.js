@@ -2,6 +2,7 @@ import actionTypes from "../actions/actionTypes";
 
 const initState = {
   isPlaying: false,
+  repeatValue: 0,
   curSongId: null,
   curPlaylistId: null,
   curPlaylist: {}
@@ -29,6 +30,11 @@ const musicReducer = (state = initState, action) => {
       return {
         ...state,
         isPlaying: action.flag
+      }
+    case actionTypes.SET_REPEAT_VALUE:
+      return {
+        ...state,
+        repeatValue: action.value
       }
     default:
       return state

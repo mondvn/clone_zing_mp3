@@ -19,3 +19,8 @@ export const togglePlayMusic = (flag) => ({
   type: actionTypes.TOGGLE_PLAY_MUSIC,
   flag
 })
+
+export const setRepeatValue = (value) => ({
+  type: actionTypes.SET_REPEAT_VALUE,
+  value
+})

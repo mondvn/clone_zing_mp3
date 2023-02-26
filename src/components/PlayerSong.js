@@ -7,7 +7,7 @@ import * as actions from '../store/actions'
 import { Link } from 'react-router-dom'
 
 
-const { RiVipCrown2Line, BsFillPlayFill } = icons
+const { BsFillPlayFill } = icons
 
 const PlayerSong = ({ song, prev, title, link }) => {
   const dispatch = useDispatch()

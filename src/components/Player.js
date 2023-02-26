@@ -8,22 +8,24 @@ import * as apis from '../apis'
 import * as actions from '../store/actions'
 import PlayerVolume from './PlayerVolume'
 
-const { SlHeart, BsThreeDots, BsPlayCircle, MdSkipPrevious, MdSkipNext, TbRepeat, FiPauseCircle, RxShuffle, MdOutlineQueueMusic } = icons
+const { SlHeart, BsThreeDots, BsPlayCircle, MdSkipPrevious, MdSkipNext, TbRepeat, FiPauseCircle, RxShuffle, MdOutlineQueueMusic, TbRepeatOnce } = icons
 
 const Player = () => {
-  const { curSongId, isPlaying, curPlaylist } = useSelector(state => state.music)
+  const { curSongId, isPlaying, curPlaylist, repeatValue } = useSelector(state => state.music)
   const [songInfo, setSongInfo] = useState(null)
   const [percentage, setPercentage] = useState(0)
   const [thumbMarginLeft, setThumbMarginLeft] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
   const [volume, setVolume] = useState(0)
   const [isFirstTime, setIsFirstTime] = useState(true)
+  // 0 = none, 1 = looping all, 2 = reapeat only 1
 
   const rangeRef = useRef()
   const dispatch = useDispatch()
   const audioRef = useRef()
 
   console.log('[Player Component]: Re-render')
+  console.log('[Player Component] repeatValue: ', repeatValue)
   // console.log('[Player Component] - isPlaying:', isPlaying)
 
   // SideEffects
@@ -47,6 +49,17 @@ const Player = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [curSongId])
 
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setIsFirstTime(false)
+    }, 3000)
+
+    return () => {
+      clearInterval(intervalId)
+    }
+  }, [])
+
   // 2.Xử lý khi src thay đổi
   useEffect(() => {
     if (isFirstTime) {
@@ -62,6 +75,7 @@ const Player = () => {
   useEffect(() => {
     audioRef.current.volume = volume
   }, [volume])
+
 
   // 4. Xử lý Bật/ tắt nhạc
   useEffect(() => {
@@ -89,7 +103,6 @@ const Player = () => {
 
   // 3.Hàm này sẽ chạy liên tục vì được gán với onTimeUpdate của Audio => re-render component liên tục
   const getCurrentDuration = (e) => {
-    setIsFirstTime(false)
     let percent
     e.currentTarget.currentTime === 0 ? percent = 0 : percent = ((e.currentTarget.currentTime / e.currentTarget.duration) * 100).toFixed(2)
     const time = e.currentTarget.currentTime.toFixed(2)
@@ -99,17 +112,29 @@ const Player = () => {
 
     // Xử lý khi hết bài hát
     if (e.currentTarget.currentTime === e.currentTarget.duration) {
-      audioRef.current.currentTime = 0
-      dispatch(actions.togglePlayMusic(false))
+      if (repeatValue === 2) {
+        audioRef.current.currentTime = 0
+        audioRef.current.play()
+      } else {
+        audioRef.current.currentTime = 0
+        handleNextSong()
+      }
     }
   }
 
   const handleNextSong = () => {
     const currentSongIndex = curPlaylist?.songs?.findIndex(song => song.encodeId === curSongId)
-    const nextSongId = curPlaylist.songs[currentSongIndex + 1].encodeId
+    if (currentSongIndex === curPlaylist?.songs?.length - 1) {
+      dispatch(actions.setCurSongId(curPlaylist.songs[0].encodeId))
+      dispatch(actions.togglePlayMusic(false))
+    } else {
+      const nextSongId = curPlaylist.songs[currentSongIndex + 1].encodeId
+      dispatch(actions.setCurSongId(nextSongId))
+      dispatch(actions.togglePlayMusic(false))
+    }
 
-    dispatch(actions.setCurSongId(nextSongId))
-    dispatch(actions.togglePlayMusic(false))
+    if (repeatValue === 2) dispatch(actions.setRepeatValue(0))
+
   }
 
   const handlePrevSong = () => {
@@ -124,6 +149,10 @@ const Player = () => {
       audioRef.current.currentTime = 0
       dispatch(actions.togglePlayMusic(true))
     }
+  }
+
+  const handleRepeatSong = () => {
+    repeatValue < 2 ? dispatch(actions.setRepeatValue(repeatValue + 1)) : dispatch(actions.setRepeatValue(0))
   }
 
   return (
@@ -184,9 +213,7 @@ const Player = () => {
             </div>
           </span>
           {/* Next */}
-          <span className={`flex items-center justify-center w-8 h-8 hover:bg-[#2d2d2d] rounded-full
-          ${(curPlaylist?.songs?.findIndex(song => song.encodeId === curSongId) === (curPlaylist.length - 1)) && 'pointer-events-none opacity-50'}
-          `}>
+          <span className='flex items-center justify-center w-8 h-8 hover:bg-[#2d2d2d] rounded-full'>
             <div
               className='px-[3px] py-[3px]'
               onClick={handleNextSong}
@@ -197,11 +224,18 @@ const Player = () => {
           {/* Repeat */}
           <span
             title='Bật phát lại tất cả'
+            onClick={handleRepeatSong}
             className='flex items-center justify-center w-8 h-8 hover:bg-[#2d2d2d] rounded-full'
           >
-            <div className='px-[7px] py-[7px]'>
+            {repeatValue === 0 && <div className='px-[7px] py-[7px]'>
               <TbRepeat size={18} />
-            </div>
+            </div>}
+            {repeatValue === 1 && <div className='px-[7px] py-[7px] text-pink-#9b4de0'>
+              <TbRepeat size={18} />
+            </div>}
+            {repeatValue === 2 && <div className='px-[7px] py-[7px] text-pink-#9b4de0'>
+              <TbRepeatOnce size={18} />
+            </div>}
           </span>
         </div>
         {/* Progressbar */}
@@ -250,7 +284,7 @@ const Player = () => {
       <div className='w-[30%] flex-auto flex items-center justify-end'>
         <PlayerVolume volume={volume} setVolume={setVolume} />
         <div className='h-[33px] w-[1px] mx-5 bg-black-#ffffff1a'></div>
-        {/* On/Of playlist music player */}
+        {/* On/Off playlist music player */}
         <div>
           <button className='flex items-center justify-center w-8 h-8 bg-[#2d2d2d] hover:bg-black-#ffffff33 rounded-md text-white'>
             <MdOutlineQueueMusic size={18} />
