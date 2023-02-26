@@ -1,7 +1,7 @@
 import { AiOutlineHeart, AiOutlineRight, AiOutlineLeft } from 'react-icons/ai'
 import { BiDisc, BiSort, BiCategoryAlt } from 'react-icons/bi'
 import { BsArrowLeft, BsArrowRight, BsThreeDots, BsPlayCircle, BsFillPlayFill, BsDot } from 'react-icons/bs'
-import { CiRepeat, CiMusicNote1 } from 'react-icons/ci'
+import { CiRepeat, CiMusicNote1, CiAlarmOn } from 'react-icons/ci'
 import { FaRandom } from 'react-icons/fa'
 import { FiRadio, FiSearch, FiSettings, FiPauseCircle } from 'react-icons/fi'
 import { MdOutlineLibraryMusic, MdOutlineFeed, MdSkipNext, MdSkipPrevious, MdMusicVideo, MdOutlineQueueMusic } from 'react-icons/md'
@@ -29,6 +29,7 @@ const icons = {
   BsFillPlayFill,
   CiRepeat,
   CiMusicNote1,
+  CiAlarmOn,
   FaRandom,
   FiPauseCircle,
   FiRadio,

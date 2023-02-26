@@ -6,7 +6,6 @@ const { MdMusicVideo, GiMicrophone, VscChromeRestore, SlVolume2, SlVolumeOff } =
 
 const PlayerVolume = ({ volume, setVolume }) => {
   console.log('Player volume: re-render')
-  console.log(volume)
   const [percentageVolume, setPercentageVolume] = useState(0)
   const [thumbVolumeMarginLeft, setThumbVolumeMarginLeft] = useState(0)
   const [lastVolumeValue, setLastVolumeValue] = useState(0)

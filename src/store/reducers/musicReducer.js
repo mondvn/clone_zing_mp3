@@ -1,9 +1,10 @@
 import actionTypes from "../actions/actionTypes";
 
 const initState = {
+  isPlaying: false,
   curSongId: null,
   curPlaylistId: null,
-  isPlaying: false,
+  curPlaylist: []
 }
 
 const musicReducer = (state = initState, action) => {
@@ -17,6 +18,11 @@ const musicReducer = (state = initState, action) => {
       return {
         ...state,
         curPlaylistId: action.playlistId || null
+      }
+    case actionTypes.SET_CURRENT_PLAYLIST:
+      return {
+        ...state,
+        curPlaylist: [...action.playlist] || null
       }
     case actionTypes.TOGGLE_PLAY_MUSIC:
       return {

@@ -17,16 +17,11 @@ const Album = () => {
   const { isPlaying, curPlaylistId } = useSelector(state => state.music)
   const [playListData, setPlayListData] = useState(null)
 
-  console.log('pid: ', pid)
-  console.log('curPlaylistId: ', curPlaylistId)
-
   useEffect(() => {
     const fetchDetailPlaylist = async () => {
       const response = await apis.apiGetDetailPlaylist(pid)
-      // console.log(response?.data?.data)
       if (response?.data?.err === 0) {
         setPlayListData(response?.data?.data)
-        console.log(response?.data?.data)
       }
     }
 

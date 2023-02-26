@@ -1,6 +1,7 @@
 export { default as SidebarLeft } from './SidebarLeft'
-export { default as SidebarRight } from './SidebarRight'
 export { default as Header } from './Header'
 export { default as HeaderSearch } from './HeaderSearch'
 export { default as Player } from './Player'
+export { default as PlayerPlaylist } from './PlayerPlaylist'
 export { default as PlayerVolume } from './PlayerVolume'
+export { default as PlayerSong } from './PlayerSong'

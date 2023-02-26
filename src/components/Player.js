@@ -11,7 +11,7 @@ import PlayerVolume from './PlayerVolume'
 const { SlHeart, BsThreeDots, BsPlayCircle, MdSkipPrevious, MdSkipNext, TbRepeat, FiPauseCircle, RxShuffle, MdOutlineQueueMusic } = icons
 
 const Player = () => {
-  const { curSongId, isPlaying } = useSelector(state => state.music)
+  const { curSongId, isPlaying, curPlaylist } = useSelector(state => state.music)
   const [songInfo, setSongInfo] = useState(null)
   const [percentage, setPercentage] = useState(0)
   const [thumbMarginLeft, setThumbMarginLeft] = useState(0)
@@ -104,6 +104,28 @@ const Player = () => {
     }
   }
 
+  const handleNextSong = () => {
+    const currentSongIndex = curPlaylist.findIndex(song => song.encodeId === curSongId)
+    const nextSongId = curPlaylist[currentSongIndex + 1].encodeId
+
+    dispatch(actions.setCurSongId(nextSongId))
+    dispatch(actions.togglePlayMusic(false))
+  }
+
+  const handlePrevSong = () => {
+    const currentSongIndex = curPlaylist.findIndex(song => song.encodeId === curSongId)
+    const prevSongId = curPlaylist[currentSongIndex - 1].encodeId
+
+    if (audioRef?.current?.currentTime < 5) {
+      dispatch(actions.setCurSongId(prevSongId))
+      dispatch(actions.togglePlayMusic(false))
+    } else {
+      dispatch(actions.togglePlayMusic(false))
+      audioRef.current.currentTime = 0
+      dispatch(actions.togglePlayMusic(true))
+    }
+  }
+
   return (
     <div className='h-full flex z-50'>
       {/* Song Info */}
@@ -141,9 +163,14 @@ const Player = () => {
           </span>
           {/* Previous */}
           <span
-            className='flex items-center justify-center w-8 h-8 hover:bg-[#2d2d2d] rounded-full'
+            className={`flex items-center justify-center w-8 h-8 hover:bg-[#2d2d2d] rounded-full
+            ${((audioRef?.current?.currentTime < 5 && +curPlaylist.findIndex(song => song.encodeId === curSongId) === 0)) && 'pointer-events-none opacity-50'}
+            `}
           >
-            <div className='px-[3px] py-[3px]'>
+            <div
+              className='px-[3px] py-[3px]'
+              onClick={handlePrevSong}
+            >
               <MdSkipPrevious size={26} />
             </div>
           </span>
@@ -157,9 +184,12 @@ const Player = () => {
             </div>
           </span>
           {/* Next */}
-          <span className='flex items-center justify-center w-8 h-8 hover:bg-[#2d2d2d] rounded-full'>
+          <span className={`flex items-center justify-center w-8 h-8 hover:bg-[#2d2d2d] rounded-full
+          ${(curPlaylist.findIndex(song => song.encodeId === curSongId) === (curPlaylist.length - 1)) && 'pointer-events-none opacity-50'}
+          `}>
             <div
               className='px-[3px] py-[3px]'
+              onClick={handleNextSong}
             >
               <MdSkipNext size={26} />
             </div>

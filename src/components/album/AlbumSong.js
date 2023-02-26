@@ -1,10 +1,12 @@
 import { memo } from 'react'
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment'
 
 import icons from '../../ultis/icons'
 import * as actions from '../../store/actions'
-import { Link } from 'react-router-dom'
+import * as apis from '../../apis'
+
 
 const { CiMusicNote1, RiVipCrown2Line, BsFillPlayFill } = icons
 
@@ -14,11 +16,25 @@ const AlbumSong = ({ song, isAlbum, pid }) => {
 
   const dispatch = useDispatch()
   const { curSongId, isPlaying } = useSelector(state => state.music)
+
+  const fetchCurrentPlaylist = async () => {
+    const response = await apis.apiGetDetailPlaylist(pid)
+    if (response?.data?.err === 0) {
+      // console.log(response?.data?.data)
+      // const data = {
+      //   title: response?.data?.data?.title,
+      //   link: response?.data?.data?.title,
+      //   songs: response?.data?.data?.song?.items?.filter(item => item.isWorldWide)
+      // }
+      dispatch(actions.setCurPlaylist(response?.data?.data?.song?.items?.filter(item => item.isWorldWide)))
+    }
+  }
+
   return (
     <div
       className={`
       ${!song?.isWorldWide && 'pointer-events-none'} 
-        flex items-center justify-between text-player-text-color p-[10px] text-xs border-b border-player-border-color group
+        flex items-center justify-between text-player-text-color p-[10px] text-xs border-b border-black-#353535 group
         ${song?.encodeId === curSongId ? 'bg-black-#ffffff1a' : 'hover:bg-black-#ffffff1a'}`}
     >
       <div className='flex gap-[10px] items-center justify-start flex-1'>
@@ -27,6 +43,7 @@ const AlbumSong = ({ song, isAlbum, pid }) => {
           onClick={() => {
             dispatch(actions.setCurSongId(song?.encodeId))
             dispatch(actions.setCurPlaylistId(pid))
+            fetchCurrentPlaylist()
             dispatch(actions.togglePlayMusic(false))
           }}
         >

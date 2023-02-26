@@ -12,7 +12,7 @@ const AlbumPlayList = ({ songs, isAlbum, pid }) => {
 
   return (
     <div className='flex flex-col w-full text-xs text-player-text-color mb-5'>
-      <div className='flex justify-between items-center p-[10px] font-medium border-b border-player-border-color leading-6'>
+      <div className='flex justify-between items-center p-[10px] font-medium border-b border-black-#353535 leading-6'>
         <div className='flex gap-[10px] items-center '>
           <BiSort size={14} />
           BÀI HÁT

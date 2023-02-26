@@ -10,6 +10,11 @@ export const setCurPlaylistId = (playlistId) => ({
   playlistId
 })
 
+export const setCurPlaylist = (playlist) => ({
+  type: actionTypes.SET_CURRENT_PLAYLIST,
+  playlist
+})
+
 export const togglePlayMusic = (flag) => ({
   type: actionTypes.TOGGLE_PLAY_MUSIC,
   flag
