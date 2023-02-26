@@ -105,16 +105,16 @@ const Player = () => {
   }
 
   const handleNextSong = () => {
-    const currentSongIndex = curPlaylist.findIndex(song => song.encodeId === curSongId)
-    const nextSongId = curPlaylist[currentSongIndex + 1].encodeId
+    const currentSongIndex = curPlaylist?.songs?.findIndex(song => song.encodeId === curSongId)
+    const nextSongId = curPlaylist.songs[currentSongIndex + 1].encodeId
 
     dispatch(actions.setCurSongId(nextSongId))
     dispatch(actions.togglePlayMusic(false))
   }
 
   const handlePrevSong = () => {
-    const currentSongIndex = curPlaylist.findIndex(song => song.encodeId === curSongId)
-    const prevSongId = curPlaylist[currentSongIndex - 1].encodeId
+    const currentSongIndex = curPlaylist?.songs?.findIndex(song => song.encodeId === curSongId)
+    const prevSongId = curPlaylist.songs[currentSongIndex - 1].encodeId
 
     if (audioRef?.current?.currentTime < 5) {
       dispatch(actions.setCurSongId(prevSongId))
@@ -164,7 +164,7 @@ const Player = () => {
           {/* Previous */}
           <span
             className={`flex items-center justify-center w-8 h-8 hover:bg-[#2d2d2d] rounded-full
-            ${((audioRef?.current?.currentTime < 5 && +curPlaylist.findIndex(song => song.encodeId === curSongId) === 0)) && 'pointer-events-none opacity-50'}
+            ${((audioRef?.current?.currentTime < 5 && +curPlaylist?.songs?.findIndex(song => song.encodeId === curSongId) === 0)) && 'pointer-events-none opacity-50'}
             `}
           >
             <div
@@ -185,7 +185,7 @@ const Player = () => {
           </span>
           {/* Next */}
           <span className={`flex items-center justify-center w-8 h-8 hover:bg-[#2d2d2d] rounded-full
-          ${(curPlaylist.findIndex(song => song.encodeId === curSongId) === (curPlaylist.length - 1)) && 'pointer-events-none opacity-50'}
+          ${(curPlaylist?.songs?.findIndex(song => song.encodeId === curSongId) === (curPlaylist.length - 1)) && 'pointer-events-none opacity-50'}
           `}>
             <div
               className='px-[3px] py-[3px]'

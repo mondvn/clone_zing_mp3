@@ -10,6 +10,7 @@ const { CiAlarmOn, BsThreeDots } = icons
 
 const PlayerPlaylist = () => {
   const { curSongId, curPlaylist } = useSelector(state => state.music)
+  console.log(curPlaylist)
 
   // console.log(curPlaylist)
   return (
@@ -38,11 +39,13 @@ const PlayerPlaylist = () => {
       </header>
       <div className='flex flex-col px-2 w-full h-full'>
         <Scrollbars style={{ width: '100%', height: '100%' }}>
-          {curPlaylist.map((song, index) => (
+          {curPlaylist?.songs?.map((song, index) => (
             <PlayerSong
               key={song?.encodeId}
               song={song}
-              prev={(index < curPlaylist.findIndex(song => song.encodeId === curSongId)) ? true : false}
+              prev={(index < curPlaylist?.songs?.findIndex(song => song.encodeId === curSongId)) ? true : false}
+              title={curPlaylist?.title}
+              link={curPlaylist?.link?.split('.')[0]}
             />
           ))}
         </Scrollbars >

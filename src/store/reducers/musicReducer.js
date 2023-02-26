@@ -4,7 +4,7 @@ const initState = {
   isPlaying: false,
   curSongId: null,
   curPlaylistId: null,
-  curPlaylist: []
+  curPlaylist: {}
 }
 
 const musicReducer = (state = initState, action) => {
@@ -20,9 +20,10 @@ const musicReducer = (state = initState, action) => {
         curPlaylistId: action.playlistId || null
       }
     case actionTypes.SET_CURRENT_PLAYLIST:
+      console.log(action.playlist)
       return {
         ...state,
-        curPlaylist: [...action.playlist] || null
+        curPlaylist: { ...action.playlist } || null
       }
     case actionTypes.TOGGLE_PLAY_MUSIC:
       return {

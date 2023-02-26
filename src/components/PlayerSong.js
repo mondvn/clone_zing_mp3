@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
 
 const { RiVipCrown2Line, BsFillPlayFill } = icons
 
-const PlayerSong = ({ song, prev }) => {
+const PlayerSong = ({ song, prev, title, link }) => {
   const dispatch = useDispatch()
   const { isPlaying, curSongId } = useSelector(state => state.music)
 
@@ -60,13 +60,12 @@ const PlayerSong = ({ song, prev }) => {
           <div className='flex flex-col flex-1 justify-between'>
             <div className='flex justify-start text-sm text-primary-text-color w-[85%] gap-[6px]'>
               <div className='line-clamp-1'>{song?.title}</div>
-              <div className={`${!song?.isWorldWide ? 'flex' : 'hidden'} items-center justify-center text-yellow-300`}><RiVipCrown2Line size={16} /></div>
             </div>
             <h3 className='flex justify-start'>
               <div className='line-clamp-1'>
                 {song?.artists?.map((artist) => (
                   <div className='hover:text-pink-#c86dd7 hover:underline inline-block mr-1' key={artist?.id}>
-                    <Link to={artist?.Link}>{artist?.name}</Link>
+                    <Link to={artist?.link}>{artist?.name}</Link>
                   </div>
                 ))}
               </div>
@@ -77,9 +76,9 @@ const PlayerSong = ({ song, prev }) => {
       {song?.encodeId === curSongId &&
         <div className='pt-[15px] pb-[10px] flex flex-col text-sm'>
           <h3 className='text-white'>Tiếp theo</h3>
-          <h3 className='flex gap-1'>
+          <h3 className='flex gap-1 w-full'>
             <span className='text-black-#FFFFFF80'>Từ playlist</span>
-            <Link className='text-pink-#9b4de0'>fdsjfsdjfhdskfjhdsfkjdshfk</Link>
+            <Link to={link} className='text-pink-#9b4de0'>{title?.length > 20 ? `${title?.slice(0, 20)}...` : title}</Link>
           </h3>
         </div>}
     </>
