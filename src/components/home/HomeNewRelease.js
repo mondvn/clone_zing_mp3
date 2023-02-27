@@ -100,7 +100,7 @@ const HomeNewRelease = ({ newRelease, title }) => {
             <div
               className={`
               ${!item?.isWorldWide && 'pointer-events-none'} 
-              flex text-player-text-color p-[10px] text-xs border-b border-black-#353535 group
+              flex text-player-text-color p-[10px] text-xs group
               ${item?.encodeId === curSongId ? 'bg-black-#ffffff1a' : 'hover:bg-black-#ffffff1a'}`}
               key={index}>
               <div className='flex relative mr-[10px]' onClick={() => handlePlay(item?.encodeId)}>

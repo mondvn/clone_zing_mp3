@@ -78,7 +78,7 @@ const PlayerSong = ({ song, prev, title, link }) => {
           <h3 className='text-white'>Tiếp theo</h3>
           <h3 className='flex gap-1 w-full'>
             <span className='text-black-#FFFFFF80'>Từ playlist</span>
-            <Link to={link} className='text-pink-#9b4de0'>{title?.length > 20 ? `${title?.slice(0, 20)}...` : title}</Link>
+            <Link to={link} className='text-pink-#9b4de0'>{title?.length > 30 ? `${title?.slice(0, 30)}...` : title}</Link>
           </h3>
         </div>}
     </>

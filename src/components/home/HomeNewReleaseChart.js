@@ -2,14 +2,39 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from "swiper";
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment';
 
 import icons from '../../ultis/icons'
+import * as actions from '../../store/actions'
+import * as apis from '../../apis'
 
-const { AiOutlineRight } = icons
+const { AiOutlineRight, BsFillPlayFill, RiVipCrown2Line } = icons
 
 const HomeNewReleaseChart = ({ newReleaseCharts, title }) => {
+  const dispatch = useDispatch()
+  const { curSongId, isPlaying } = useSelector(state => state.music)
   // console.log(newReleaseCharts)
+
+  const fetchDetailSong = async (encodeId) => {
+    const response = await apis.apiGetInfoSong(encodeId)
+    if (response?.data?.err === 0) {
+      const data = {
+        title: '',
+        link: '',
+        songs: [response?.data?.data]
+      }
+      dispatch(actions.setCurPlaylist(data))
+    }
+  }
+
+  const handlePlay = (encodeId) => {
+    fetchDetailSong(encodeId)
+    dispatch(actions.setCurSongId(encodeId))
+    dispatch(actions.clearPlaylistBeforeShuffle())
+    dispatch(actions.togglePlayMusic(false))
+  }
+
   return (
     <div className='pt-[30px] flex flex-col'>
       <div className='flex mb-5 items-center justify-between'>
@@ -35,13 +60,35 @@ const HomeNewReleaseChart = ({ newReleaseCharts, title }) => {
         >
           {newReleaseCharts?.map((item, index) => (
             <SwiperSlide key={item?.encodeId}>
-              <div className='flex bg-black-#ffffff1a rounded-[4px] p-[15px]'>
-                <img
-                  src={item?.thumbnailM}
-                  alt='thumbnal'
-                  className='w-[120px] object-contain rounded-[4px] mr-[10px]'
+              <div
+                className={` flex bg-black-#ffffff1a rounded-[4px] p-[15px] text-player-text-color text-xs group
+                ${!item?.isWorldWide && 'pointer-events-none'}`}
+              >
+                <div className='flex relative mr-[10px]' onClick={() => handlePlay(item?.encodeId)}>
+                  <img src={item?.thumbnailM} alt='song thumb' className='w-[120px] h-[120px]  object-contain rounded-[4px]' />
+                  <div className={`absolute w-full h-full top-0 left-0 bg-[#00000080] ${item?.encodeId === curSongId ? 'flex' : 'hidden group-hover:flex'}`}></div>
 
-                />
+                  <div className={`absolute w-full h-full top-0 left-0 items-center justify-center flex`}>
+                    <button className='text-white flex items-center justify-center'>
+                      {(item?.encodeId === curSongId && isPlaying) &&
+                        <div className='w-6 h-6 flex items-center justify-center'>
+                          <img
+                            src='https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif'
+                            alt='gif playing'
+                            className='w-6 h-6'
+                          />
+                        </div>}
+                      {(item?.encodeId === curSongId && !isPlaying) &&
+                        <div className='w-7 h-7 flex items-center justify-center'>
+                          <BsFillPlayFill size={28} />
+                        </div>}
+                    </button>
+                    {item?.encodeId !== curSongId &&
+                      <button className='text-white items-center justify-center hidden group-hover:flex '>
+                        <BsFillPlayFill size={28} />
+                      </button>}
+                  </div>
+                </div>
                 <div className='flex-auto flex flex-col justify-between text-black-#FFFFFF80'>
                   <div className='flex flex-col'>
                     <h3 className='text-base font-bold text-white'>{item?.title}</h3>
