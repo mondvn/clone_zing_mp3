@@ -30,18 +30,40 @@ const Album = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pid])
 
-
   const handleTogglePlayMusic = () => {
     dispatch(actions.togglePlayMusic(!isPlaying))
   }
 
+
   const handlePlayRandomMusic = () => {
     const arr = playListData?.song?.items?.filter(item => item.isWorldWide)
     const randomNumber = Math.round(Math.random() * arr.length)
-    // console.log(arr[randomNumber].encodeId)
-
+    console.log('randomNumber', randomNumber)
+    console.log(playListData?.song?.items[randomNumber])
+    // Buoc 1: Xet shuffle = true
+    dispatch(actions.toggleShuffle(true))
+    // Buoc 2: Xet curSongId
     dispatch(actions.setCurSongId(arr[randomNumber].encodeId))
+    // Buoc 3 xet curPlaylistId
     dispatch(actions.setCurPlaylistId(pid))
+    // Buoc 4 xet CurPlaylist va playlistBeforeShuffe
+    const data = {
+      title: playListData?.title,
+      link: playListData?.link,
+      songs: arr
+    }
+    const dataShuffle = {
+      ...data,
+      songs: [
+        arr[randomNumber],
+        ...arr.slice().filter((_, index) => index !== randomNumber).sort(() => Math.random() - 0.5)
+      ]
+    }
+    console.log(data)
+    console.log(dataShuffle)
+    dispatch(actions.setCurPlaylist(dataShuffle))
+    dispatch(actions.setPlaylistBeforeShuffle(data))
+    // Buoc 5 xet isPlay = false
     dispatch(actions.togglePlayMusic(false))
   }
 

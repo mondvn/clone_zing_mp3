@@ -33,15 +33,14 @@ const AlbumSong = ({ song, isAlbum, pid }) => {
   const fetchCurrentPlaylistWithShuffle = async () => {
     const response = await apis.apiGetDetailPlaylist(pid)
     if (response?.data?.err === 0) {
-      // console.log(response?.data?.data)
       const arr = response?.data?.data?.song?.items?.filter(item => item.isWorldWide)
+      const currentSongIndex = response?.data?.data?.song?.items?.findIndex(item => item.encodeId === song?.encodeId)
+
       const data = {
         title: response?.data?.data?.title,
         link: response?.data?.data?.link,
         songs: arr
       }
-
-      const currentSongIndex = response?.data?.data?.song?.items?.findIndex(item => item.encodeId === song?.encodeId)
       const dataShuffle = {
         ...data,
         songs: [
@@ -49,12 +48,8 @@ const AlbumSong = ({ song, isAlbum, pid }) => {
           ...arr.slice().filter(item => item.encodeId !== song?.encodeId).sort(() => Math.random() - 0.5)
         ]
       }
-      console.log(data)
-      console.log(dataShuffle)
-
       dispatch(actions.setCurPlaylist(dataShuffle))
       dispatch(actions.setPlaylistBeforeShuffle(data))
-
     }
   }
 
