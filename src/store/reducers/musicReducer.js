@@ -6,8 +6,16 @@ const initState = {
   repeatValue: 0,
   curSongId: null,
   curPlaylistId: null,
-  curPlaylist: {},
-  playlistBeforeShuffle: {}
+  curPlaylist: {
+    title: '',
+    link: '',
+    songs: [],
+  },
+  playlistBeforeShuffle: {
+    title: '',
+    link: '',
+    songs: [],
+  }
 }
 
 const musicReducer = (state = initState, action) => {

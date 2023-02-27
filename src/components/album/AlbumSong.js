@@ -15,7 +15,7 @@ const AlbumSong = ({ song, isAlbum, pid }) => {
   // console.log(isAlbum)
 
   const dispatch = useDispatch()
-  const { curSongId, curPlaylistId, isPlaying } = useSelector(state => state.music)
+  const { curSongId, curPlaylistId, isPlaying, isShuffle } = useSelector(state => state.music)
 
   const fetchCurrentPlaylist = async () => {
     const response = await apis.apiGetDetailPlaylist(pid)
@@ -30,6 +30,45 @@ const AlbumSong = ({ song, isAlbum, pid }) => {
     }
   }
 
+  const fetchCurrentPlaylistWithShuffle = async () => {
+    const response = await apis.apiGetDetailPlaylist(pid)
+    if (response?.data?.err === 0) {
+      // console.log(response?.data?.data)
+      const arr = response?.data?.data?.song?.items?.filter(item => item.isWorldWide)
+      const data = {
+        title: response?.data?.data?.title,
+        link: response?.data?.data?.link,
+        songs: arr
+      }
+
+      const currentSongIndex = response?.data?.data?.song?.items?.findIndex(item => item.encodeId === song?.encodeId)
+      const dataShuffle = {
+        ...data,
+        songs: [
+          response?.data?.data?.song?.items[currentSongIndex],
+          ...arr.slice().filter(item => item.encodeId !== song?.encodeId).sort(() => Math.random() - 0.5)
+        ]
+      }
+      console.log(data)
+      console.log(dataShuffle)
+
+      dispatch(actions.setCurPlaylist(dataShuffle))
+      dispatch(actions.setPlaylistBeforeShuffle(data))
+
+    }
+  }
+
+  const handlePlaySong = () => {
+    dispatch(actions.setCurSongId(song?.encodeId))
+
+    if (pid !== curPlaylistId) {
+      dispatch(actions.setCurPlaylistId(pid))
+      isShuffle ? fetchCurrentPlaylistWithShuffle() : fetchCurrentPlaylist()
+    }
+
+    dispatch(actions.togglePlayMusic(false))
+  }
+
   return (
     <div
       className={`
@@ -40,15 +79,7 @@ const AlbumSong = ({ song, isAlbum, pid }) => {
       <div className='flex gap-[10px] items-center justify-start flex-1'>
         <CiMusicNote1 size={14} />
         <div className='relative h-10 w-10'
-          onClick={() => {
-            dispatch(actions.setCurSongId(song?.encodeId))
-
-            if (pid !== curPlaylistId) {
-              dispatch(actions.setCurPlaylistId(pid))
-              fetchCurrentPlaylist()
-            }
-            dispatch(actions.togglePlayMusic(false))
-          }}
+          onClick={handlePlaySong}
         >
           <img src={song?.thumbnail}
             alt='song thumb'
