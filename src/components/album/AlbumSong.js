@@ -18,9 +18,10 @@ const AlbumSong = ({ song, isAlbum, pid }) => {
   const { curSongId, curPlaylistId, isPlaying, isShuffle } = useSelector(state => state.music)
 
   const fetchCurrentPlaylist = async () => {
+    console.log('fetchCurrentPlaylist')
     const response = await apis.apiGetDetailPlaylist(pid)
     if (response?.data?.err === 0) {
-      console.log(response?.data?.data)
+      // console.log(response?.data?.data)
       const data = {
         title: response?.data?.data?.title,
         link: response?.data?.data?.link,
@@ -31,6 +32,7 @@ const AlbumSong = ({ song, isAlbum, pid }) => {
   }
 
   const fetchCurrentPlaylistWithShuffle = async () => {
+    console.log('fetchCurrentPlaylistWithShuffle')
     const response = await apis.apiGetDetailPlaylist(pid)
     if (response?.data?.err === 0) {
       const arr = response?.data?.data?.song?.items?.filter(item => item.isWorldWide)
