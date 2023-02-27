@@ -75,13 +75,9 @@ const AlbumSong = ({ song, isAlbum, pid }) => {
     >
       <div className='flex gap-[10px] items-center justify-start flex-1'>
         <CiMusicNote1 size={14} />
-        <div className='relative h-10 w-10'
-          onClick={handlePlaySong}
-        >
-          <img src={song?.thumbnail}
-            alt='song thumb'
-            className='h-10 w-10 rounded-sm object-cover'
-          />
+        <div className='relative h-10 w-10' onClick={handlePlaySong}>
+          <img src={song?.thumbnail} alt='song thumb' className='h-10 w-10 rounded-sm object-cover' />
+
           <div className={`absolute w-full h-full top-0 left-0 bg-[#00000080] ${song?.encodeId === curSongId ? 'flex' : 'hidden group-hover:flex'}`}></div>
 
           <div className={`absolute w-full h-full top-0 left-0 items-center justify-center flex`}>
