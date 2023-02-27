@@ -15,8 +15,18 @@ export const setCurPlaylist = (playlist) => ({
   playlist
 })
 
+export const setPlaylistBeforeShuffle = (playlist) => ({
+  type: actionTypes.SET_PLAYLIST_BEFORE_SHUFFLE,
+  playlist
+})
+
 export const togglePlayMusic = (flag) => ({
   type: actionTypes.TOGGLE_PLAY_MUSIC,
+  flag
+})
+
+export const toggleShuffle = (flag) => ({
+  type: actionTypes.TOGGLE_SHUFFLE,
   flag
 })
 

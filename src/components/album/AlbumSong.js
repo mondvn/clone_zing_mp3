@@ -15,7 +15,7 @@ const AlbumSong = ({ song, isAlbum, pid }) => {
   // console.log(isAlbum)
 
   const dispatch = useDispatch()
-  const { curSongId, isPlaying } = useSelector(state => state.music)
+  const { curSongId, curPlaylistId, isPlaying } = useSelector(state => state.music)
 
   const fetchCurrentPlaylist = async () => {
     const response = await apis.apiGetDetailPlaylist(pid)
@@ -42,8 +42,11 @@ const AlbumSong = ({ song, isAlbum, pid }) => {
         <div className='relative h-10 w-10'
           onClick={() => {
             dispatch(actions.setCurSongId(song?.encodeId))
-            dispatch(actions.setCurPlaylistId(pid))
-            fetchCurrentPlaylist()
+
+            if (pid !== curPlaylistId) {
+              dispatch(actions.setCurPlaylistId(pid))
+              fetchCurrentPlaylist()
+            }
             dispatch(actions.togglePlayMusic(false))
           }}
         >

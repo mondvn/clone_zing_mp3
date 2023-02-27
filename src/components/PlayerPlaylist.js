@@ -42,7 +42,7 @@ const PlayerPlaylist = () => {
             <PlayerSong
               key={song?.encodeId}
               song={song}
-              prev={(index < curPlaylist?.songs?.findIndex(song => song.encodeId === curSongId)) ? true : false}
+              prev={(index < curPlaylist?.songs?.findIndex(song => song?.encodeId === curSongId)) ? true : false}
               title={curPlaylist?.title}
               link={curPlaylist?.link?.split('.')[0]}
             />

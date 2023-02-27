@@ -2,10 +2,12 @@ import actionTypes from "../actions/actionTypes";
 
 const initState = {
   isPlaying: false,
+  isShuffle: false,
   repeatValue: 0,
   curSongId: null,
   curPlaylistId: null,
-  curPlaylist: {}
+  curPlaylist: {},
+  playlistBeforeShuffle: {}
 }
 
 const musicReducer = (state = initState, action) => {
@@ -21,15 +23,25 @@ const musicReducer = (state = initState, action) => {
         curPlaylistId: action.playlistId || null
       }
     case actionTypes.SET_CURRENT_PLAYLIST:
-      console.log(action.playlist)
       return {
         ...state,
         curPlaylist: { ...action.playlist } || null
+      }
+    case actionTypes.SET_PLAYLIST_BEFORE_SHUFFLE:
+      console.log(action.playlist)
+      return {
+        ...state,
+        playlistBeforeShuffle: { ...action.playlist } || null
       }
     case actionTypes.TOGGLE_PLAY_MUSIC:
       return {
         ...state,
         isPlaying: action.flag
+      }
+    case actionTypes.TOGGLE_SHUFFLE:
+      return {
+        ...state,
+        isShuffle: action.flag
       }
     case actionTypes.SET_REPEAT_VALUE:
       return {

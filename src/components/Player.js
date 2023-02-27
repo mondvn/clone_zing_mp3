@@ -11,21 +11,20 @@ import PlayerVolume from './PlayerVolume'
 const { SlHeart, BsThreeDots, BsPlayCircle, MdSkipPrevious, MdSkipNext, TbRepeat, FiPauseCircle, RxShuffle, MdOutlineQueueMusic, TbRepeatOnce } = icons
 
 const Player = () => {
-  const { curSongId, isPlaying, curPlaylist, repeatValue } = useSelector(state => state.music)
+  const { curSongId, isPlaying, curPlaylist, repeatValue, isShuffle, playlistBeforeShuffle } = useSelector(state => state.music)
   const [songInfo, setSongInfo] = useState(null)
   const [percentage, setPercentage] = useState(0)
   const [thumbMarginLeft, setThumbMarginLeft] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
   const [volume, setVolume] = useState(0)
   const [isFirstTime, setIsFirstTime] = useState(true)
-  // 0 = none, 1 = looping all, 2 = reapeat only 1
 
   const rangeRef = useRef()
   const dispatch = useDispatch()
   const audioRef = useRef()
 
-  console.log('[Player Component]: Re-render')
-  console.log('[Player Component] repeatValue: ', repeatValue)
+  // console.log('[Player Component]: Re-render')
+  // console.log('[Player Component] repeatValue: ', repeatValue)
   // console.log('[Player Component] - isPlaying:', isPlaying)
 
   // SideEffects
@@ -138,10 +137,11 @@ const Player = () => {
   }
 
   const handlePrevSong = () => {
-    const currentSongIndex = curPlaylist?.songs?.findIndex(song => song.encodeId === curSongId)
-    const prevSongId = curPlaylist.songs[currentSongIndex - 1].encodeId
+
 
     if (audioRef?.current?.currentTime < 5) {
+      const currentSongIndex = curPlaylist?.songs?.findIndex(song => song?.encodeId === curSongId)
+      const prevSongId = curPlaylist?.songs[currentSongIndex - 1]?.encodeId
       dispatch(actions.setCurSongId(prevSongId))
       dispatch(actions.togglePlayMusic(false))
     } else {
@@ -153,6 +153,32 @@ const Player = () => {
 
   const handleRepeatSong = () => {
     repeatValue < 2 ? dispatch(actions.setRepeatValue(repeatValue + 1)) : dispatch(actions.setRepeatValue(0))
+  }
+
+  const handleToggleShuffle = () => {
+    if (isShuffle === false) {
+      dispatch(actions.toggleShuffle(true))
+
+      const currentSongIndex = curPlaylist?.songs?.findIndex(song => song.encodeId === curSongId)
+      const newPlaylist = [
+        curPlaylist?.songs?.[currentSongIndex],
+        ...curPlaylist?.songs?.slice().filter(item => item.encodeId !== curSongId).sort(() => Math.random() - 0.5)
+      ]
+      // console.log(curPlaylist)
+      // console.log(newPlaylist)
+      dispatch(actions.setPlaylistBeforeShuffle({ ...curPlaylist }))
+      dispatch(actions.setCurPlaylist({
+        ...curPlaylist,
+        songs: newPlaylist
+      }))
+    }
+    else {
+      dispatch(actions.toggleShuffle(false))
+      dispatch(actions.setCurPlaylist({
+        ...playlistBeforeShuffle,
+      }))
+
+    }
   }
 
   return (
@@ -181,10 +207,11 @@ const Player = () => {
       <div className='w-[30%] flex-auto flex flex-col items-center justify-center text-primary-text-color'>
         {/* Control music player */}
         <div className='flex justify-center items-center h-[50px] gap-[14px]'>
-          {/* Random */}
+          {/* Shuffle */}
           <span
             title='Bật phát ngẫu nhiên'
-            className='flex items-center justify-center w-8 h-8 hover:bg-[#2d2d2d] rounded-full'
+            onClick={handleToggleShuffle}
+            className={`flex items-center justify-center w-8 h-8 hover:bg-[#2d2d2d] rounded-full ${isShuffle && 'text-pink-#9b4de0'}`}
           >
             <div className='px-2 py-2'>
               <RxShuffle size={16} />
@@ -193,7 +220,7 @@ const Player = () => {
           {/* Previous */}
           <span
             className={`flex items-center justify-center w-8 h-8 hover:bg-[#2d2d2d] rounded-full
-            ${((audioRef?.current?.currentTime < 5 && +curPlaylist?.songs?.findIndex(song => song.encodeId === curSongId) === 0)) && 'pointer-events-none opacity-50'}
+            ${((audioRef?.current?.currentTime < 5 && +curPlaylist?.songs?.findIndex(song => song?.encodeId === curSongId) === 0)) && 'pointer-events-none opacity-50'}
             `}
           >
             <div
