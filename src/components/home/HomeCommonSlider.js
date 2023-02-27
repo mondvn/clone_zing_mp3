@@ -8,7 +8,7 @@ import icons from '../../ultis/icons'
 const { AiOutlineRight } = icons
 
 const HomeCommonSlider = ({ sliders }) => {
-  // console.log(sliders)
+  console.log(sliders)
 
   // Xử lý 1 số trường hợp swiper sẽ autoplay còn lại thì không
   let swiperParams = {}
@@ -30,6 +30,11 @@ const HomeCommonSlider = ({ sliders }) => {
   }
 
   sliders?.sectionId === "hAlbum" ? swiperParams = { ...swiperWithAutoplayParams } : swiperParams = { ...swiperWithOutAutoplayParams }
+
+  const handlePlay = () => {
+
+  }
+
 
   return (
     <div className='mt-12'>
@@ -57,6 +62,7 @@ const HomeCommonSlider = ({ sliders }) => {
               <div className='flex flex-col'>
                 <Link>
                   <img
+                    onClick={handlePlay}
                     className='w-full h-full rounded-md'
                     src={item?.thumbnailM}
                     alt='Hình nền slider'
@@ -66,7 +72,7 @@ const HomeCommonSlider = ({ sliders }) => {
                   to={item?.link.split('.')[0]}
                   className='mt-3 mb-1'
                 >
-                  <h4 className='text-white text-sm font-bold line-clamp-1'>{item?.title}</h4>
+                  <h4 className='text-white text-sm font-bold line-clamp-1 hover:text-pink-#9b4de0'>{item?.title}</h4>
                 </Link>
                 <h3 className='text-black-#FFFFFF80 text-sm font-normal line-clamp-2'>
                   {item?.sortDescription || item?.artistsNames}

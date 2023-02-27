@@ -116,7 +116,7 @@ const Album = () => {
             <button
               onClick={handlePlayRandomMusic}
               className='flex items-center justify-center gap-[5px] text-primary-text-color bg-button-primary-bg 
-            rounded-full text-sm py-[9px] px-[20px] hover:brightness-90'>
+            rounded-full text-sm py-[9px] px-[20px] hover:brightness-90 uppercase'>
               <BsFillPlayFill size={20} />
               Phát Ngẫu Nhiên
             </button>}

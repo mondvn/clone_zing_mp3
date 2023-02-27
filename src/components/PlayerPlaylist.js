@@ -13,7 +13,7 @@ const PlayerPlaylist = () => {
 
   // console.log(curPlaylist)
   return (
-    <div className='w-full h-full pb-[90px]'>
+    <div className='w-full h-full pb-[90px] animate-slide-left'>
       <header className='px-2 py-[14px] flex justify-between items-center gap-2'>
         <div className='flex flex-1 items-center justify-center rounded-full bg-black-#ffffff1a cursor-pointer p-[3px]'>
           <div className='py-[5px] bg-black-#ffffff4d flex flex-1 items-center justify-center rounded-full'>

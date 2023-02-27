@@ -5,20 +5,34 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import * as actions from '../../store/actions'
+import * as apis from '../../apis'
 import icons from '../../ultis/icons'
 
 const { AiOutlineRight, AiOutlineLeft } = icons
 
 const HomeBanner = ({ banners }) => {
-  // console.log(banners)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  const fetchDetailSong = async (encodeId) => {
+    const response = await apis.apiGetInfoSong(encodeId)
+    if (response?.data?.err === 0) {
+      const data = {
+        title: '',
+        link: '',
+        songs: [response?.data?.data]
+      }
+      dispatch(actions.setCurPlaylist(data))
+    }
+  }
+
   const handleClickBanner = (item) => {
     // console.log({ item })
     if (item.type === 1) {
+      fetchDetailSong(item.encodeId)
       dispatch(actions.setCurSongId(item.encodeId))
+      dispatch(actions.clearPlaylistBeforeShuffle())
       dispatch(actions.togglePlayMusic(false))
     } else if (item.type === 4) {
       const albumPath = item.link.split('.')[0]

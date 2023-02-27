@@ -58,8 +58,8 @@ const AlbumSong = ({ song, isAlbum, pid }) => {
 
     if (pid !== curPlaylistId) {
       dispatch(actions.setCurPlaylistId(pid))
-      isShuffle ? fetchCurrentPlaylistWithShuffle() : fetchCurrentPlaylist()
     }
+    isShuffle ? fetchCurrentPlaylistWithShuffle() : fetchCurrentPlaylist()
 
     dispatch(actions.togglePlayMusic(false))
   }

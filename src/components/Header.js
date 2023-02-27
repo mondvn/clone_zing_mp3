@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 import icons from '../ultis/icons'
 import Search from './HeaderSearch'
@@ -6,8 +7,12 @@ import Search from './HeaderSearch'
 const { BsArrowLeft, BsArrowRight, VscDesktopDownload, TbShirt, RiVipDiamondLine, FiSettings } = icons
 
 const Header = () => {
+  const { isShowPlaylist } = useSelector(state => state.app)
   return (
-    <div className='h-[70px] px-[59px] flex items-center fixed top-0 left-[240px] right-[329px] justify-between bg-[#1e1e1e] z-50 backdrop-blur-[50px] shadow-[0_3px_5px_rgba(0,0,0,0.08)]'>
+    <div className={`h-[70px] px-[59px] flex items-center fixed top-0 left-[240px]
+    justify-between bg-[#1e1e1e] z-50 backdrop-blur-[50px] shadow-[0_3px_5px_rgba(0,0,0,0.08)]
+    ${isShowPlaylist ? 'right-[329px]' : 'right-0'}
+    `}>
       <div className='flex items-center gap-5'>
         <div className='flex gap-5 text-[#616161]'>
           <span><BsArrowLeft size={24} /></span>

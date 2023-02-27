@@ -1,9 +1,11 @@
 import { Outlet } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 import { Scrollbars } from 'react-custom-scrollbars-2';
 
 import { Header, Player, SidebarLeft, PlayerPlaylist } from '../../components'
 
 function Public() {
+  const { isShowPlaylist } = useSelector(state => state.app)
   return (
     <div className='w-full h-screen flex bg-[#1e1e1e]'>
       <div className='w-[240px] flex-none h-full '>
@@ -19,9 +21,9 @@ function Public() {
           </div>
         </Scrollbars>
       </div>
-      <div className='w-[329px] pb-[90px] flex-none border-l border-black-#353535'>
+      {isShowPlaylist && <div className='w-[329px] pb-[90px] flex-none border-l border-black-#353535'>
         <PlayerPlaylist />
-      </div>
+      </div>}
       <div className='fixed h-[90px] bottom-0 right-0 left-0 px-5 bg-black-#181818 border-t border-black-#353535'>
         <Player />
       </div>

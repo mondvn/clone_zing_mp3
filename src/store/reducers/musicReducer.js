@@ -35,11 +35,29 @@ const musicReducer = (state = initState, action) => {
         ...state,
         curPlaylist: { ...action.playlist } || null
       }
+    case actionTypes.CLEAR_CURRENT_PLAYLIST:
+      return {
+        ...state,
+        curPlaylist: {
+          title: '',
+          link: '',
+          songs: [],
+        }
+      }
     case actionTypes.SET_PLAYLIST_BEFORE_SHUFFLE:
       console.log(action.playlist)
       return {
         ...state,
         playlistBeforeShuffle: { ...action.playlist } || null
+      }
+    case actionTypes.CLEAR_PLAYLIST_BEFORE_SHUFFLE:
+      return {
+        ...state,
+        playlistBeforeShuffle: {
+          title: '',
+          link: '',
+          songs: [],
+        }
       }
     case actionTypes.TOGGLE_PLAY_MUSIC:
       return {

@@ -12,6 +12,7 @@ const { SlHeart, BsThreeDots, BsPlayCircle, MdSkipPrevious, MdSkipNext, TbRepeat
 
 const Player = () => {
   const { curSongId, isPlaying, curPlaylist, repeatValue, isShuffle, playlistBeforeShuffle } = useSelector(state => state.music)
+  const { isShowPlaylist } = useSelector(state => state.app)
   const [songInfo, setSongInfo] = useState(null)
   const [percentage, setPercentage] = useState(0)
   const [thumbMarginLeft, setThumbMarginLeft] = useState(0)
@@ -47,7 +48,6 @@ const Player = () => {
     fetchDetailSong()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [curSongId])
-
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -137,8 +137,6 @@ const Player = () => {
   }
 
   const handlePrevSong = () => {
-
-
     if (audioRef?.current?.currentTime < 5) {
       const currentSongIndex = curPlaylist?.songs?.findIndex(song => song?.encodeId === curSongId)
       const prevSongId = curPlaylist?.songs[currentSongIndex - 1]?.encodeId
@@ -179,6 +177,10 @@ const Player = () => {
       }))
 
     }
+  }
+
+  const handleToggleShowPlaylist = () => {
+    dispatch(actions.toggleShowPlaylist(!isShowPlaylist))
   }
 
   return (
@@ -313,7 +315,12 @@ const Player = () => {
         <div className='h-[33px] w-[1px] mx-5 bg-black-#ffffff1a'></div>
         {/* On/Off playlist music player */}
         <div>
-          <button className='flex items-center justify-center w-8 h-8 bg-[#2d2d2d] hover:bg-black-#ffffff33 rounded-md text-white'>
+          <button
+            onClick={handleToggleShowPlaylist}
+            className={`flex items-center justify-center w-8 h-8 text-white rounded-md
+            ${isShowPlaylist ? 'bg-pink-#9b4de0 hover:brightness-90' : 'bg-[#2d2d2d] hover:bg-[#ffffff33]'}
+            `}
+          >
             <MdOutlineQueueMusic size={18} />
           </button>
         </div>

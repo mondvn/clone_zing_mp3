@@ -15,7 +15,6 @@ import * as actions from './store/actions'
 function App() {
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(actions.getHome())
     dispatch(actions.getHomeData())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
