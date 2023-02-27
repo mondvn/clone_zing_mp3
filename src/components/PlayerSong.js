@@ -11,7 +11,7 @@ const { BsFillPlayFill } = icons
 
 const PlayerSong = ({ song, prev, title, link }) => {
   const dispatch = useDispatch()
-  const { isPlaying, curSongId } = useSelector(state => state.music)
+  const { isPlaying, curSongId, curPlaylist } = useSelector(state => state.music)
 
   return (
     <>
@@ -73,7 +73,7 @@ const PlayerSong = ({ song, prev, title, link }) => {
           </div>
         </div>
       </div>
-      {song?.encodeId === curSongId &&
+      {(song?.encodeId === curSongId && curSongId !== curPlaylist?.songs[curPlaylist?.songs.length - 1]?.encodeId) &&
         <div className='pt-[15px] pb-[10px] flex flex-col text-sm'>
           <h3 className='text-white'>Tiếp theo</h3>
           <h3 className='flex gap-1 w-full'>
