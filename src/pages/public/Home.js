@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-import { HomeBanner, HomeCommonSlider, HomeNewRelease, HomeNewReleaseChart, HomeRadioSlider } from '../../components/home';
+import { HomeBanner, HomeChart, HomeCommonSlider, HomeNewRelease, HomeNewReleaseChart, HomeRadioSlider } from '../../components/home';
 
 function Home() {
 
@@ -47,6 +47,14 @@ function Home() {
               <HomeCommonSlider
                 key={index}
                 sliders={item}
+              />
+            )
+          case "RTChart":
+            return (
+              <HomeChart
+                key={index}
+                chart={item?.chart}
+                songs={item?.items}
               />
             )
           default:

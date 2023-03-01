@@ -12,3 +12,13 @@
     cursor: pointer;
   }
 }
+
+.text-stroke-zc-0 {
+  -webkit-text-stroke: 1px #4a90e2;
+}
+.text-stroke-zc-1 {
+  -webkit-text-stroke: 1px #50e3c2;
+}
+.text-stroke-zc-2 {
+  -webkit-text-stroke: 1px #e35050;
+}

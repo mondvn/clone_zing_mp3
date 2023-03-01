@@ -12,7 +12,7 @@ import * as actions from '../../store/actions'
 const { AiOutlineRight, BsPlayCircle } = icons
 
 const HomeCommonSlider = ({ sliders }) => {
-  console.log(sliders)
+  // console.log(sliders)
   const dispatch = useDispatch()
   const { isPlaying, curPlaylistId } = useSelector(state => state.music)
 
