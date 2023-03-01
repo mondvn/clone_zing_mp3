@@ -65,6 +65,7 @@ const Player = () => {
       dispatch(actions.togglePlayMusic(false))
       setVolume(audioRef.current.volume = 0.5)
     } else {
+      dispatch(actions.setHistory(songInfo))
       dispatch(actions.togglePlayMusic(true))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -34,7 +34,6 @@ const Album = () => {
     dispatch(actions.togglePlayMusic(!isPlaying))
   }
 
-
   const handlePlayRandomMusic = () => {
     const arr = playListData?.song?.items?.filter(item => item.isWorldWide)
     const randomNumber = Math.round(Math.random() * arr.length)

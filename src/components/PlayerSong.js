@@ -3,15 +3,40 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import icons from '../ultis/icons'
 import * as actions from '../store/actions'
-// import * as apis from '../apis'
 import { Link } from 'react-router-dom'
 
 
 const { BsFillPlayFill } = icons
 
-const PlayerSong = ({ song, prev, title, link }) => {
+const PlayerSong = ({ song, prev, title, link, isHistory, setPlaylistState }) => {
   const dispatch = useDispatch()
-  const { isPlaying, curSongId, curPlaylist } = useSelector(state => state.music)
+  const { isPlaying, curSongId, curPlaylist, history } = useSelector(state => state.music)
+
+  const handlePlay = () => {
+    if (song?.encodeId === curSongId) {
+      dispatch(actions.togglePlayMusic(!isPlaying))
+    } else {
+      if (!isHistory) {
+        dispatch(actions.setCurSongId(song?.encodeId))
+        dispatch(actions.togglePlayMusic(false))
+      } else {
+        // console.log(history?.songs)
+        const currentSongIndex = history?.songs?.findIndex(item => item.encodeId === song?.encodeId)
+        // console.log(history?.songs[currentSongIndex])
+        dispatch(actions.setCurPlaylist({
+          ...curPlaylist,
+          title: '',
+          link: '',
+          songs: [history?.songs[currentSongIndex],
+          ...history?.songs.slice().filter(item => item.encodeId !== song?.encodeId).reverse()]
+        }))
+        dispatch(actions.setCurSongId(song?.encodeId))
+        dispatch(actions.togglePlayMusic(false))
+        setPlaylistState('normal')
+      }
+    }
+  }
+
 
   return (
     <>
@@ -23,12 +48,8 @@ const PlayerSong = ({ song, prev, title, link }) => {
       >
         <div className='flex gap-[10px] items-center justify-start flex-1'>
           <div className='relative h-10 w-10'
-            onClick={() => {
-              dispatch(actions.setCurSongId(song?.encodeId))
-              // dispatch(actions.setCurPlaylistId(pid))
-              // fetchCurrentPlaylist()
-              dispatch(actions.togglePlayMusic(false))
-            }}
+            // onClick={!isHistory ? handlePlay : handlePushSongFromHistorytoCurPlaylist}
+            onClick={handlePlay}
           >
             <img src={song?.thumbnail}
               alt='song thumb'
@@ -73,7 +94,7 @@ const PlayerSong = ({ song, prev, title, link }) => {
           </div>
         </div>
       </div>
-      {(song?.encodeId === curSongId && curSongId !== curPlaylist?.songs[curPlaylist?.songs.length - 1]?.encodeId) &&
+      {(song?.encodeId === curSongId && curSongId !== curPlaylist?.songs[curPlaylist?.songs.length - 1]?.encodeId) && link &&
         <div className='pt-[15px] pb-[10px] flex flex-col text-sm'>
           <h3 className='text-white'>Tiếp theo</h3>
           <h3 className='flex gap-1 w-full'>

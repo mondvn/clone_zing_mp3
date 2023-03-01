@@ -56,14 +56,18 @@ const AlbumSong = ({ song, isAlbum, pid }) => {
   }
 
   const handlePlaySong = () => {
-    dispatch(actions.setCurSongId(song?.encodeId))
+    if (curSongId === song?.encodeId) {
+      dispatch(actions.togglePlayMusic(!isPlaying))
+    } else {
+      dispatch(actions.setCurSongId(song?.encodeId))
 
-    if (pid !== curPlaylistId) {
-      dispatch(actions.setCurPlaylistId(pid))
+      if (pid !== curPlaylistId) {
+        dispatch(actions.setCurPlaylistId(pid))
+      }
+      isShuffle ? fetchCurrentPlaylistWithShuffle() : fetchCurrentPlaylist()
+
+      dispatch(actions.togglePlayMusic(false))
     }
-    isShuffle ? fetchCurrentPlaylistWithShuffle() : fetchCurrentPlaylist()
-
-    dispatch(actions.togglePlayMusic(false))
   }
 
   return (

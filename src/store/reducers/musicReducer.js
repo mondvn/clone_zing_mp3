@@ -15,7 +15,10 @@ const initState = {
     title: '',
     link: '',
     songs: [],
-  }
+  },
+  history: {
+    songs: []
+  },
 }
 
 const musicReducer = (state = initState, action) => {
@@ -73,6 +76,30 @@ const musicReducer = (state = initState, action) => {
       return {
         ...state,
         repeatValue: action.value
+      }
+    case actionTypes.SET_HISTORY:
+      // Xử lý trùng bài hát
+      let curPlaylist = []
+      const checkSameSong = state.history.songs.some(song => song.encodeId === action.song.encodeId)
+      checkSameSong
+        ? curPlaylist = [...state.history.songs.slice().filter(song => song.encodeId !== action.song.encodeId)]
+        : curPlaylist = [...state.history.songs]
+
+      // Xử lý nếu list hơn 20 bài hát
+      if (curPlaylist.length >= 20) curPlaylist.shift()
+      return {
+        ...state,
+        history: {
+          songs: [...curPlaylist, action.song] || null
+        }
+      }
+    case actionTypes.PUSH_SONG_FROM_HISTORY_TO_CURRENT_PLAYLIST:
+      // const currentSongIndex = state.curPlaylist.songs.findIndex(song => song.encodeId === state.curSongId)
+      // console.log(state.curPlaylist.songs?.slice(0, currentSongIndex))
+      // console.log(state.curPlaylist.songs?.slice(currentSongIndex, state.curPlaylist.songs.length - 1))
+      return {
+        ...state,
+
       }
     default:
       return state

@@ -41,3 +41,11 @@ export const setRepeatValue = (value) => ({
   type: actionTypes.SET_REPEAT_VALUE,
   value
 })
+export const setHistory = (song) => ({
+  type: actionTypes.SET_HISTORY,
+  song
+})
+export const pushSongFromHistoryToCurrentPlaylist = (song) => ({
+  type: actionTypes.PUSH_SONG_FROM_HISTORY_TO_CURRENT_PLAYLIST,
+  song
+})
