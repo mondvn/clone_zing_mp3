@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Scrollbars from 'react-custom-scrollbars-2'
 import { useSelector } from 'react-redux'
 
@@ -13,16 +13,10 @@ const styleActived = 'py-[5px] flex flex-1 items-center justify-center rounded-f
 const PlayerPlaylist = () => {
   const { curSongId, curPlaylist, history } = useSelector(state => state.music)
   const [playlistState, setPlaylistState] = useState('normal')
-  const [playlist, setPlaylist] = useState(curPlaylist)
 
   const hanndleTogglePlaylist = () => {
     playlistState === 'normal' ? setPlaylistState('history') : setPlaylistState('normal')
   }
-
-  // useEffect(()=>{
-  //   playlistState === 'normal' ? setPlaylist(curPlaylist) : setPlaylist
-  // },[playlistState])
-
 
   console.log(history)
   return (

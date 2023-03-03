@@ -57,10 +57,14 @@ const HomeNewRelease = ({ newRelease, title }) => {
   }
 
   const handlePlay = (encodeId) => {
-    fetchDetailSong(encodeId)
-    dispatch(actions.setCurSongId(encodeId))
-    dispatch(actions.clearPlaylistBeforeShuffle())
-    dispatch(actions.togglePlayMusic(false))
+    if (encodeId !== curSongId) {
+      fetchDetailSong(encodeId)
+      dispatch(actions.setCurSongId(encodeId))
+      dispatch(actions.clearPlaylistBeforeShuffle())
+      dispatch(actions.togglePlayMusic(false))
+    } else {
+      dispatch(actions.togglePlayMusic(!isPlaying))
+    }
   }
 
   return (

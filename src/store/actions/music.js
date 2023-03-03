@@ -1,4 +1,5 @@
 import actionTypes from "./actionTypes";
+import * as apis from "../../apis"
 
 export const setCurSongId = (songId) => ({
   type: actionTypes.SET_CURRENT_SONG_ID,
@@ -45,7 +46,15 @@ export const setHistory = (song) => ({
   type: actionTypes.SET_HISTORY,
   song
 })
-export const pushSongFromHistoryToCurrentPlaylist = (song) => ({
-  type: actionTypes.PUSH_SONG_FROM_HISTORY_TO_CURRENT_PLAYLIST,
-  song
-})
+export const setSearchData = (searchValue) => async (dispatch) => {
+  try {
+    const response = await apis.apiSearch(searchValue)
+    if (response.data.err === 0) {
+      dispatch({ type: actionTypes.SET_SEARCH_DATA, data: response.data.data })
+    } else {
+      dispatch({ type: actionTypes.SET_SEARCH_DATA, data: null })
+    }
+  } catch (error) {
+    dispatch({ type: actionTypes.SET_SEARCH_DATA, data: null })
+  }
+}

@@ -7,8 +7,8 @@ import _ from 'lodash'
 
 import bgChart from '../../assets/images/bg-chart.jpg'
 import icons from '../../ultis/icons'
-import * as actions from '../../store/actions'
-import * as apis from '../../apis'
+// import * as actions from '../../store/actions'
+// import * as apis from '../../apis'
 
 const { BsFillPlayFill, RiVipCrown2Line } = icons
 

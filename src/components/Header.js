@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 import icons from '../ultis/icons'
-import Search from './HeaderSearch'
+import { HeaderSearch } from './header/'
 
 const { BsArrowLeft, BsArrowRight, VscDesktopDownload, TbShirt, RiVipDiamondLine, FiSettings } = icons
 
@@ -19,7 +19,7 @@ const Header = () => {
           <span><BsArrowRight size={24} /></span>
         </div>
         <div className=''>
-          <Search />
+          <HeaderSearch />
         </div>
       </div>
       <div className='flex justify-between gap-3'>

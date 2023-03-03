@@ -9,7 +9,7 @@ import icons from '../../ultis/icons'
 import * as actions from '../../store/actions'
 import * as apis from '../../apis'
 
-const { AiOutlineRight, BsFillPlayFill, RiVipCrown2Line } = icons
+const { AiOutlineRight, BsFillPlayFill } = icons
 
 const HomeNewReleaseChart = ({ newReleaseCharts, title }) => {
   const dispatch = useDispatch()

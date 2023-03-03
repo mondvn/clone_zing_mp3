@@ -8,3 +8,8 @@ export { default as Hub } from './Hub'
 export { default as MusicVideo } from './MusicVideo'
 export { default as NewMusic } from './NewMusic'
 export { default as Top100 } from './Top100'
+
+export { default as Search } from './Search'
+export { default as SearchAll } from './SearchAll'
+export { default as SearchSongs } from './SearchSongs'
+

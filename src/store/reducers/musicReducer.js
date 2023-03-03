@@ -19,6 +19,7 @@ const initState = {
   history: {
     songs: []
   },
+  searchData: {},
 }
 
 const musicReducer = (state = initState, action) => {
@@ -93,13 +94,10 @@ const musicReducer = (state = initState, action) => {
           songs: [...curPlaylist, action.song] || null
         }
       }
-    case actionTypes.PUSH_SONG_FROM_HISTORY_TO_CURRENT_PLAYLIST:
-      // const currentSongIndex = state.curPlaylist.songs.findIndex(song => song.encodeId === state.curSongId)
-      // console.log(state.curPlaylist.songs?.slice(0, currentSongIndex))
-      // console.log(state.curPlaylist.songs?.slice(currentSongIndex, state.curPlaylist.songs.length - 1))
+    case actionTypes.SET_SEARCH_DATA:
       return {
         ...state,
-
+        searchData: action.data || null
       }
     default:
       return state

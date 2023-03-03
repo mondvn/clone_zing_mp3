@@ -9,6 +9,10 @@ const path = {
   MUSIC_VIDEO: 'the-loai-video',
   NEW_MUSIC: 'moi-phat-hanh',
   TOP_100: 'top100',
+  SEARCH: 'tim-kiem',
+  SEARCH_ALL: 'tat-ca',
+  SEARCH_SONGS: 'bai-hat',
+
 }
 
 export default path

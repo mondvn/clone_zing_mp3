@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import "swiper/css";
 // import "swiper/css/navigation";
 
-import { Home, Public, Login, MyMusic, Album, Hub, NewMusic, Top100, MusicVideo } from './pages/public'
+import { Home, Public, Login, MyMusic, Album, Hub, NewMusic, Top100, MusicVideo, Search, SearchSongs, SearchAll } from './pages/public'
 import path from './ultis/path'
 import * as actions from './store/actions'
 
@@ -34,6 +34,11 @@ function App() {
             <Route path={path.NEW_MUSIC} element={<NewMusic />} />
             <Route path={path.TOP_100} element={<Top100 />} />
             <Route path={path.MUSIC_VIDEO} element={<MusicVideo />} />
+            <Route path={path.SEARCH} element={<Search />} >
+              <Route path={path.SEARCH_ALL} element={<SearchAll />} />
+              <Route path={path.SEARCH_SONGS} element={<SearchSongs />} />
+
+            </Route>
 
           </Route>
         </Routes>

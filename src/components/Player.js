@@ -188,23 +188,25 @@ const Player = () => {
     <div className='h-full flex z-50'>
       {/* Song Info */}
       <div className='w-[30%] flex-auto flex items-center'>
-        <img src={songInfo?.thumbnail} alt='thumbnail' className='w-16 h-16 object-cover rounded-[5px] mr-3' />
-        <div className='flex flex-col mr-5'>
-          <span className='text-primary-text-color font-medium text-[14px]'>{songInfo?.title}</span>
-          <h3 className='text-player-text-color font-normal text-[12px]'>{songInfo?.artistsNames}</h3>
-        </div>
-        <div className='flex items-center justify-center gap-1'>
-          <div className=' flex items-center justify-center text-primary-text-color hover:bg-[#2d2d2d] rounded-full'>
-            <div className='px-[8px] py-[8px]'>
-              <SlHeart size={16} />
+        {songInfo && <div className='flex flex-auto items-center'>
+          <img src={songInfo?.thumbnail} alt='thumbnail' className='w-16 h-16 object-cover rounded-[5px] mr-3' />
+          <div className='flex flex-col mr-5'>
+            <span className='text-primary-text-color font-medium text-[14px]'>{songInfo?.title}</span>
+            <h3 className='text-player-text-color font-normal text-[12px]'>{songInfo?.artistsNames}</h3>
+          </div>
+          <div className='flex items-center justify-center gap-1'>
+            <div className=' flex items-center justify-center text-primary-text-color hover:bg-[#2d2d2d] rounded-full'>
+              <div className='px-[8px] py-[8px]'>
+                <SlHeart size={16} />
+              </div>
+            </div>
+            <div className='flex items-center justify-center text-primary-text-color hover:bg-[#2d2d2d] rounded-full'>
+              <div className='px-[8px] py-[8px]'>
+                <BsThreeDots size={16} />
+              </div>
             </div>
           </div>
-          <div className='flex items-center justify-center text-primary-text-color hover:bg-[#2d2d2d] rounded-full'>
-            <div className='px-[8px] py-[8px]'>
-              <BsThreeDots size={16} />
-            </div>
-          </div>
-        </div>
+        </div>}
       </div>
       {/* Music Player */}
       <div className='w-[30%] flex-auto flex flex-col items-center justify-center text-primary-text-color'>
