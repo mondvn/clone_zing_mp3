@@ -11,7 +11,7 @@ import * as apis from '../../apis'
 const { CiMusicNote1, RiVipCrown2Line, BsFillPlayFill } = icons
 
 const AlbumSong = ({ song, isAlbum, pid }) => {
-  console.log('AlbumSong Component re-render')
+  // console.log('AlbumSong Component re-render')
   // console.log(isAlbum)
 
   const dispatch = useDispatch()

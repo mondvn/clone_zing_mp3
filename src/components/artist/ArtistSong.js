@@ -10,7 +10,7 @@ const { BsFillPlayFill, AiOutlineRight } = icons
 
 const ArtistSong = ({ songs }) => {
   const { isPlaying, curSongId, isShuffle, curPlaylist } = useSelector(state => state.music)
-  const dispatch = useDispatch
+  const dispatch = useDispatch()
 
   const handlePlaySong = (encodeId) => {
     dispatch(actions.setCurPlaylistId(''))

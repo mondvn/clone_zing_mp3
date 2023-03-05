@@ -16,7 +16,6 @@ const path = {
   SEARCH_ARTIST: 'artist',
   ARTIST: ':artist',
   ARTIST_2ND: 'nghe-si/:artist',
-
+  ZING_CHART: 'zing-chart',
 }
-
 export default path

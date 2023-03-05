@@ -22,3 +22,7 @@
 .text-stroke-zc-2 {
   -webkit-text-stroke: 1px #e35050;
 }
+
+.text-stroke-zc {
+  -webkit-text-stroke: 1px #fff;
+}

@@ -12,6 +12,7 @@ import { Home, Public, Login, MyMusic, Album, Hub, NewMusic, Top100, MusicVideo,
 import path from './ultis/path'
 import * as actions from './store/actions'
 import Artist from './pages/public/Artist';
+import ZingChart from './pages/public/ZingChart';
 
 function App() {
   const dispatch = useDispatch()
@@ -26,6 +27,7 @@ function App() {
         <Routes>
           <Route path={path.PUBLIC} element={<Public />}>
             <Route path={path.HOME} element={<Home />} />
+            <Route path={path.ZING_CHART} element={<ZingChart />} />
             <Route path={path.LOGIN} element={<Login />} />
             <Route path={path.MY_MUSIC} element={<MyMusic />} />
             <Route path={path.ALBUM__TITLE__PID} element={<Album />} />

@@ -1,6 +1,6 @@
 import { AiOutlineHeart, AiOutlineRight, AiOutlineLeft } from 'react-icons/ai'
 import { BiDisc, BiSort, BiCategoryAlt } from 'react-icons/bi'
-import { BsArrowLeft, BsArrowRight, BsThreeDots, BsPlayCircle, BsFillPlayFill, BsDot } from 'react-icons/bs'
+import { BsArrowLeft, BsArrowRight, BsThreeDots, BsPlayCircle, BsFillPlayFill, BsDot, BsCaretDownFill, BsCaretUpFill } from 'react-icons/bs'
 import { CiRepeat, CiMusicNote1, CiAlarmOn } from 'react-icons/ci'
 import { FaRandom } from 'react-icons/fa'
 import { FiRadio, FiSearch, FiSettings, FiPauseCircle } from 'react-icons/fi'
@@ -8,7 +8,7 @@ import { MdOutlineLibraryMusic, MdOutlineFeed, MdSkipNext, MdSkipPrevious, MdMus
 import { GiChart, GiMicrophone } from 'react-icons/gi'
 import { GrVolumeMute, GrVolume } from 'react-icons/gr'
 import { RiVipDiamondLine, RiVipCrown2Line } from 'react-icons/ri'
-import { RxShuffle } from 'react-icons/rx'
+import { RxShuffle, RxBorderSolid } from 'react-icons/rx'
 import { SlHeart, SlVolumeOff, SlVolume2, SlStar, SlUserFollow } from 'react-icons/sl'
 import { TbShirt, TbRepeat, TbWorldOff, TbRepeatOnce } from 'react-icons/tb'
 import { VscClose, VscDesktopDownload, VscChromeRestore } from 'react-icons/vsc'
@@ -24,6 +24,8 @@ const icons = {
   BsArrowLeft,
   BsArrowRight,
   BsDot,
+  BsCaretDownFill,
+  BsCaretUpFill,
   BsThreeDots,
   BsPlayCircle,
   BsFillPlayFill,
@@ -48,6 +50,7 @@ const icons = {
   RiVipDiamondLine,
   RiVipCrown2Line,
   RxShuffle,
+  RxBorderSolid,
   TbShirt,
   TbRepeat,
   TbWorldOff,
