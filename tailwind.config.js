@@ -33,6 +33,9 @@ module.exports = {
         'pink-#9b4de0': '#9b4de0',
         'yellow-#ffdb00': '#ffdb00',
         'grey-#a0a0a0': '#a0a0a0',
+        'grey-#feffffcc': '#feffffcc',
+        'grey-#feffff1a': '#feffff1a',
+        'grey-#feffff33': '#feffff33',
       },
       borderColor: {
         'black-#353535': '#353535',

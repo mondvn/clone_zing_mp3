@@ -9,7 +9,7 @@ import { GiChart, GiMicrophone } from 'react-icons/gi'
 import { GrVolumeMute, GrVolume } from 'react-icons/gr'
 import { RiVipDiamondLine, RiVipCrown2Line } from 'react-icons/ri'
 import { RxShuffle } from 'react-icons/rx'
-import { SlHeart, SlVolumeOff, SlVolume2, SlStar } from 'react-icons/sl'
+import { SlHeart, SlVolumeOff, SlVolume2, SlStar, SlUserFollow } from 'react-icons/sl'
 import { TbShirt, TbRepeat, TbWorldOff, TbRepeatOnce } from 'react-icons/tb'
 import { VscClose, VscDesktopDownload, VscChromeRestore } from 'react-icons/vsc'
 
@@ -59,6 +59,7 @@ const icons = {
   SlStar,
   SlVolumeOff,
   SlVolume2,
+  SlUserFollow,
 }
 
 export default icons

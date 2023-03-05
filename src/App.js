@@ -8,9 +8,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import "swiper/css";
 // import "swiper/css/navigation";
 
-import { Home, Public, Login, MyMusic, Album, Hub, NewMusic, Top100, MusicVideo, Search, SearchSongs, SearchAll } from './pages/public'
+import { Home, Public, Login, MyMusic, Album, Hub, NewMusic, Top100, MusicVideo, Search, SearchSongs, SearchAll, SearchPlaylist, SearchArtist } from './pages/public'
 import path from './ultis/path'
 import * as actions from './store/actions'
+import Artist from './pages/public/Artist';
 
 function App() {
   const dispatch = useDispatch()
@@ -37,8 +38,11 @@ function App() {
             <Route path={path.SEARCH} element={<Search />} >
               <Route path={path.SEARCH_ALL} element={<SearchAll />} />
               <Route path={path.SEARCH_SONGS} element={<SearchSongs />} />
-
+              <Route path={path.SEARCH_PLAYLISTS} element={<SearchPlaylist />} />
+              <Route path={path.SEARCH_ARTIST} element={<SearchArtist />} />
             </Route>
+            <Route path={path.ARTIST} element={<Artist />} />
+            <Route path={path.ARTIST_2ND} element={<Artist />} />
 
           </Route>
         </Routes>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Tippy from '@tippyjs/react/headless';
-import Scrollbars from 'react-custom-scrollbars-2';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -12,7 +11,7 @@ import { useDebounce } from '../../hooks';
 import SearchItem from './SearchItem';
 import path from '../../ultis/path'
 
-const { FiSearch, VscClose, BsFillPlayFill, RiVipCrown2Line } = icons
+const { FiSearch, VscClose } = icons
 
 const HeaderSearch = () => {
   const navigate = useNavigate()
@@ -37,7 +36,6 @@ const HeaderSearch = () => {
     const fetchSearchResults = async () => {
       const response = await apis.apiSearch(debounced)
       if (response?.data?.err === 0) {
-        // console.log(response?.data?.data)
         setSearchResults([response?.data?.data?.artists[0], response?.data?.data?.playlists[0], ...response?.data?.data?.songs.slice(0, 4)])
       }
     }
@@ -57,11 +55,13 @@ const HeaderSearch = () => {
   }
 
   const handleNavigate = () => {
+    dispatch(actions.setSearchData(debounced))
     navigate(`/${path.SEARCH}/${path.SEARCH_ALL}`)
   }
 
   const handleSearch = async e => {
     if (e.keyCode === 13) {
+      dispatch(actions.setSearchData(debounced))
       navigate(`/${path.SEARCH}/${path.SEARCH_ALL}`)
     }
   }
@@ -91,13 +91,13 @@ const HeaderSearch = () => {
         </div>
       )}
     >
-      <div className={`flex items-center bg-[#333] h-10 w-[440px] text-[#757575] ${!!searchValue && showResults ? 'rounded-t-[20px]' : 'rounded-[20px]'}`}>
+      <div className={`flex items-center bg-black-#ffffff1a h-10 w-[440px] text-[#757575] ${!!searchValue && showResults ? 'rounded-t-[20px]' : 'rounded-[20px]'}`}>
         <div className='ml-[8px] mr-2'>
           <FiSearch size={22} />
         </div>
         <input
           ref={inputRef}
-          className='flex-auto mr-2 outline-none text-[14px] bg-[#333] text-white placeholder:text-[#757575] placeholder:font-normal font-extralight'
+          className='flex-auto mr-2 outline-none text-[14px] bg-[transparent] text-white placeholder:text-[#757575] placeholder:font-normal font-extralight'
           placeholder='Tìm kiếm bài hát, nghệ sĩ, lời bài hát...'
           value={searchValue}
           onChange={e => setSearchValue(e.target.value)}

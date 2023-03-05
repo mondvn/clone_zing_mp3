@@ -1,51 +1,71 @@
-import React from 'react'
+import { memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import moment from 'moment'
 
 import icons from '../../ultis/icons'
 import * as actions from '../../store/actions'
-import * as apis from '../../apis'
-import { Link } from 'react-router-dom'
 
+const { BsFillPlayFill, AiOutlineRight } = icons
 
-const { BsFillPlayFill } = icons
+const ArtistSong = ({ songs }) => {
+  const { isPlaying, curSongId, isShuffle, curPlaylist } = useSelector(state => state.music)
+  const dispatch = useDispatch
 
-const SearchSongs = () => {
-
-  const { searchData, isPlaying, curSongId } = useSelector(state => state.music)
-  const dispatch = useDispatch()
-
-  const fetchDetailSong = async (encodeId) => {
-    const response = await apis.apiGetInfoSong(encodeId)
-    if (response?.data?.err === 0) {
-      const data = {
-        title: '',
-        link: '',
-        songs: [response?.data?.data]
-      }
-      dispatch(actions.setCurPlaylist(data))
-    }
-  }
-  const handlePlay = (encodeId) => {
-    if (encodeId !== curSongId) {
-      fetchDetailSong(encodeId)
-      dispatch(actions.setCurSongId(encodeId))
-      dispatch(actions.clearPlaylistBeforeShuffle())
-      dispatch(actions.togglePlayMusic(false))
-    } else {
+  const handlePlaySong = (encodeId) => {
+    dispatch(actions.setCurPlaylistId(''))
+    if (curSongId === encodeId) {
       dispatch(actions.togglePlayMusic(!isPlaying))
+    } else {
+      dispatch(actions.setCurSongId(encodeId))
+      if (isShuffle) {
+        const arr = songs?.items?.filter(item => item.isWorldWide)
+        const currentSongIndex = songs?.items?.findIndex(item => item.encodeId === encodeId)
+        const data = {
+          title: '',
+          link: '',
+          songs: arr
+        }
+        const dataShuffle = {
+          ...data,
+          songs: [
+            songs?.items[currentSongIndex],
+            ...arr.slice().filter(item => item.encodeId !== encodeId).sort(() => Math.random() - 0.5)
+          ]
+        }
+        dispatch(actions.setCurPlaylist(dataShuffle))
+        dispatch(actions.setPlaylistBeforeShuffle(data))
+      } else {
+        dispatch(actions.setCurPlaylist({
+          ...curPlaylist,
+          title: '',
+          link: '',
+          songs: [...songs?.items.filter(item => item.isWorldWide)]
+        }))
+      }
+      dispatch(actions.togglePlayMusic(false))
     }
   }
   return (
-    <div className='mx-[59px]'>
-      <div className='mt-7 mb-[10px] text-white text-xl font-bold'>Bài Hát</div>
-      <div className='grid grid-cols-1'>
-        {searchData?.songs?.map(item => (
-          <div className='flex items-center justify-between text-player-text-color p-[10px] text-xs group rounded-[4px] border-b border-black-#ffffff1a hover:bg-black-#ffffff1a'>
-            <div className='flex flex-1'>
+    <div className='mt-[30px] flex flex-col'>
+      <div className='mb-6 flex justify-between items-center'>
+        <span className='text-xl text-white font-bold'>{songs?.title}</span>
+        {songs.items.length > 6 && <Link
+          to={songs?.link}
+          className='text-black-#FFFFFF80 text-xs font-medium flex items-center uppercase justify-center gap-1 hover:text-pink-#c273ed'>
+          Tất Cả
+          <AiOutlineRight size={17} />
+        </Link>}
+      </div>
+      <div className='grid grid-cols-2 gap-x-7'>
+        {songs?.items?.slice(0, 6).map(item => (
+          <div
+            key={item.encodeId}
+            className='flex items-center justify-between text-player-text-color p-[10px] text-xs group rounded-[4px] border-b border-black-#ffffff1a hover:bg-black-#ffffff1a'>
+            <div className='flex items-center'>
               <div
                 className='flex relative mr-[16px] cursor-pointer'
-                onClick={() => handlePlay(item?.encodeId)}
+                onClick={() => handlePlaySong(item?.encodeId)}
               >
                 <img src={item.thumbnail} alt='song thumb' className='h-[40px] w-[40px] object-contain rounded-sm' />
                 <div className={`absolute w-full h-full top-0 left-0 rounded-sm bg-[#00000080] ${item.encodeId === curSongId ? 'flex' : 'hidden group-hover:flex'}`}></div>
@@ -79,9 +99,6 @@ const SearchSongs = () => {
                 </h3>
               </div>
             </div>
-            <Link to={item?.album?.link.split('.')[0]} className='flex flex-start flex-1 text-xs text-black-#FFFFFF80 cursor-pointer hover:text-pink-#c86dd7'>
-              {item?.album?.title}
-            </Link>
             <div className='flex-none'>{moment.unix(item?.duration).format("mm:ss")}</div>
           </div>
         ))}
@@ -90,4 +107,4 @@ const SearchSongs = () => {
   )
 }
 
-export default SearchSongs
+export default memo(ArtistSong)

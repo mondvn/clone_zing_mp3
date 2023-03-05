@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useSelector } from 'react-redux'
 
 import icons from '../ultis/icons'
@@ -6,11 +6,11 @@ import { HeaderSearch } from './header/'
 
 const { BsArrowLeft, BsArrowRight, VscDesktopDownload, TbShirt, RiVipDiamondLine, FiSettings } = icons
 
-const Header = () => {
+const Header = ({ headerColor, isTransparent }) => {
   const { isShowPlaylist } = useSelector(state => state.app)
   return (
     <div className={`h-[70px] px-[59px] flex items-center fixed top-0 left-[240px]
-    justify-between bg-[#1e1e1e] z-50 backdrop-blur-[50px] shadow-[0_3px_5px_rgba(0,0,0,0.08)]
+    justify-between bg-[${headerColor}] z-50 ${!isTransparent && 'backdrop-blur-[50px]'}  shadow-[0_3px_5px_rgba(0,0,0,0.08)]
     ${isShowPlaylist ? 'right-[329px]' : 'right-0'}
     `}>
       <div className='flex items-center gap-5'>
@@ -59,4 +59,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default memo(Header)

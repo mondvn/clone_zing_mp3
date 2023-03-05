@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-import { HomeBanner, HomeChart, HomeCommonSlider, HomeNewRelease, HomeNewReleaseChart, HomeRadioSlider } from '../../components/home';
+import { HomeArtist, HomeBanner, HomeChart, HomeCommonSlider, HomeNewRelease, HomeNewReleaseChart, HomeRadioSlider } from '../../components/home';
 
 function Home() {
 
@@ -55,6 +55,13 @@ function Home() {
                 key={index}
                 chart={item?.chart}
                 songs={item?.items}
+              />
+            )
+          case "artistSpotlight":
+            return (
+              <HomeArtist
+                key={index}
+                artists={item?.items}
               />
             )
           default:

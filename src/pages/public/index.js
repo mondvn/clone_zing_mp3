@@ -12,4 +12,6 @@ export { default as Top100 } from './Top100'
 export { default as Search } from './Search'
 export { default as SearchAll } from './SearchAll'
 export { default as SearchSongs } from './SearchSongs'
+export { default as SearchPlaylist } from './SearchPlaylist'
+export { default as SearchArtist } from './SearchArtist'
 

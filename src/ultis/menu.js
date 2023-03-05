@@ -51,7 +51,30 @@ export const sidebarSecondMenu = [
   },
   {
     path: 'the-loai-video',
-    text: 'Mv',
+    text: 'MV',
     icon: <MdMusicVideo size={20} />
+  }
+]
+
+export const searchMenu = [
+  {
+    path: 'tat-ca',
+    text: 'TẤT CẢ',
+  },
+  {
+    path: 'bai-hat',
+    text: 'BÀI HÁT',
+  },
+  {
+    path: 'playlist',
+    text: 'PLAYLIST/ALBUM',
+  },
+  {
+    path: 'artist',
+    text: 'NGHỆ SĨ/OA',
+  },
+  {
+    path: 'video',
+    text: 'MV',
   }
 ]

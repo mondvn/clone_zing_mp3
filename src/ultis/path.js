@@ -12,6 +12,10 @@ const path = {
   SEARCH: 'tim-kiem',
   SEARCH_ALL: 'tat-ca',
   SEARCH_SONGS: 'bai-hat',
+  SEARCH_PLAYLISTS: 'playlist',
+  SEARCH_ARTIST: 'artist',
+  ARTIST: ':artist',
+  ARTIST_2ND: 'nghe-si/:artist',
 
 }
 
