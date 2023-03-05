@@ -6,7 +6,7 @@ import icons from '../../ultis/icons'
 import { handleDevineNumber } from '../../ultis/fn'
 
 
-const { AiOutlineRight, SlUserFollow } = icons
+const { SlUserFollow } = icons
 
 const SearchArtist = () => {
   const { searchData } = useSelector(state => state.music)

@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 
@@ -9,7 +8,7 @@ import * as actions from '../../store/actions'
 import * as apis from '../../apis'
 
 
-const { BsFillPlayFill, RiVipCrown2Line, BsDot } = icons
+const { BsFillPlayFill, BsDot } = icons
 
 const SearchItem = ({ item }) => {
   const dispatch = useDispatch()

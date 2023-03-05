@@ -5,6 +5,7 @@ const path = {
   MY_MUSIC: 'mymusic',
   ALBUM__TITLE__PID: 'album/:title/:pid',
   PLAYLIST__TITLE__PID: 'playlist/:title/:pid',
+  WEEKCHART__FILTER__CHARTID: 'zing-chart-tuan/:filter/:chartId',
   HUB: 'hub',
   MUSIC_VIDEO: 'the-loai-video',
   NEW_MUSIC: 'moi-phat-hanh',

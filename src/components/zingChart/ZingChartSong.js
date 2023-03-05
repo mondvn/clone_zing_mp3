@@ -1,21 +1,26 @@
 import { memo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import moment from 'moment'
 
 import icons from '../../ultis/icons'
 import * as actions from '../../store/actions'
 
-const { BsFillPlayFill, AiOutlineRight, RxBorderSolid, BsCaretDownFill, BsCaretUpFill } = icons
+const { BsFillPlayFill, RxBorderSolid, BsCaretDownFill, BsCaretUpFill } = icons
 
 
-const ZingChartSong = ({ songs, lengthChart, textColor, isShowAlbum, numberWidth, borderBottom }) => {
+const ZingChartSong = ({ songs, lengthChart, textColor, isShowAlbum, numberWidth, borderBottom, isTop100, isShowButton, link }) => {
   const [length, setLength] = useState(lengthChart)
   const { isPlaying, curSongId, isShuffle, curPlaylist } = useSelector(state => state.music)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleToggleLength = () => {
     length === lengthChart ? setLength(songs?.items?.length) : setLength(lengthChart)
+  }
+
+  const handleNavigate = () => {
+    navigate(link)
   }
 
   const handlePlaySong = (encodeId) => {
@@ -114,10 +119,21 @@ const ZingChartSong = ({ songs, lengthChart, textColor, isShowAlbum, numberWidth
           <div className='flex-none ml-[10px]'>{moment.unix(item?.duration).format("mm:ss")}</div>
         </div>
       ))}
-      <button
-        onClick={handleToggleLength}
-        className='flex items-center justify-center text-sm text-white font-medium 
-      rounded-full border border-white py-2 px-[25px] mx-auto mt-6'>Xem top 100</button>
+      {isShowButton && <button
+        onClick={isTop100 ? handleToggleLength : handleNavigate}
+        className='flex items-center justify-center text-sm text-white font-medium rounded-full 
+          border border-white py-2 px-[25px] mx-auto mt-6 hover:bg-black-#ffffff1a'>
+        {isTop100 ? 'Xem Top 100' : 'Xem Tất Cả'}
+      </button>}
+
+      {/* {!isTop100 && 
+      <Link
+        to={link}
+        className='flex items-center justify-center text-sm text-white font-medium rounded-full 
+          border border-white py-2 px-[25px] mx-auto mt-6 hover:bg-black-#ffffff1a cursor-pointer'>
+        Xem tất cả
+      </Link>} */}
+
     </div>
   )
 }

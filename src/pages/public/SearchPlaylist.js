@@ -1,17 +1,14 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import moment from 'moment'
 import { toast } from 'react-toastify'
 
 import icons from '../../ultis/icons'
-import { handleDevineNumber } from '../../ultis/fn'
 import * as actions from '../../store/actions'
 import * as apis from '../../apis'
 import { Link } from 'react-router-dom'
 
 
-const { AiOutlineRight, BsPlayCircle } = icons
+const { BsPlayCircle } = icons
 
 const SearchPlaylist = () => {
   const { searchData, isPlaying, curPlaylistId } = useSelector(state => state.music)

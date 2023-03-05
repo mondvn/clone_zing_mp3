@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Line } from 'react-chartjs-2'
+// eslint-disable-next-line no-unused-vars
 import { chart } from 'chart.js/auto'
 import { useDispatch, useSelector } from 'react-redux'
 import _ from 'lodash'
@@ -208,16 +209,18 @@ const ZingChart = () => {
       </div>
       <div className='mx-[59px] mt-1'>
         <ZingChartSong
+          isShowButton={true}
           songs={chartData?.RTChart}
           lengthChart={10}
           textColor={true}
           isShowAlbum={true}
           numberWidth={60}
           borderBottom={true}
+          isTop100={true}
         />
       </div>
-      <div className='mt-6 relative mb-12'>
-        <img src={weekChart} alt='bg-chart' className='object-cover w-full h-full grayscale' />
+      <div className='mt-6 relative'>
+        <img src={weekChart} alt='bg-chart' className='object-cover w-full h-[560px] grayscale' />
         <div className='absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-b from-[#ffffff00] to-[#1e1e1e] opacity-90'></div>
         <div className='absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-b from-[#1e1e1e] to-[#1e1e1e] opacity-90'></div>
         <div className='absolute top-5 left-5 right-5 bottom-5 mx-[59px]'>
@@ -234,12 +237,15 @@ const ZingChart = () => {
                 </button>
               </div>
               <ZingChartSong
+                isShowButton={true}
                 songs={chartData?.weekChart?.vn}
                 lengthChart={5}
                 textColor={false}
                 isShowAlbum={false}
                 numberWidth={32}
                 borderBottom={false}
+                isTop100={false}
+                link={chartData?.weekChart?.vn?.link.split('.')[0]}
               />
             </div>
             <div className='flex flex-col py-5 px-[10px] rounded-[16px] bg-[#ffffff0d]'>
@@ -253,12 +259,15 @@ const ZingChart = () => {
                 </button>
               </div>
               <ZingChartSong
+                isShowButton={true}
                 songs={chartData?.weekChart?.us}
                 lengthChart={5}
                 textColor={false}
                 isShowAlbum={false}
                 numberWidth={32}
                 borderBottom={false}
+                isTop100={false}
+                link={chartData?.weekChart?.us?.link.split('.')[0]}
               />
             </div>
             <div className='flex flex-col py-5 px-[10px] rounded-[16px] bg-[#ffffff0d]'>
@@ -272,12 +281,15 @@ const ZingChart = () => {
                 </button>
               </div>
               <ZingChartSong
+                isShowButton={true}
                 songs={chartData?.weekChart?.korea}
                 lengthChart={5}
                 textColor={false}
                 isShowAlbum={false}
                 numberWidth={32}
                 borderBottom={false}
+                isTop100={false}
+                link={chartData?.weekChart?.korea?.link.split('.')[0]}
               />
             </div>
           </div>

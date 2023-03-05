@@ -3,6 +3,7 @@ export { default as Login } from './Login'
 export { default as Public } from './Public'
 export { default as MyMusic } from './MyMusic'
 export { default as Album } from './Album'
+export { default as WeekChart } from './WeekChart'
 
 export { default as Hub } from './Hub'
 export { default as MusicVideo } from './MusicVideo'

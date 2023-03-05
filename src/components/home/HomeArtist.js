@@ -1,11 +1,8 @@
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation } from "swiper";
-import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 
-import * as actions from '../../store/actions'
-import * as apis from '../../apis'
 import icons from '../../ultis/icons'
 import { handleDevineNumber } from '../../ultis/fn';
 
@@ -21,8 +18,6 @@ const HomeArtist = ({ artists }) => {
         slidesPerView={5}
         slidesPerGroup={5}
         spaceBetween={30}
-        // loop={true}
-        // centeredSlides={true}
         autoplay={{
           delay: 4000,
           disableOnInteraction: false,

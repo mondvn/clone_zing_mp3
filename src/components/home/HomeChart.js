@@ -1,6 +1,7 @@
 import { memo, useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { Line } from 'react-chartjs-2'
+// eslint-disable-next-line no-unused-vars
 import { chart } from 'chart.js/auto'
 import { useSelector } from 'react-redux'
 import _ from 'lodash'

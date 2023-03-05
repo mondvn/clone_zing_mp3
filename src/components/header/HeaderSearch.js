@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Tippy from '@tippyjs/react/headless';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import icons from '../../ultis/icons'
 import * as apis from '../../apis'
@@ -16,7 +16,6 @@ const { FiSearch, VscClose } = icons
 const HeaderSearch = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { searchData } = useSelector(state => state.music)
 
   const [searchValue, setSearchValue] = useState('')
   const [searchResults, setSearchResults] = useState([])
