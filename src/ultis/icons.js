@@ -1,4 +1,4 @@
-import { AiOutlineHeart, AiOutlineRight, AiOutlineLeft } from 'react-icons/ai'
+import { AiOutlineHeart, AiOutlineRight, AiOutlineLeft, AiFillHeart } from 'react-icons/ai'
 import { BiDisc, BiSort, BiCategoryAlt } from 'react-icons/bi'
 import { BsArrowLeft, BsArrowRight, BsThreeDots, BsPlayCircle, BsFillPlayFill, BsDot, BsCaretDownFill, BsCaretUpFill } from 'react-icons/bs'
 import { CiRepeat, CiMusicNote1, CiAlarmOn } from 'react-icons/ci'
@@ -18,6 +18,7 @@ const icons = {
   AiOutlineHeart,
   AiOutlineRight,
   AiOutlineLeft,
+  AiFillHeart,
   BiDisc,
   BiSort,
   BiCategoryAlt,

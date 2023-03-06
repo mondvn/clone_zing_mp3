@@ -281,7 +281,7 @@ const SearchAll = () => {
               <div className='flex flex-col items-center justify-center'>
                 <Link to={item?.link.split('.')[0]} className='relative overflow-hidden rounded-full cursor-pointer group'>
                   <img
-                    src={item?.thumbnailM}
+                    src={item?.thumbnail}
                     alt='thumbnail'
                     className='w-full object-contain rounded-full shadow-sm transform transition duration-1000 scale-100  group-hover:scale-110 ease-in-out'
                   />

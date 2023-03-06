@@ -19,17 +19,17 @@ export const sidebarMainMenu = [
     text: '#zingchart',
     icon: <GiChart size={20} />
   },
-  {
-    path: 'radio',
-    text: 'Radio',
-    icon: <FiRadio size={20} />,
-    popup: true
-  },
-  {
-    path: 'follow',
-    text: 'Theo Dõi',
-    icon: <MdOutlineFeed size={20} />
-  },
+  // {
+  //   path: 'radio',
+  //   text: 'Radio',
+  //   icon: <FiRadio size={20} />,
+  //   popup: true
+  // },
+  // {
+  //   path: 'follow',
+  //   text: 'Theo Dõi',
+  //   icon: <MdOutlineFeed size={20} />
+  // },
 ]
 
 export const sidebarSecondMenu = [
@@ -38,22 +38,22 @@ export const sidebarSecondMenu = [
     text: 'Nhạc Mới',
     icon: <CiMusicNote1 size={20} />
   },
-  {
-    path: 'hub',
-    text: 'Thể Loại',
-    end: true,
-    icon: <BiCategoryAlt size={20} />
-  },
+  // {
+  //   path: 'hub',
+  //   text: 'Thể Loại',
+  //   end: true,
+  //   icon: <BiCategoryAlt size={20} />
+  // },
   {
     path: 'top100',
     text: 'Top 100',
     icon: <SlStar size={20} />
   },
-  {
-    path: 'the-loai-video',
-    text: 'MV',
-    icon: <MdMusicVideo size={20} />
-  }
+  // {
+  //   path: 'the-loai-video',
+  //   text: 'MV',
+  //   icon: <MdMusicVideo size={20} />
+  // }
 ]
 
 export const searchMenu = [
@@ -73,8 +73,8 @@ export const searchMenu = [
     path: 'artist',
     text: 'NGHỆ SĨ/OA',
   },
-  {
-    path: 'video',
-    text: 'MV',
-  }
+  // {
+  //   path: 'video',
+  //   text: 'MV',
+  // }
 ]

@@ -20,6 +20,7 @@ const initState = {
     songs: []
   },
   searchData: {},
+  playlistFavoriteSong: []
 }
 
 const musicReducer = (state = initState, action) => {
@@ -98,6 +99,18 @@ const musicReducer = (state = initState, action) => {
       return {
         ...state,
         searchData: action.data || null
+      }
+    case actionTypes.ADD_FAVORITE_SONG:
+      // console.log('action.song', action.song)
+      return {
+        ...state,
+        playlistFavoriteSong: [...state.playlistFavoriteSong, action.song] || null
+      }
+    case actionTypes.DEL_FAVORITE_SONG:
+      // console.log('action.songId', action.songId)
+      return {
+        ...state,
+        playlistFavoriteSong: [...state.playlistFavoriteSong.filter(item => item.encodeId !== action.songId)]
       }
     default:
       return state
