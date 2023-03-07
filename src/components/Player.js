@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment'
+import Tippy from '@tippyjs/react/headless';
+import { WrapperButton } from '../components/Popper';
 import { toast } from 'react-toastify'
 
 import icons from '../ultis/icons'
@@ -8,10 +10,10 @@ import * as apis from '../apis'
 import * as actions from '../store/actions'
 import PlayerVolume from './PlayerVolume'
 
-const { SlHeart, BsThreeDots, BsPlayCircle, MdSkipPrevious, MdSkipNext, TbRepeat, FiPauseCircle, RxShuffle, MdOutlineQueueMusic, TbRepeatOnce } = icons
+const { SlHeart, BsThreeDots, BsPlayCircle, MdSkipPrevious, MdSkipNext, TbRepeat, FiPauseCircle, RxShuffle, MdOutlineQueueMusic, TbRepeatOnce, AiFillHeart } = icons
 
 const Player = () => {
-  const { curSongId, isPlaying, curPlaylist, repeatValue, isShuffle, playlistBeforeShuffle } = useSelector(state => state.music)
+  const { curSongId, isPlaying, curPlaylist, repeatValue, isShuffle, playlistBeforeShuffle, playlistFavoriteSong } = useSelector(state => state.music)
   const { isShowPlaylist } = useSelector(state => state.app)
   const [songInfo, setSongInfo] = useState(null)
   const [percentage, setPercentage] = useState(0)
@@ -19,6 +21,7 @@ const Player = () => {
   const [currentTime, setCurrentTime] = useState(0)
   const [volume, setVolume] = useState(0)
   const [isFirstTime, setIsFirstTime] = useState(true)
+  const [playlistFavoriteOnlyEncodeID, setplaylistFavoriteOnlyEncodeID] = useState([])
 
   const rangeRef = useRef()
   const dispatch = useDispatch()
@@ -76,12 +79,18 @@ const Player = () => {
     audioRef.current.volume = volume
   }, [volume])
 
-
   // 4. Xử lý Bật/ tắt nhạc
   useEffect(() => {
     isPlaying ? audioRef.current.play() : audioRef.current.pause()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isPlaying])
+
+  useEffect(() => {
+    if (playlistFavoriteSong) {
+      const arr = playlistFavoriteSong.map(item => item.encodeId)
+      setplaylistFavoriteOnlyEncodeID(arr)
+    }
+  }, [playlistFavoriteSong])
 
   // Handle events
   // 1. Xử lý Button Play
@@ -183,6 +192,15 @@ const Player = () => {
   const handleToggleShowPlaylist = () => {
     dispatch(actions.toggleShowPlaylist(!isShowPlaylist))
   }
+  const handleAddFavoriteSong = () => {
+    dispatch(actions.addFavoriteSong(songInfo))
+    toast('Thêm bài hát vào thư viên thành công')
+  }
+
+  const handleDelFavoriteSong = () => {
+    dispatch(actions.delFavoriteSong(curSongId))
+    toast('Xóa bài hát khỏi thư viên thành công')
+  }
 
   return (
     <div className='h-full flex z-50'>
@@ -195,11 +213,22 @@ const Player = () => {
             <h3 className='text-player-text-color font-normal text-[12px]'>{songInfo?.artistsNames}</h3>
           </div>
           <div className='flex items-center justify-center gap-1'>
-            <div className=' flex items-center justify-center text-primary-text-color hover:bg-[#2d2d2d] rounded-full'>
-              <div className='px-[8px] py-[8px]'>
-                <SlHeart size={16} />
+            <Tippy placement='top' delay={[0, 50]}
+              render={attrs => (
+                <WrapperButton>
+                  {playlistFavoriteOnlyEncodeID.includes(curSongId) ? 'Xóa khỏi thư viện' : 'Thêm vào thư viện'}
+                </WrapperButton>
+              )}>
+              <div
+                onClick={playlistFavoriteOnlyEncodeID.includes(curSongId) ? handleDelFavoriteSong : handleAddFavoriteSong}
+                className=' flex items-center justify-center text-primary-text-color hover:bg-[#2d2d2d] rounded-full'>
+                <div className='px-[8px] py-[8px]'>
+                  {playlistFavoriteOnlyEncodeID.includes(curSongId)
+                    ? <AiFillHeart className='text-pink-#9b4de0' size={16} />
+                    : <SlHeart className='text-white' size={16} />}
+                </div>
               </div>
-            </div>
+            </Tippy>
             <div className='flex items-center justify-center text-primary-text-color hover:bg-[#2d2d2d] rounded-full'>
               <div className='px-[8px] py-[8px]'>
                 <BsThreeDots size={16} />

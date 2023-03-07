@@ -15,6 +15,7 @@ import path from './ultis/path'
 import * as actions from './store/actions'
 import Artist from './pages/public/Artist';
 import ZingChart from './pages/public/ZingChart';
+import { MyMusicSong, MyMusicAlbum } from './components/mymusic/';
 
 function App() {
   const dispatch = useDispatch()
@@ -32,11 +33,13 @@ function App() {
             <Route path={path.HOME} element={<Home />} />
             <Route path={path.ZING_CHART} element={<ZingChart />} />
             <Route path={path.LOGIN} element={<Login />} />
-            <Route path={path.MY_MUSIC} element={<MyMusic />} />
+            <Route path={path.MY_MUSIC} element={<MyMusic />} >
+              <Route path={path.MY_MUSIC_SONG} element={<MyMusicSong />} />
+              <Route path={path.MY_MUSIC_ALBUM} element={<MyMusicAlbum />} />
+            </Route>
             <Route path={path.ALBUM__TITLE__PID} element={<Album />} />
             <Route path={path.PLAYLIST__TITLE__PID} element={<Album />} />
             <Route path={path.WEEKCHART__FILTER__CHARTID} element={<WeekChart />} />
-
             <Route path={path.HUB} element={<Hub />} />
             <Route path={path.NEW_MUSIC} element={<NewMusic />} />
             <Route path={path.TOP_100} element={<Top100 />} />
@@ -63,7 +66,7 @@ function App() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
+        theme="dark"
       />
     </>
   );

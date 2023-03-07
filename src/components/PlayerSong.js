@@ -1,16 +1,27 @@
-import React, { memo } from 'react'
+import React, { memo, useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
-import icons from '../ultis/icons'
-import * as actions from '../store/actions'
 import { Link } from 'react-router-dom'
+import Tippy from '@tippyjs/react/headless';
+import { toast } from 'react-toastify'
+import { WrapperButton } from './Popper';
+
+import * as actions from '../store/actions'
+import icons from '../ultis/icons'
 
 
-const { BsFillPlayFill } = icons
+const { BsFillPlayFill, SlHeart, AiFillHeart } = icons
 
 const PlayerSong = ({ song, prev, title, link, isHistory, setPlaylistState }) => {
   const dispatch = useDispatch()
-  const { isPlaying, curSongId, curPlaylist, history } = useSelector(state => state.music)
+  const { isPlaying, curSongId, curPlaylist, history, playlistFavoriteSong } = useSelector(state => state.music)
+  const [playlistFavoriteOnlyEncodeID, setplaylistFavoriteOnlyEncodeID] = useState([])
+
+  useEffect(() => {
+    if (playlistFavoriteSong) {
+      const arr = playlistFavoriteSong.map(item => item.encodeId)
+      setplaylistFavoriteOnlyEncodeID(arr)
+    }
+  }, [playlistFavoriteSong])
 
   const handlePlay = () => {
     if (song?.encodeId === curSongId) {
@@ -36,19 +47,43 @@ const PlayerSong = ({ song, prev, title, link, isHistory, setPlaylistState }) =>
       }
     }
   }
+  const handleAddFavoriteSong = () => {
+    dispatch(actions.addFavoriteSong(song))
+    toast('Thêm bài hát vào thư viên thành công')
 
+  }
+
+  const handleDelFavoriteSong = () => {
+    dispatch(actions.delFavoriteSong(song?.encodeId))
+    toast('Xóa bài hát khỏi thư viên thành công')
+  }
 
   return (
     <>
       <div
-        className={` rounded-[4px] text-player-text-color text-xs
-      flex items-center justify-between p-[10px] group
+        className={`relative rounded-[4px] text-player-text-color text-xs flex items-center justify-between p-[10px] group
       ${(prev && song?.encodeId !== curSongId) && 'opacity-40'}
       ${song?.encodeId === curSongId ? 'bg-pink-#9b4de0' : 'hover:bg-black-#ffffff1a'}`}
       >
+        <div className='absolute z-10 w-1/4 top-0 bottom-0 right-0 items-center justify-end hidden group-hover:flex '>
+          <Tippy placement='top' delay={[0, 50]}
+            render={attrs => (
+              <WrapperButton>
+                {playlistFavoriteOnlyEncodeID.includes(song?.encodeId) ? 'Xóa khỏi thư viện' : 'Thêm vào thư viện'}
+              </WrapperButton>
+            )}>
+            <div onClick={playlistFavoriteOnlyEncodeID.includes(song?.encodeId) ? handleDelFavoriteSong : handleAddFavoriteSong}
+              className=' flex items-center justify-center hover:bg-[#2d2d2d] rounded-full mr-5'>
+              <div className='px-[8px] py-[8px]'>
+                {playlistFavoriteOnlyEncodeID.includes(song?.encodeId)
+                  ? <AiFillHeart className='text-pink-#9b4de0' size={16} />
+                  : <SlHeart className='text-white' size={16} />}
+              </div>
+            </div>
+          </Tippy>
+        </div>
         <div className='flex gap-[10px] items-center justify-start flex-1'>
           <div className='relative h-10 w-10'
-            // onClick={!isHistory ? handlePlay : handlePushSongFromHistorytoCurPlaylist}
             onClick={handlePlay}
           >
             <img src={song?.thumbnail}
@@ -94,13 +129,14 @@ const PlayerSong = ({ song, prev, title, link, isHistory, setPlaylistState }) =>
           </div>
         </div>
       </div>
-      {(song?.encodeId === curSongId && curSongId !== curPlaylist?.songs[curPlaylist?.songs.length - 1]?.encodeId) && link &&
+      {(song?.encodeId === curSongId && curSongId !== curPlaylist?.songs[curPlaylist?.songs.length - 1]?.encodeId) &&
         <div className='pt-[15px] pb-[10px] flex flex-col text-sm'>
           <h3 className='text-white'>Tiếp theo</h3>
-          <h3 className='flex gap-1 w-full'>
-            <span className='text-black-#FFFFFF80'>Từ playlist</span>
-            <Link to={link} className='text-pink-#9b4de0'>{title?.length > 30 ? `${title?.slice(0, 30)}...` : title}</Link>
-          </h3>
+          {link &&
+            <h3 className='flex gap-1 w-full'>
+              <span className='text-black-#FFFFFF80'>Từ playlist</span>
+              <Link to={link} className='text-pink-#9b4de0'>{title?.length > 30 ? `${title?.slice(0, 30)}...` : title}</Link>
+            </h3>}
         </div>}
     </>
   )

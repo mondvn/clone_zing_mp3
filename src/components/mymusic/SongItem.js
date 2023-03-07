@@ -9,17 +9,15 @@ import moment from 'moment'
 
 import icons from '../../ultis/icons'
 import * as actions from '../../store/actions'
-import * as apis from '../../apis'
-
 
 const { CiMusicNote1, RiVipCrown2Line, BsFillPlayFill, SlHeart, AiFillHeart } = icons
 
-const AlbumSong = ({ song, isAlbum, pid }) => {
+const SongItem = ({ song, isAlbum }) => {
   // console.log('AlbumSong Component re-render')
   // console.log(isAlbum)
 
   const dispatch = useDispatch()
-  const { curSongId, curPlaylistId, isPlaying, isShuffle, playlistFavoriteSong } = useSelector(state => state.music)
+  const { curSongId, isPlaying, isShuffle, playlistFavoriteSong } = useSelector(state => state.music)
   const [playlistFavoriteOnlyEncodeID, setplaylistFavoriteOnlyEncodeID] = useState([])
 
   useEffect(() => {
@@ -30,42 +28,33 @@ const AlbumSong = ({ song, isAlbum, pid }) => {
   }, [playlistFavoriteSong])
 
 
-  const fetchCurrentPlaylist = async () => {
-    console.log('fetchCurrentPlaylist')
-    const response = await apis.apiGetDetailPlaylist(pid)
-    if (response?.data?.err === 0) {
-      // console.log(response?.data?.data)
-      const data = {
-        title: response?.data?.data?.title,
-        link: response?.data?.data?.link,
-        songs: response?.data?.data?.song?.items?.filter(item => item.isWorldWide)
-      }
-      dispatch(actions.setCurPlaylist(data))
+  const playlist = async () => {
+    const data = {
+      title: '',
+      link: '',
+      songs: playlistFavoriteSong.filter(item => item.isWorldWide)
     }
+    dispatch(actions.setCurPlaylist(data))
   }
 
-  const fetchCurrentPlaylistWithShuffle = async () => {
-    console.log('fetchCurrentPlaylistWithShuffle')
-    const response = await apis.apiGetDetailPlaylist(pid)
-    if (response?.data?.err === 0) {
-      const arr = response?.data?.data?.song?.items?.filter(item => item.isWorldWide)
-      const currentSongIndex = response?.data?.data?.song?.items?.findIndex(item => item.encodeId === song?.encodeId)
+  const playlistWithShuffle = async () => {
+    const arr = playlistFavoriteSong
+    const currentSongIndex = playlistFavoriteSong?.findIndex(item => item.encodeId === song?.encodeId)
 
-      const data = {
-        title: response?.data?.data?.title,
-        link: response?.data?.data?.link,
-        songs: arr
-      }
-      const dataShuffle = {
-        ...data,
-        songs: [
-          response?.data?.data?.song?.items[currentSongIndex],
-          ...arr.slice().filter(item => item.encodeId !== song?.encodeId).sort(() => Math.random() - 0.5)
-        ]
-      }
-      dispatch(actions.setCurPlaylist(dataShuffle))
-      dispatch(actions.setPlaylistBeforeShuffle(data))
+    const data = {
+      title: '',
+      link: '',
+      songs: arr
     }
+    const dataShuffle = {
+      ...data,
+      songs: [
+        arr[currentSongIndex],
+        ...arr.slice().filter(item => item.encodeId !== song?.encodeId).sort(() => Math.random() - 0.5)
+      ]
+    }
+    dispatch(actions.setCurPlaylist(dataShuffle))
+    dispatch(actions.setPlaylistBeforeShuffle(data))
   }
 
   const handlePlaySong = () => {
@@ -73,12 +62,8 @@ const AlbumSong = ({ song, isAlbum, pid }) => {
       dispatch(actions.togglePlayMusic(!isPlaying))
     } else {
       dispatch(actions.setCurSongId(song?.encodeId))
-
-      if (pid !== curPlaylistId) {
-        dispatch(actions.setCurPlaylistId(pid))
-      }
-      isShuffle ? fetchCurrentPlaylistWithShuffle() : fetchCurrentPlaylist()
-
+      dispatch(actions.setCurPlaylistId(''))
+      isShuffle ? playlistWithShuffle() : playlist()
       dispatch(actions.togglePlayMusic(false))
     }
   }
@@ -94,6 +79,8 @@ const AlbumSong = ({ song, isAlbum, pid }) => {
     toast('Xóa bài hát khỏi thư viên thành công')
 
   }
+
+  console.log('Song Item')
 
   return (
     <div
@@ -119,7 +106,9 @@ const AlbumSong = ({ song, isAlbum, pid }) => {
       </div>
       <div className='flex gap-[10px] items-center justify-start flex-1'>
         <CiMusicNote1 size={14} />
-        <div className='relative h-10 w-10' onClick={handlePlaySong}>
+        <div className='relative h-10 w-10'
+          onClick={handlePlaySong}
+        >
           <img src={song?.thumbnail} alt='song thumb' className='h-10 w-10 rounded-sm object-cover' />
 
           <div className={`absolute w-full h-full top-0 left-0 bg-[#00000080] ${song?.encodeId === curSongId ? 'flex' : 'hidden group-hover:flex'}`}></div>
@@ -169,4 +158,4 @@ const AlbumSong = ({ song, isAlbum, pid }) => {
   )
 }
 
-export default memo(AlbumSong)
+export default memo(SongItem)

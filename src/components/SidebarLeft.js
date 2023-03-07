@@ -56,18 +56,6 @@ const SidebarLeft = () => {
                 {item.popup && <img src={liveTag} alt='live tag' />}
               </NavLink>
             ))}
-            {/* Banner Vip */}
-            <div className='flex flex-col text-[12px] mx-5 my-[10px] px-[8px] py-[15px] bg-gradient-to-r from-blue-#5a4be7 to-pink-#c86dd7 rounded-lg'>
-              <div className='text-center text-white font-semibold mb-[10px] leading-[1.67]'>Nghe nhạc không quảng cáo cùng kho nhạc VIP</div>
-              <Link
-                to='https://zingmp3.vn/vip?utm_source=desktop&utm_campaign=VIP&utm_medium=sidebar'
-                target={'_blank'}
-                className='text-black-#32323d font-semibold border border-yellow-#ffdb00 
-                rounded-full bg-yellow-#ffdb00 flex items-center justify-center px-[35px] py-[6px] mx-auto'
-              >
-                NÂNG CẤP VIP
-              </Link>
-            </div>
           </Scrollbars>
         </div>
       </div>

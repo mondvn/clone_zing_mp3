@@ -4,7 +4,7 @@ const { MdOutlineLibraryMusic, BiDisc, GiChart, FiRadio, MdOutlineFeed,
   CiMusicNote1, BiCategoryAlt, SlStar, MdMusicVideo } = icons
 export const sidebarMainMenu = [
   {
-    path: 'mymusic',
+    path: 'mymusic/song',
     text: 'Cá Nhân',
     icon: <MdOutlineLibraryMusic size={20} />
   },
@@ -77,4 +77,16 @@ export const searchMenu = [
   //   path: 'video',
   //   text: 'MV',
   // }
+]
+
+export const myMusicMenu = [
+  {
+    text: 'BÀI HÁT',
+    path: 'song',
+  },
+  {
+    text: 'ALBUM/PLAYLIST',
+    path: 'album',
+  },
+
 ]
