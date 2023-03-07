@@ -1,21 +1,32 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import Tippy from '@tippyjs/react/headless';
+import { toast } from 'react-toastify'
 import moment from 'moment'
 
 import * as apis from '../../apis'
 import icons from '../../ultis/icons'
 import * as actions from '../../store/actions'
 import { AlbumPlayList } from '../../components/album'
+import { WrapperButton } from '../../components/Popper';
 
 
-const { BsFillPlayFill, BsPlayCircle, SlHeart, BsThreeDots, BsDot } = icons
+const { BsFillPlayFill, BsPlayCircle, SlHeart, BsThreeDots, BsDot, AiFillHeart } = icons
 
 const Album = () => {
   const { pid } = useParams()
   const dispatch = useDispatch()
-  const { isPlaying, curPlaylistId } = useSelector(state => state.music)
+  const { isPlaying, curPlaylistId, listFavoriteAlbum } = useSelector(state => state.music)
   const [playListData, setPlayListData] = useState(null)
+  const [listFavoriteAlbumOnlyEncodeID, setListFavoriteAlbumOnlyEncodeID] = useState([])
+
+  useEffect(() => {
+    if (listFavoriteAlbum) {
+      const arr = listFavoriteAlbum.map(item => item.encodeId)
+      setListFavoriteAlbumOnlyEncodeID(arr)
+    }
+  }, [listFavoriteAlbum])
 
   useEffect(() => {
     const fetchDetailPlaylist = async () => {
@@ -66,6 +77,21 @@ const Album = () => {
     dispatch(actions.togglePlayMusic(false))
   }
 
+  const handleAddFavoriteAlbum = (event) => {
+    event.stopPropagation()
+    // console.log(playListData)
+    dispatch(actions.addFavoriteAlbum(playListData))
+    toast('Thêm Album/Playlist vào thư viên thành công')
+
+  }
+
+  const handleDelFavoriteAlbum = (event) => {
+    event.stopPropagation()
+    dispatch(actions.delFavoriteAlbum(pid))
+    toast('Xóa Album/Playlist khỏi thư viên thành công')
+
+  }
+
   console.log('Album Component re-render')
   return (
     <div className='relative pt-[40px] flex flex-1 mx-[59px] h-full'>
@@ -74,6 +100,25 @@ const Album = () => {
           className='overflow-hidden rounded-lg cursor-pointer relative group'
           onClick={pid === curPlaylistId ? handleTogglePlayMusic : handlePlayRandomMusic}
         >
+          <div className='absolute z-10 w-1/4 top-0 bottom-0 right-0 items-center justify-end hidden group-hover:flex '>
+            <Tippy placement='top' delay={[0, 50]}
+              render={attrs => (
+                <WrapperButton>
+                  {listFavoriteAlbumOnlyEncodeID.includes(pid) ? 'Xóa khỏi thư viện' : 'Thêm vào thư viện'}
+                </WrapperButton>
+              )}>
+              <div
+                onClick={!listFavoriteAlbumOnlyEncodeID.includes(pid) ? (event) => handleAddFavoriteAlbum(event) : (event) => handleDelFavoriteAlbum(event)}
+                // onClick={event => event.stopPropagation()}
+                className=' flex items-center justify-center hover:bg-[#2d2d2d] rounded-full mr-10'>
+                <div className='px-[12px] py-[12px]'>
+                  {listFavoriteAlbumOnlyEncodeID.includes(pid)
+                    ? <AiFillHeart className='text-pink-#9b4de0' size={30} />
+                    : <SlHeart className='text-white' size={30} />}
+                </div>
+              </div>
+            </Tippy>
+          </div>
           <img
             src={playListData?.thumbnailM}
             alt='thumbnail'

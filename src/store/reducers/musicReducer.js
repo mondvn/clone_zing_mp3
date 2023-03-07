@@ -20,7 +20,8 @@ const initState = {
     songs: []
   },
   searchData: {},
-  playlistFavoriteSong: []
+  playlistFavoriteSong: [],
+  listFavoriteAlbum: [],
 }
 
 const musicReducer = (state = initState, action) => {
@@ -111,6 +112,18 @@ const musicReducer = (state = initState, action) => {
       return {
         ...state,
         playlistFavoriteSong: [...state.playlistFavoriteSong.filter(item => item.encodeId !== action.songId)]
+      }
+    case actionTypes.ADD_FAVORITE_ALBUM:
+      // console.log('action.album', action.album)
+      return {
+        ...state,
+        listFavoriteAlbum: [...state.listFavoriteAlbum, action.album] || null
+      }
+    case actionTypes.DEL_FAVORITE_ALBUM:
+      // console.log('action.pid', action.pid)
+      return {
+        ...state,
+        listFavoriteAlbum: [...state.listFavoriteAlbum.filter(item => item.encodeId !== action.pid)]
       }
     default:
       return state
