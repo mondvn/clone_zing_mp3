@@ -1,19 +1,31 @@
-import { memo, useState } from 'react'
+import { memo, useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import moment from 'moment'
+import Tippy from '@tippyjs/react/headless';
+import { toast } from 'react-toastify'
 
 import icons from '../../ultis/icons'
 import * as actions from '../../store/actions'
+import { WrapperButton } from '../Popper';
 
-const { BsFillPlayFill, RxBorderSolid, BsCaretDownFill, BsCaretUpFill } = icons
+const { BsFillPlayFill, RxBorderSolid, BsCaretDownFill, BsCaretUpFill, RiVipCrown2Line, AiFillHeart, SlHeart } = icons
 
 
 const ZingChartSong = ({ songs, lengthChart, textColor, isShowAlbum, numberWidth, borderBottom, isTop100, isShowButton, link }) => {
-  const [length, setLength] = useState(lengthChart)
-  const { isPlaying, curSongId, isShuffle, curPlaylist } = useSelector(state => state.music)
+  const { isPlaying, curSongId, isShuffle, curPlaylist, playlistFavoriteSong } = useSelector(state => state.music)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  const [length, setLength] = useState(lengthChart)
+  const [playlistFavoriteOnlyEncodeID, setplaylistFavoriteOnlyEncodeID] = useState([])
+
+  useEffect(() => {
+    if (playlistFavoriteSong) {
+      const arr = playlistFavoriteSong.map(item => item.encodeId)
+      setplaylistFavoriteOnlyEncodeID(arr)
+    }
+  }, [playlistFavoriteSong])
 
   const handleToggleLength = () => {
     length === lengthChart ? setLength(songs?.items?.length) : setLength(lengthChart)
@@ -57,13 +69,45 @@ const ZingChartSong = ({ songs, lengthChart, textColor, isShowAlbum, numberWidth
       dispatch(actions.togglePlayMusic(false))
     }
   }
+
+  const handleAddFavoriteSong = (song) => {
+    dispatch(actions.addFavoriteSong(song))
+    toast('Thêm bài hát vào thư viên thành công')
+
+  }
+
+  const handleDelFavoriteSong = (encodeId) => {
+    dispatch(actions.delFavoriteSong(encodeId))
+    toast('Xóa bài hát khỏi thư viên thành công')
+
+  }
+
+  console.log(songs)
   return (
     <div className='flex flex-col'>
       {songs?.items?.slice(0, length).map((item, index) => (
         <div
-          key={item.encodeId}
-          className={`flex items-center justify-start text-player-text-color p-[10px] text-xs group rounded-[4px]  hover:bg-black-#ffffff1a
+          key={item?.encodeId}
+          className={`relative flex items-center justify-start text-player-text-color p-[10px] text-xs group rounded-[4px]  hover:bg-black-#ffffff1a
+          ${!item?.isWorldWide && 'pointer-events-none'} 
           ${borderBottom && 'border-b border-black-#ffffff1a'}`}>
+          <div className='absolute z-10 w-1/4 top-0 bottom-0 right-0 items-center justify-end hidden group-hover:flex '>
+            <Tippy placement='top' delay={[0, 50]}
+              render={attrs => (
+                <WrapperButton>
+                  {playlistFavoriteOnlyEncodeID.includes(item?.encodeId) ? 'Xóa khỏi thư viện' : 'Thêm vào thư viện'}
+                </WrapperButton>
+              )}>
+              <div onClick={playlistFavoriteOnlyEncodeID.includes(item?.encodeId) ? () => handleDelFavoriteSong(item?.encodeId) : () => handleAddFavoriteSong(item)}
+                className=' flex items-center justify-center hover:bg-[#2d2d2d] rounded-full mr-5'>
+                <div className='px-[8px] py-[8px]'>
+                  {playlistFavoriteOnlyEncodeID.includes(item?.encodeId)
+                    ? <AiFillHeart className='text-pink-#9b4de0' size={16} />
+                    : <SlHeart className='text-white' size={16} />}
+                </div>
+              </div>
+            </Tippy>
+          </div>
           <div className='flex items-center justify-center gap-[5px] mr-[15px]'>
             <span style={{ width: `${numberWidth}px` }} className={(textColor && index <= 2) ? `flex items-center justify-center font-black text-[32px] w-[${numberWidth}px] text-[#4a90e200] text-stroke-zc-${index}`
               : `flex items-center justify-center font-black text-[32px] w-[${numberWidth}px] text-[#4a90e200] text-stroke-zc`}>{index + 1}</span>
@@ -107,16 +151,19 @@ const ZingChartSong = ({ songs, lengthChart, textColor, isShowAlbum, numberWidth
               </div>
             </div>
             <div className='flex flex-col justify-evenly text-xs font-medium text-black-#FFFFFF80'>
-              <div className='text-sm text-white font-semibold line-clamp-1'>{item.title}</div>
-              <h3 className='flex gap-1 line-clamp-1'>
-                {item?.artists?.map((artist, index) => (
-                  <Link key={artist?.id} className='hover:text-pink-#9b4de0'>{artist?.name}</Link>
+              <div className='flex text-sm text-white font-semibold gap-1'>
+                <div className='line-clamp-1'>{item.title}</div>
+                <div className={`${!item?.isWorldWide ? 'flex' : 'hidden'} items-center justify-center text-yellow-300`}><RiVipCrown2Line size={16} /></div>
+              </div>
+              <h3 className='flex line-clamp-1'>
+                {item?.artists?.map((artist) => (
+                  <Link to={artist?.link} key={artist?.id} className='hover:text-pink-#9b4de0 mr-1'>{artist?.name}</Link>
                 ))}
               </h3>
             </div>
           </div>
           {isShowAlbum && <span className='flex flex-1 text-xs text-black-#FFFFFF80 font-normal'>{item?.album?.title}</span>}
-          <div className='flex-none ml-[10px]'>{moment.unix(item?.duration).format("mm:ss")}</div>
+          <div className='flex-none ml-[10px] group-hover:hidden'>{moment.unix(item?.duration).format("mm:ss")}</div>
         </div>
       ))}
       {isShowButton && <button
