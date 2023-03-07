@@ -3,15 +3,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Tippy from '@tippyjs/react/headless';
 import { toast } from 'react-toastify'
-import { WrapperButton } from './Popper';
+import moment from 'moment'
 
+import { WrapperButton } from './Popper';
 import * as actions from '../store/actions'
 import icons from '../ultis/icons'
 
 
 const { BsFillPlayFill, SlHeart, AiFillHeart } = icons
 
-const PlayerSong = ({ song, prev, title, link, isHistory, setPlaylistState }) => {
+const PlayerSong = ({ song, prev, title, link, isHistory, setPlaylistState, isShowDuration }) => {
   const dispatch = useDispatch()
   const { isPlaying, curSongId, curPlaylist, history, playlistFavoriteSong } = useSelector(state => state.music)
   const [playlistFavoriteOnlyEncodeID, setplaylistFavoriteOnlyEncodeID] = useState([])
@@ -128,6 +129,7 @@ const PlayerSong = ({ song, prev, title, link, isHistory, setPlaylistState }) =>
             </h3>
           </div>
         </div>
+        {isShowDuration && <div className='flex-none group-hover:hidden'>{moment.unix(song?.duration).format("mm:ss")}</div>}
       </div>
       {(song?.encodeId === curSongId && curSongId !== curPlaylist?.songs[curPlaylist?.songs.length - 1]?.encodeId) &&
         <div className='pt-[15px] pb-[10px] flex flex-col text-sm'>

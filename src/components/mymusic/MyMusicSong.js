@@ -13,7 +13,7 @@ const MyMusicSong = () => {
     setListSong(playlistFavoriteSong)
   }, [playlistFavoriteSong])
 
-  console.log(listSong)
+  // console.log(listSong)
   return (
     <div className='flex flex-col w-full text-xs text-player-text-color mb-5'>
       <div className='flex justify-between items-center p-[10px] font-medium border-b border-black-#353535 leading-6'>

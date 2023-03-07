@@ -112,7 +112,7 @@ const Artist = () => {
                   <span className='text-sm text-black-#FFFFFF80 font-normal'>Người quan tâm</span>
                 </div>
                 <div className='flex flex-col gap-1'>
-                  <span className='text-xl text-white font-bold'>{artistData?.awards?.length}</span>
+                  <span className='text-xl text-white font-bold'>{artistData?.awards?.length || '0'}</span>
                   <span className='text-sm text-black-#FFFFFF80 font-normal'>Giải thưởng</span>
                 </div>
               </div>

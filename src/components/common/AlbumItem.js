@@ -85,7 +85,7 @@ const AlbumItem = ({ albumData }) => {
   }
 
   const handleNavigate = () => {
-    navigate(albumData?.link)
+    navigate(albumData?.link.split('.')[0])
   }
 
   return (
@@ -143,7 +143,14 @@ const AlbumItem = ({ albumData }) => {
         <h4 className='text-white text-sm font-bold line-clamp-1 hover:text-pink-#9b4de0'>{albumData?.title}</h4>
       </Link>
       <h3 className='text-black-#FFFFFF80 text-sm font-normal line-clamp-2'>
-        {albumData?.sortDescription || albumData?.artistsNames}
+        {albumData?.sortDescription ||
+          //  albumData?.artistsNames
+          <h3 className='flex gap-1'>
+            {albumData?.artists?.map((artist, index) => (
+              <Link to={artist?.link.split('.')[0]} key={artist?.id} className='hover:text-pink-#9b4de0'>{artist?.name}</Link>
+            ))}
+          </h3>
+        }
       </h3>
     </div>
   )

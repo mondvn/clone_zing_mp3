@@ -6,6 +6,7 @@ import icons from '../../ultis/icons'
 import * as actions from '../../store/actions'
 import * as apis from '../../apis'
 import { Link } from 'react-router-dom'
+import AlbumItem from '../../components/common/AlbumItem'
 
 
 const { BsPlayCircle } = icons
@@ -67,49 +68,53 @@ const SearchPlaylist = () => {
         </div>
         <div className='grid grid-cols-5 gap-x-7'>
           {searchData?.playlists?.map(item => (
-            <div key={item?.encodeId}>
-              <div className='flex flex-col'>
-                <Link to={item?.link.split('.')[0]} className='relative overflow-hidden rounded-lg cursor-pointer group'>
-                  <img
-                    src={item?.thumbnailM}
-                    alt='thumbnail'
-                    className='w-full object-contain rounded-lg shadow-sm transform transition duration-1000 scale-100  group-hover:scale-110 ease-in-out'
-                  />
-                  {(!isPlaying || (isPlaying && item?.encodeId !== curPlaylistId)) && <div className='absolute w-full h-full top-0 left-0 bg-[#00000080] hidden group-hover:block'></div>}
-                  <div
-                    className={`absolute w-full h-full top-0 left-0 items-center justify-center hidden 
-                    ${(!isPlaying || (isPlaying && item?.encodeId !== curPlaylistId)) && 'group-hover:flex'}`}>
-                    <button
-                      onClick={item?.encodeId === curPlaylistId ? handleTogglePlay : () => handlePlayAlbum(item?.encodeId)}
-                      className='text-white flex items-center justify-center'>
-                      <BsPlayCircle size={45} className='hover:brightness-[0.8]' />
-                    </button>
-                  </div>
-                  <div className={`absolute w-full h-full top-0 left-0 items-center justify-center ${(isPlaying && item?.encodeId === curPlaylistId) ? 'flex' : 'hidden'}`}>
-                    <button className='text-white flex items-center justify-center'>
-                      <div onClick={handleTogglePlay} className='border border-white rounded-full w-11 h-11 flex items-center justify-center'>
-                        <img
-                          src='https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif'
-                          alt='gif playing'
-                          className='w-5 h-5'
-                        />
-                      </div>
-                    </button>
-                  </div>
-                </Link>
-                <Link
-                  to={item?.link.split('.')[0]}
-                  className='mt-3 mb-1'
-                >
-                  <h4 className='text-white text-sm font-bold line-clamp-1 hover:text-pink-#9b4de0'>{item?.title}</h4>
-                </Link>
-                <h3 className='text-black-#FFFFFF80 text-sm font-normal line-clamp-2'>
-                  {item?.artists?.map((artist, index) => (
-                    <Link key={artist?.id} className='hover:text-pink-#9b4de0 mr-1'>{artist?.name}</Link>
-                  ))}
-                </h3>
-              </div>
-            </div>
+            // <div key={item?.encodeId}>
+            //   <div className='flex flex-col'>
+            //     <Link to={item?.link.split('.')[0]} className='relative overflow-hidden rounded-lg cursor-pointer group'>
+            //       <img
+            //         src={item?.thumbnailM}
+            //         alt='thumbnail'
+            //         className='w-full object-contain rounded-lg shadow-sm transform transition duration-1000 scale-100  group-hover:scale-110 ease-in-out'
+            //       />
+            //       {(!isPlaying || (isPlaying && item?.encodeId !== curPlaylistId)) && <div className='absolute w-full h-full top-0 left-0 bg-[#00000080] hidden group-hover:block'></div>}
+            //       <div
+            //         className={`absolute w-full h-full top-0 left-0 items-center justify-center hidden 
+            //         ${(!isPlaying || (isPlaying && item?.encodeId !== curPlaylistId)) && 'group-hover:flex'}`}>
+            //         <button
+            //           onClick={item?.encodeId === curPlaylistId ? handleTogglePlay : () => handlePlayAlbum(item?.encodeId)}
+            //           className='text-white flex items-center justify-center'>
+            //           <BsPlayCircle size={45} className='hover:brightness-[0.8]' />
+            //         </button>
+            //       </div>
+            //       <div className={`absolute w-full h-full top-0 left-0 items-center justify-center ${(isPlaying && item?.encodeId === curPlaylistId) ? 'flex' : 'hidden'}`}>
+            //         <button className='text-white flex items-center justify-center'>
+            //           <div onClick={handleTogglePlay} className='border border-white rounded-full w-11 h-11 flex items-center justify-center'>
+            //             <img
+            //               src='https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif'
+            //               alt='gif playing'
+            //               className='w-5 h-5'
+            //             />
+            //           </div>
+            //         </button>
+            //       </div>
+            //     </Link>
+            //     <Link
+            //       to={item?.link.split('.')[0]}
+            //       className='mt-3 mb-1'
+            //     >
+            //       <h4 className='text-white text-sm font-bold line-clamp-1 hover:text-pink-#9b4de0'>{item?.title}</h4>
+            //     </Link>
+            //     <h3 className='text-black-#FFFFFF80 text-sm font-normal line-clamp-2'>
+            //       {item?.artists?.map((artist, index) => (
+            //         <Link key={artist?.id} className='hover:text-pink-#9b4de0 mr-1'>{artist?.name}</Link>
+            //       ))}
+            //     </h3>
+            //   </div>
+            // </div>
+            <AlbumItem
+              key={item?.encodeId}
+              albumData={item}
+            />
           ))}
         </div>
       </div>

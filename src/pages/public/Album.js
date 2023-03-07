@@ -196,8 +196,10 @@ const Album = () => {
       </div>
       <div className='ml-[330px] flex flex-col flex-auto'>
         <div className='flex mb-[10px] gap-1'>
-          <span className='text-player-text-color text-sm'>Lời tựa</span>
-          <span className='text-primary-text-color text-sm'>{playListData?.description}</span>
+          <span className='text-primary-text-color text-sm'>
+            <span className='text-player-text-color text-sm mr-1'>Lời tựa</span>
+            {playListData?.description}
+          </span>
         </div>
         <AlbumPlayList songs={playListData?.song} isAlbum={playListData?.isAlbum} pid={pid} />
       </div>
