@@ -12,25 +12,43 @@ const HomeCommonSlider = ({ sliders }) => {
 
   // Xử lý 1 số trường hợp swiper sẽ autoplay còn lại thì không
   let swiperParams = {}
+  const swiperWithOutAutoplayParams = {}
   const swiperWithAutoplayParams = {
-    slidesPerView: 5,
-    slidesPerGroup: 5,
-    spaceBetween: 28,
     loop: true,
     autoplay: {
       delay: 4000,
       disableOnInteraction: false,
-    },
+    }
   }
 
-  const swiperWithOutAutoplayParams = {
-    slidesPerView: 5,
-    slidesPerGroup: 5,
-    spaceBetween: 28,
+  const breakpoints = {
+    1350: {
+      slidesPerView: 5,
+      slidesPerGroup: 5,
+      spaceBetween: 28,
+    },
+    1024: {
+      slidesPerView: 4,
+      slidesPerGroup: 4,
+      spaceBetween: 24,
+    },
+    640: {
+      slidesPerView: 3,
+      slidesPerGroup: 3,
+      spaceBetween: 20,
+    },
+    500: {
+      slidesPerView: 2,
+      slidesPerGroup: 2,
+      spaceBetween: 16,
+    },
+    0: {
+      slidesPerView: 1,
+      slidesPerGroup: 1,
+    }
   }
 
   sliders?.sectionId === "hAlbum" ? swiperParams = { ...swiperWithAutoplayParams } : swiperParams = { ...swiperWithOutAutoplayParams }
-
 
   return (
     <div className='mt-12'>
@@ -50,10 +68,11 @@ const HomeCommonSlider = ({ sliders }) => {
       <div className='flex'>
         <Swiper
           {...swiperParams}
+          breakpoints={breakpoints}
           modules={[Autoplay]}
           className="mySwiper"
         >
-          {sliders?.items?.map((item, index) => (
+          {sliders?.items?.map(item => (
             <SwiperSlide key={item?.encodeId}>
               <AlbumItem albumData={item} />
             </SwiperSlide>

@@ -88,13 +88,13 @@ const HomeChart = ({ chart, songs }) => {
   }, [chart])
 
   return (
-    <div className='mt-12  text-white relative overflow-hidden rounded-[8px]'>
-      <img src={bgChart} alt='bg-chart' className='object-cover rounded-[8px] w-full h-[420px]' />
+    <div className='mt-12 text-white relative overflow-hidden rounded-[8px]'>
+      <img src={bgChart} alt='bg-chart' className='object-cover rounded-[8px] w-full h-[700px] min-[1230px]:h-[420px]' />
       <div className='absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-b from-[#740091] to-[#2d1a4c] opacity-95'></div>
       <div className='absolute top-5 left-5 right-5 bottom-5 flex flex-col gap-5'>
         <Link to='/zing-chart' className=' text-[28px] font-bold'>#zingchart</Link>
-        <div className='flex gap-7'>
-          <div className='flex-4'>
+        <div className='grid grid-cols-1 min-[1230px]:grid-cols-10 gap-7'>
+          <div className='order-last min-[1230px]:order-first min-[1230px]:col-span-4'>
             {songs?.filter((_, index) => index < 3)?.map((item, index) => (
               <div
                 className={`
@@ -130,12 +130,12 @@ const HomeChart = ({ chart, songs }) => {
                         </button>}
                     </div>
                   </div>
-                  <div className='flex flex-col justify-evenly text-xs font-medium text-black-#FFFFFF80'>
+                  <div className='flex flex-1 flex-col justify-evenly text-xs font-medium text-black-#FFFFFF80'>
                     <div className='flex justify-start text-sm text-primary-text-color gap-[6px]'>
                       <div className='line-clamp-1'>{item?.title}</div>
                       <div className={`${!item?.isWorldWide ? 'flex' : 'hidden'} items-center justify-center text-yellow-300`}><RiVipCrown2Line size={16} /></div>
                     </div>
-                    <h3 className='flex gap-1'>
+                    <h3 className='flex gap-1 line-clamp-1'>
                       {item?.artists?.map((artist, index) => (
                         <Link key={artist?.id} className='hover:text-pink-#9b4de0'>{artist?.name}</Link>
                       ))}
@@ -148,7 +148,7 @@ const HomeChart = ({ chart, songs }) => {
             <button className='flex items-center justify-center px-[25px] py-[5px] border border-white 
             rounded-full font-medium text-sm mx-auto hover:bg-black-#ffffff1a'>Xem Thêm</button>
           </div>
-          <div className='flex-6 relative'>
+          <div className='order-first min-[1230px]:order-last min-[1230px]:col-span-6 mx-auto relative'>
             {data && <Line data={data} ref={lineChartRef} options={options} />}
             <div className='tooltip' style={{ top: tooltipState.top, left: tooltipState.left, opacity: tooltipState.opacity, position: 'absolute' }}>
               tooltip

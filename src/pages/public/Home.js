@@ -9,7 +9,7 @@ function Home() {
   console.log(homeData)
 
   return (
-    <div className='mx-[59px]'>
+    <div className='mx-[29px] lg:mx-[59px]'>
       {homeData?.map((item, index) => {
         switch (item.sectionType) {
           case "banner":

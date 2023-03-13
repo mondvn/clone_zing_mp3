@@ -189,7 +189,7 @@ const ZingChart = () => {
         <img src={bgChart} alt='bg-chart' className='object-cover w-full h-full grayscale' />
         <div className='absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-b from-[#ffffff00] to-[#1e1e1e] opacity-90'></div>
         <div className='absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-b from-[#1e1e1e] to-[#1e1e1e] opacity-90'></div>
-        <div className='absolute top-5 left-5 right-5 bottom-5 flex flex-col gap-5 mx-[59px]'>
+        <div className='absolute top-5 left-5 right-5 bottom-5 flex flex-col gap-5 mx-[29px] lg:mx-[59px]'>
           <div className='flex items-center pt-[110px] gap-2'>
             <span className='text-[40px] font-extrabold'>#zingchart</span>
             <button
@@ -207,7 +207,7 @@ const ZingChart = () => {
           </div>
         </div>
       </div>
-      <div className='mx-[59px] mt-1'>
+      <div className='mx-[29px] lg:mx-[59px] mt-1'>
         <ZingChartSong
           isShowButton={true}
           songs={chartData?.RTChart}
@@ -223,7 +223,7 @@ const ZingChart = () => {
         <img src={weekChart} alt='bg-chart' className='object-cover w-full h-[560px] grayscale' />
         <div className='absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-b from-[#ffffff00] to-[#1e1e1e] opacity-90'></div>
         <div className='absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-b from-[#1e1e1e] to-[#1e1e1e] opacity-90'></div>
-        <div className='absolute top-5 left-5 right-5 bottom-5 mx-[59px]'>
+        <div className='absolute top-5 left-5 right-5 bottom-5 mx-[29px] lg:mx-[59px]'>
           <div className='text-white text-[40px] font-extrabold mb-5'>Bảng Xếp Hạng Tuần</div>
           <div className='grid grid-cols-3 gap-7 '>
             <div className='flex flex-col py-5 px-[10px] rounded-[16px] bg-[#ffffff0d]'>

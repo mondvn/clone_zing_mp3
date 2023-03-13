@@ -37,7 +37,7 @@ const SearchSongs = () => {
     }
   }
   return (
-    <div className='mx-[59px]'>
+    <div className='mx-[29px] lg:mx-[59px]'>
       <div className='mt-7 mb-[10px] text-white text-xl font-bold'>Bài Hát</div>
       <div className='grid grid-cols-1'>
         {searchData?.songs?.map(item => (

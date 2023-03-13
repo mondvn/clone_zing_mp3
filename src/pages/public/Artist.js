@@ -54,7 +54,7 @@ const Artist = () => {
           </div>
         </div>
       </div>
-      <div className='mx-[59px]'>
+      <div className='mx-[29px] lg:mx-[59px]'>
         {artistData?.sections?.map((item, index) => {
           switch (item.sectionType) {
             case "song":

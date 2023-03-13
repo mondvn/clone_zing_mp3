@@ -11,13 +11,36 @@ import { handleDevineNumber } from '../../ultis/fn';
 const { AiOutlineRight, AiOutlineLeft, SlUserFollow } = icons
 
 const HomeArtist = ({ artists }) => {
-  console.log(artists)
+  const breakpoints = {
+    1024: {
+      slidesPerView: 5,
+      slidesPerGroup: 5,
+      spaceBetween: 30,
+    },
+    768: {
+      slidesPerView: 4,
+      slidesPerGroup: 4,
+      spaceBetween: 26,
+    },
+    600: {
+      slidesPerView: 3,
+      slidesPerGroup: 3,
+      spaceBetween: 20,
+    },
+    500: {
+      slidesPerView: 2,
+      slidesPerGroup: 2,
+      spaceBetween: 16,
+    },
+    0: {
+      slidesPerView: 1,
+      slidesPerGroup: 1,
+    }
+  }
   return (
     <div className='pt-[30px] group'>
       <Swiper
-        slidesPerView={5}
-        slidesPerGroup={5}
-        spaceBetween={30}
+        breakpoints={breakpoints}
         autoplay={{
           delay: 4000,
           disableOnInteraction: false,

@@ -62,7 +62,7 @@ const NewMusic = () => {
         <div className='absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-b from-[#ffffff00] to-[#1e1e1e] opacity-80'></div>
         <div className='absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-b from-[#1e1e1e] to-[#1e1e1e] opacity-80'></div>
       </div>
-      <div className='relative mt-[-140px] mx-[59px]'>
+      <div className='relative mt-[-140px] mx-[29px] lg:mx-[59px]'>
         <div className='flex items-center gap-2 mb-[25px]'>
           <span className='text-[40px] text-white font-extrabold'>Nhạc Mới</span>
           <div>

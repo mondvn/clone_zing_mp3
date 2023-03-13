@@ -9,7 +9,7 @@ const { BsArrowLeft, BsArrowRight, VscDesktopDownload, TbShirt, RiVipDiamondLine
 const Header = ({ headerColor, isTransparent }) => {
   const { isShowPlaylist } = useSelector(state => state.app)
   return (
-    <div className={`h-[70px] px-6 sm:px-[59px] flex items-center fixed top-0 left-[63px] min-[1130px]:left-[240px] gap-2 sm:gap-4
+    <div className={`h-[70px] px-[29px] lg:px-[59px] flex items-center fixed top-0 left-[63px] min-[1130px]:left-[240px] gap-2 sm:gap-4
     justify-between bg-[${headerColor}] z-50 ${!isTransparent && 'backdrop-blur-[50px]'}  shadow-[0_3px_5px_rgba(0,0,0,0.08)]
     ${isShowPlaylist ? 'right-0 2xl:right-[329px]' : 'right-0'}
     `}>

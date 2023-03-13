@@ -22,7 +22,7 @@ const Top100 = () => {
         <div className='absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-b from-[#ffffff00] to-[#1e1e1e] opacity-80'></div>
         <div className='absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-b from-[#1e1e1e] to-[#1e1e1e] opacity-80'></div>
       </div>
-      <div className='mx-[59px] mt-[-48px]'>
+      <div className='mx-[29px] lg:mx-[59px] mt-[-48px]'>
         {top100Data && top100Data.map((item, index) => (
           <Top100Item key={index} sliders={item} />
         ))}

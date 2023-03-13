@@ -45,7 +45,7 @@ const WeekChart = () => {
         <img src={weekChartBg} alt='bg-chart' className='object-cover w-full h-full grayscale' />
         <div className='absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-b from-[#ffffff00] to-[#1e1e1e] opacity-90'></div>
         <div className='absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-b from-[#1e1e1e] to-[#1e1e1e] opacity-90'></div>
-        <div className='absolute top-0 left-0 right-0 bottom-0 flex flex-col gap-5 mx-[59px] h-full'>
+        <div className='absolute top-0 left-0 right-0 bottom-0 flex flex-col gap-5 mx-[29px] lg:mx-[59px] h-full'>
           <div className='flex items-center pt-[110px] gap-2'>
             <span className='text-[40px] font-extrabold'>Bảng Xếp Hạng Tuần</span>
             <button

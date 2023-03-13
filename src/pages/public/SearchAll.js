@@ -48,7 +48,7 @@ const SearchAll = () => {
   }
 
   return (
-    <div className='mx-[59px]'>
+    <div className='mx-[29px] lg:mx-[59px]'>
       <div className='mt-7 flex flex-col'>
         <div className='mb-5 text-white text-xl font-bold'>Nổi Bật</div>
         <div className='grid grid-cols-3 gap-x-7 rounded-md'>

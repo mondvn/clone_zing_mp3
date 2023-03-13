@@ -10,7 +10,7 @@ const activeStyle = 'flex items-center justify-center py-4 text-[15px] text-whit
 
 const MyMusic = () => {
   return (
-    <div className='mx-[59px] mt-[140px]'>
+    <div className='mx-[29px] lg:mx-[59px] mt-[140px]'>
       <div className='flex items-center justify-start gap-4'>
         <h3 className='text-white text-[40px] font-bold'>Thư viện</h3>
         <button

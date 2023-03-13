@@ -8,7 +8,42 @@ import icons from '../../ultis/icons'
 const { AiOutlineRight } = icons
 
 const HomeRadioSlider = ({ radios, title }) => {
-  // console.log(radios)
+  const breakpoints = {
+    1350: {
+      slidesPerView: 7,
+      slidesPerGroup: 7,
+      spaceBetween: 28,
+    },
+    1024: {
+      slidesPerView: 6,
+      slidesPerGroup: 6,
+      spaceBetween: 24,
+    },
+    660: {
+      slidesPerView: 5,
+      slidesPerGroup: 5,
+      spaceBetween: 20,
+    },
+    520: {
+      slidesPerView: 4,
+      slidesPerGroup: 4,
+      spaceBetween: 16,
+    },
+    450: {
+      slidesPerView: 3,
+      slidesPerGroup: 3,
+      spaceBetween: 12,
+    },
+    0: {
+      slidesPerView: 2,
+      slidesPerGroup: 2,
+      spaceBetween: 10,
+    },
+    // 0: {
+    //   slidesPerView: 1,
+    //   slidesPerGroup: 1,
+    // }
+  }
   return (
     <div className='pt-[30px] flex flex-col'>
       <div className='flex mb-5 items-center justify-between'>
@@ -21,9 +56,10 @@ const HomeRadioSlider = ({ radios, title }) => {
       </div>
       <div>
         <Swiper
-          slidesPerView={7}
-          slidesPerGroup={7}
-          spaceBetween={28}
+          // slidesPerView={7}
+          // slidesPerGroup={7}
+          // spaceBetween={28}
+          breakpoints={breakpoints}
           navigation={true}
           modules={[Navigation]}
           className="mySwiper"

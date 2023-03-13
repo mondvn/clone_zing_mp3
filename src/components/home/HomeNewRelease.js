@@ -74,7 +74,7 @@ const HomeNewRelease = ({ newRelease, title }) => {
       </header>
       <div className='flex flex-col'>
         <header className='flex w-full justify-between mb-4'>
-          <div className='flex items-center justify-between gap-[15px]'>
+          <div className='grid grid-cols-1 min-[435px]:grid-cols-2 min-[550px]:grid-cols-3 items-center justify-between gap-[15px]'>
             <button
               className={buttonActive === 'all' ? activeStyle : notActiveStyle}
               onClick={() => handleButtonFilter('all')}
@@ -94,12 +94,12 @@ const HomeNewRelease = ({ newRelease, title }) => {
               Quốc Tế
             </button>
           </div>
-          <Link className='text-black-#FFFFFF80 text-sm font-medium flex items-center justify-center gap-1 hover:text-pink-#c273ed'>
+          <Link className='text-black-#FFFFFF80 text-sm font-medium flex items-start leading-[30px] justify-center gap-1 hover:text-pink-#c273ed'>
             Tất Cả
-            <AiOutlineRight size={18} />
+            <AiOutlineRight className='h-[30px]' size={18} />
           </Link>
         </header>
-        <div className='grid grid-cols-3 gap-x-[28px] rounded-md'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 min-[1220px]:grid-cols-3 gap-x-[28px] rounded-md'>
           {data?.slice(0, 12).map((item, index) => (
             <div
               className={`
@@ -133,14 +133,14 @@ const HomeNewRelease = ({ newRelease, title }) => {
                     </button>}
                 </div>
               </div>
-              <div className='flex flex-col justify-between text-xs font-medium text-black-#FFFFFF80'>
+              <div className='flex flex-1 flex-col justify-between text-xs font-medium text-black-#FFFFFF80'>
                 <div className='flex justify-start text-sm text-primary-text-color gap-[6px]'>
                   <div className='line-clamp-1'>{item?.title}</div>
                   <div className={`${!item?.isWorldWide ? 'flex' : 'hidden'} items-center justify-center text-yellow-300`}><RiVipCrown2Line size={16} /></div>
                 </div>
-                <h3 className='flex gap-1'>
+                <h3 className='flex line-clamp-1'>
                   {item?.artists?.map((artist, index) => (
-                    <Link key={artist?.id} className='hover:text-pink-#9b4de0'>{artist?.name}</Link>
+                    <Link key={artist?.id} className='hover:text-pink-#9b4de0 mr-1'>{artist?.name}</Link>
                   ))}
                 </h3>
                 <span className='capitalize'>{moment.unix(item?.releaseDate).fromNow()}</span>

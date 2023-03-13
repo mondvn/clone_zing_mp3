@@ -16,6 +16,23 @@ const HomeNewReleaseChart = ({ newReleaseCharts, title }) => {
   const { curSongId, isPlaying } = useSelector(state => state.music)
   // console.log(newReleaseCharts)
 
+  const breakpoints = {
+    1024: {
+      slidesPerView: 3,
+      slidesPerGroup: 3,
+      spaceBetween: 28,
+    },
+    680: {
+      slidesPerView: 2,
+      slidesPerGroup: 2,
+      spaceBetween: 28,
+    },
+    0: {
+      slidesPerView: 1,
+      slidesPerGroup: 1,
+    }
+  }
+
   const fetchDetailSong = async (encodeId) => {
     const response = await apis.apiGetInfoSong(encodeId)
     if (response?.data?.err === 0) {
@@ -47,9 +64,7 @@ const HomeNewReleaseChart = ({ newReleaseCharts, title }) => {
       </div>
       <div>
         <Swiper
-          slidesPerView={3}
-          slidesPerGroup={3}
-          spaceBetween={28}
+          breakpoints={breakpoints}
           loop={true}
           autoplay={{
             delay: 4000,
@@ -89,14 +104,14 @@ const HomeNewReleaseChart = ({ newReleaseCharts, title }) => {
                       </button>}
                   </div>
                 </div>
-                <div className='flex-auto flex flex-col justify-between text-black-#FFFFFF80'>
+                <div className='flex-1 flex flex-col justify-between text-black-#FFFFFF80'>
                   <div className='flex flex-col'>
-                    <h3 className='text-base font-bold text-white'>{item?.title}</h3>
+                    <h3 className='text-base font-bold text-white line-clamp-2'>{item?.title}</h3>
                     <h3 className='text-xs font-normal'>{item?.artistsNames}</h3>
                   </div>
                   <div className='flex items-end justify-between'>
-                    <span className='text-white text-[40px] leading-[0.9] font-black opacity-[0.4] stroke-white'>{`#${index + 1}`}</span>
-                    <span className='text-sm'>
+                    <span className='text-white text-2xl lg:text-3xl min-[1330px]:text-[40px] leading-[0.9] font-black opacity-[0.4] stroke-white'>{`#${index + 1}`}</span>
+                    <span className='text-xs min-[1330px]:text-sm'>
                       {moment.unix(item?.releaseDate).format("DD/MM/YYYY")}
                     </span>
                   </div>

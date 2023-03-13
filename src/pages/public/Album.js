@@ -94,7 +94,7 @@ const Album = () => {
 
   console.log('Album Component re-render')
   return (
-    <div className='relative pt-[40px] flex flex-1 mx-[59px] h-full'>
+    <div className='relative pt-[40px] flex flex-1 mx-[29px] lg:mx-[59px] h-full'>
       <div className='fixed flex flex-col w-[300px]'>
         <div
           className='overflow-hidden rounded-lg cursor-pointer relative group'

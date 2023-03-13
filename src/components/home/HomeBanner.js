@@ -15,6 +15,23 @@ const HomeBanner = ({ banners }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  const breakpoints = {
+    1024: {
+      slidesPerView: 3,
+      centeredSlides: true
+
+    },
+    768: {
+      slidesPerView: 2,
+      centeredSlides: false
+
+    },
+    0: {
+      slidesPerView: 1,
+      centeredSlide: true
+    }
+  }
+
   const fetchDetailSong = async (encodeId) => {
     const response = await apis.apiGetInfoSong(encodeId)
     if (response?.data?.err === 0) {
@@ -41,14 +58,13 @@ const HomeBanner = ({ banners }) => {
 
   }
   return (
+
     <div className='pt-[30px] group'>
       <Swiper
-        slidesPerView={3}
         spaceBetween={30}
         loop={true}
-        centeredSlides={true}
         autoplay={{
-          delay: 2500,
+          delay: 4000,
           disableOnInteraction: false,
         }}
         navigation={{
@@ -57,6 +73,7 @@ const HomeBanner = ({ banners }) => {
         }}
         modules={[Autoplay, Navigation]}
         className="mySwiper"
+        breakpoints={breakpoints}
       >
         {banners?.map((item, index) => (
           <SwiperSlide key={item?.encodeId}>
@@ -75,7 +92,6 @@ const HomeBanner = ({ banners }) => {
           <AiOutlineLeft size={28} />
         </div>
       </Swiper>
-      {/* HomeBanner */}
     </div>
   )
 }

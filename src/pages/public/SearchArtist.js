@@ -11,7 +11,7 @@ const { SlUserFollow } = icons
 const SearchArtist = () => {
   const { searchData } = useSelector(state => state.music)
   return (
-    <div className='mx-[59px]'>
+    <div className='mx-[29px] lg:mx-[59px]'>
       <div className='mt-7 flex flex-col'>
         <div className='mb-5 flex justify-between items-center'>
           <span className='text-xl text-white font-bold'>Nghệ Sĩ/OA</span>
