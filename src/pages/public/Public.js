@@ -21,8 +21,8 @@ function Public() {
   };
   const { isShowPlaylist } = useSelector(state => state.app)
   return (
-    <div className='w-full h-screen flex bg-[#1e1e1e] antialiased'>
-      <div className='w-[240px] flex-none h-full '>
+    <div className='relative w-full h-screen flex bg-[#1e1e1e] antialiased'>
+      <div className='flex-none h-full '>
         <SidebarLeft />
       </div>
       <div className='flex-auto w-full h-full pb-[90px]'>
@@ -35,10 +35,10 @@ function Public() {
           </div>
         </Scrollbars>
       </div>
-      {isShowPlaylist && <div className='w-[329px] pb-[90px] flex-none border-l border-black-#353535'>
+      {isShowPlaylist && <div className=''>
         <PlayerPlaylist />
       </div>}
-      <div className='fixed h-[90px] bottom-0 right-0 left-0 px-5 bg-black-#181818 border-t border-black-#353535'>
+      <div className='fixed z-[999] h-[90px] bottom-0 right-0 left-0 px-5 bg-black-#181818 border-t border-black-#353535'>
         <Player />
       </div>
     </div>

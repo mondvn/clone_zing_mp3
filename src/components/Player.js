@@ -192,6 +192,7 @@ const Player = () => {
   const handleToggleShowPlaylist = () => {
     dispatch(actions.toggleShowPlaylist(!isShowPlaylist))
   }
+
   const handleAddFavoriteSong = () => {
     dispatch(actions.addFavoriteSong(songInfo))
     toast('Thêm bài hát vào thư viên thành công')
@@ -203,7 +204,7 @@ const Player = () => {
   }
 
   return (
-    <div className='h-full flex z-50'>
+    <div className='h-full flex'>
       {/* Song Info */}
       <div className='w-[30%] flex-auto flex items-center'>
         {songInfo && <div className='flex flex-auto items-center'>

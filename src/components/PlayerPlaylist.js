@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import Scrollbars from 'react-custom-scrollbars-2'
 import { useSelector } from 'react-redux'
 
@@ -18,9 +18,9 @@ const PlayerPlaylist = () => {
     playlistState === 'normal' ? setPlaylistState('history') : setPlaylistState('normal')
   }
 
-  console.log(history)
+  // console.log(history)
   return (
-    <div className='w-full h-full pb-[90px] animate-slide-left'>
+    <div className='w-[329px] absolute top-0 right-0 h-full z-50 2xl:static flex-none 2xl:border-l border-black-#353535 bg-[#2d2f32] 2xl:bg-transparent pb-[90px] animate-slide-left'>
       <header className='px-2 py-[14px] flex justify-between items-center gap-2'>
         <div className='flex flex-1 items-center justify-center rounded-full bg-black-#ffffff1a cursor-pointer p-[3px]'>
           <div onClick={hanndleTogglePlaylist} className={playlistState === 'history' ? style : styleActived}>
@@ -43,7 +43,7 @@ const PlayerPlaylist = () => {
           </div>
         </div>
       </header>
-      <div className='flex flex-col px-2 w-full h-full'>
+      <div className='flex flex-col px-2 w-full h-full pb-[90px]'>
         <Scrollbars style={{ width: '100%', height: '100%' }}>
           {playlistState === 'normal' && curPlaylist?.songs?.map((song, index) => (
             <PlayerSong
@@ -69,4 +69,4 @@ const PlayerPlaylist = () => {
   )
 }
 
-export default PlayerPlaylist
+export default memo(PlayerPlaylist)

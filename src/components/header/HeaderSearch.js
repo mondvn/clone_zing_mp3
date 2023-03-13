@@ -24,7 +24,25 @@ const HeaderSearch = () => {
   const debounced = useDebounce(searchValue, 800)
 
   const inputRef = useRef()
+  const searchRef = useRef()
 
+  const [windowSize, setWindowSize] = useState({ width: undefined, height: undefined })
+  const [searchResultsWidth, setSearchResultsWidth] = useState(440)
+
+  useEffect(() => {
+    const handleSize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight
+      })
+      setSearchResultsWidth(searchRef.current.offsetWidth)
+    }
+    window.addEventListener('resize', handleSize)
+    handleSize()
+    return () => {
+      window.removeEventListener('resize', handleSize)
+    }
+  }, [])
 
   useEffect(() => {
     if (!debounced.trim()) {
@@ -39,7 +57,7 @@ const HeaderSearch = () => {
       }
     }
     fetchSearchResults()
-    console.log(searchResults)
+    // console.log(searchResults)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debounced])
 
@@ -71,7 +89,7 @@ const HeaderSearch = () => {
       interactive={true}
       onClickOutside={handleHideResults}
       render={attrs => (
-        <div className='w-[440px] mt-[-10px] overflow-hidden'>
+        <div className={` mt-[-10px] overflow-hidden`} style={{ width: `${searchResultsWidth}px` }}>
           <PopperWrapper>
             <div
               onClick={handleNavigate}
@@ -90,7 +108,7 @@ const HeaderSearch = () => {
         </div>
       )}
     >
-      <div className={`flex items-center bg-black-#ffffff1a h-10 w-[440px] text-[#757575] ${!!searchValue && showResults ? 'rounded-t-[20px]' : 'rounded-[20px]'}`}>
+      <div ref={searchRef} className={`flex items-center bg-black-#ffffff1a h-10 max-w-[440px] flex-auto text-[#757575] ${!!searchValue && showResults ? 'rounded-t-[20px]' : 'rounded-[20px]'}`}>
         <div className='ml-[8px] mr-2'>
           <FiSearch size={22} />
         </div>

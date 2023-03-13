@@ -8,7 +8,7 @@ import * as actions from '../../store/actions'
 import * as apis from '../../apis'
 
 
-const { BsFillPlayFill, BsDot } = icons
+const { BsFillPlayFill, RiVipCrown2Line, BsDot } = icons
 
 const SearchItem = ({ item }) => {
   const dispatch = useDispatch()
@@ -78,8 +78,8 @@ const SearchItem = ({ item }) => {
       <div className='flex flex-col justify-evenly text-xs font-medium text-black-#FFFFFF80'>
         <div className={`flex justify-start text-sm text-primary-text-color gap-[6px] cursor-pointer
         ${!item?.playlistId && !item?.textType && 'hover:text-pink-#c86dd7'}`}>
-          <div className='line-clamp-1'>{item?.title || item?.name}</div>
-          {/* <div className={`${!item?.isWorldWide ? 'flex' : 'hidden'} items-center justify-center text-yellow-300`}><RiVipCrown2Line size={16} /></div> */}
+          <div className='flex line-clamp-1'>{item?.title || item?.name}</div>
+          <div className={`${!item?.isWorldWide ? 'flex' : 'hidden'} items-center justify-center text-yellow-300`}><RiVipCrown2Line size={12} /></div>
         </div>
         {item?.playlistId &&
           <h3 className='flex items-center'>

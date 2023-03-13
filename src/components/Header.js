@@ -9,33 +9,33 @@ const { BsArrowLeft, BsArrowRight, VscDesktopDownload, TbShirt, RiVipDiamondLine
 const Header = ({ headerColor, isTransparent }) => {
   const { isShowPlaylist } = useSelector(state => state.app)
   return (
-    <div className={`h-[70px] px-[59px] flex items-center fixed top-0 left-[240px]
+    <div className={`h-[70px] px-6 sm:px-[59px] flex items-center fixed top-0 left-[63px] min-[1130px]:left-[240px] gap-2 sm:gap-4
     justify-between bg-[${headerColor}] z-50 ${!isTransparent && 'backdrop-blur-[50px]'}  shadow-[0_3px_5px_rgba(0,0,0,0.08)]
-    ${isShowPlaylist ? 'right-[329px]' : 'right-0'}
+    ${isShowPlaylist ? 'right-0 2xl:right-[329px]' : 'right-0'}
     `}>
-      <div className='flex items-center gap-5'>
-        <div className='flex gap-5 text-[#616161]'>
+      <div className='flex w-full items-center gap-5'>
+        <div className='hidden md:flex gap-5 text-[#616161]'>
           <span><BsArrowLeft size={24} /></span>
           <span><BsArrowRight size={24} /></span>
         </div>
-        <div className=''>
+        <div className='flex flex-auto'>
           <HeaderSearch />
         </div>
       </div>
       <div className='flex justify-between gap-3'>
-        <div className='h-10 w-[175px]'>
-          <div className='flex items-center justify-center text-[#c273ed] bg-[hsla(0,0%,100%,0.1)] py-[10px] px-[20px] rounded-full cursor-pointer'>
+        <div className='h-10 hidden lg:flex min-w-[175px]'>
+          <button className='flex items-center justify-center text-[#c273ed] bg-[hsla(0,0%,100%,0.1)] py-[10px] px-[20px] rounded-full cursor-pointer'>
             <span className='mr-[6px]'><VscDesktopDownload size={20} /></span>
             <span className='font-semibold text-[14px]'>Tải bản macOS</span>
-          </div>
+          </button>
         </div>
         <div>
-          <button className='h-10 w-10 rounded-full bg-[hsla(0,0%,100%,0.1)] flex items-center justify-center text-[#d8d8d8]'>
+          <button className='h-10 w-10 rounded-full bg-[hsla(0,0%,100%,0.1)] hidden min-[888px]:flex items-center justify-center text-[#d8d8d8]'>
             <TbShirt size={20} />
           </button>
         </div>
         <div>
-          <button className='h-10 w-10 rounded-full bg-[hsla(0,0%,100%,0.1)] flex items-center justify-center text-[#d8d8d8]'>
+          <button className='h-10 w-10 rounded-full bg-[hsla(0,0%,100%,0.1)] hidden min-[888px]:flex items-center justify-center text-[#d8d8d8]'>
             <RiVipDiamondLine size={18} />
           </button>
         </div>
@@ -45,7 +45,7 @@ const Header = ({ headerColor, isTransparent }) => {
           </button>
         </div>
         <div>
-          <button className='flex items-center justify-center'>
+          <button className='flex items-center justify-center h-10 w-10'>
             {/* <FiSettings size={18} /> */}
             <img
               src='https://thuthuatnhanh.com/wp-content/uploads/2019/07/hinh-hot-girl-trung-quoc-trang-phuc-kiem-hiep.jpg'
