@@ -185,7 +185,7 @@ const ZingChart = () => {
   }
   return (
     <div className=''>
-      <div className='mt-[-70px] text-white relative overflow-hidden'>
+      <div className='mt-[-70px] min-h-[200px] text-white relative overflow-hidden'>
         <img src={bgChart} alt='bg-chart' className='object-cover w-full h-full grayscale' />
         <div className='absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-b from-[#ffffff00] to-[#1e1e1e] opacity-90'></div>
         <div className='absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-b from-[#1e1e1e] to-[#1e1e1e] opacity-90'></div>
@@ -199,7 +199,7 @@ const ZingChart = () => {
               <div className='absolute top-0 bottom-0 left-0 right-0 rounded-full duration-300 transfrom scale-0 group-hover:scale-100 group-hover:bg-pink-#9b4de0 ease-out'></div>
             </button>
           </div>
-          <div className='flex relative'>
+          <div className='hidden md:flex relative'>
             {data && <Line data={data} ref={lineChartRef} options={options} />}
             <div className='tooltip' style={{ top: tooltipState.top, left: tooltipState.left, opacity: tooltipState.opacity, position: 'absolute' }}>
               tooltip
@@ -225,7 +225,7 @@ const ZingChart = () => {
         <div className='absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-b from-[#1e1e1e] to-[#1e1e1e] opacity-90'></div>
         <div className='absolute top-5 left-5 right-5 bottom-5 mx-[29px] lg:mx-[59px]'>
           <div className='text-white text-[40px] font-extrabold mb-5'>Bảng Xếp Hạng Tuần</div>
-          <div className='grid grid-cols-3 gap-7 '>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 '>
             <div className='flex flex-col py-5 px-[10px] rounded-[16px] bg-[#ffffff0d]'>
               <div className='flex items-center justify-center mb-[10px] gap-[5px]'>
                 <Link to={chartData?.weekChart?.vn?.link.split('.')[0]} className=' text-[24px] text-white font-bold'>Việt Nam</Link>

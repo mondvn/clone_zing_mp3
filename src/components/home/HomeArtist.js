@@ -27,14 +27,15 @@ const HomeArtist = ({ artists }) => {
       slidesPerGroup: 3,
       spaceBetween: 20,
     },
-    500: {
+    // 500: {
+    //   slidesPerView: 2,
+    //   slidesPerGroup: 2,
+    //   spaceBetween: 16,
+    // },
+    0: {
       slidesPerView: 2,
       slidesPerGroup: 2,
       spaceBetween: 16,
-    },
-    0: {
-      slidesPerView: 1,
-      slidesPerGroup: 1,
     }
   }
   return (

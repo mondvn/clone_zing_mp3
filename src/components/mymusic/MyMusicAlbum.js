@@ -12,7 +12,7 @@ const MyMusicAlbum = () => {
   }, [listFavoriteAlbum])
 
   return (
-    <div className='grid grid-cols-5 gap-7'>
+    <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 min-[1350px]:grid-cols-5 gap-7'>
       {listAlbum?.map(item => (
         <AlbumItem albumData={item} />
       ))}

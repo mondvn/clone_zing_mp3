@@ -43,8 +43,9 @@ const HomeCommonSlider = ({ sliders }) => {
       spaceBetween: 16,
     },
     0: {
-      slidesPerView: 1,
-      slidesPerGroup: 1,
+      slidesPerView: 2,
+      slidesPerGroup: 2,
+      spaceBetween: 16,
     }
   }
 

@@ -162,7 +162,7 @@ const ZingChartSong = ({ songs, lengthChart, textColor, isShowAlbum, numberWidth
               </h3>
             </div>
           </div>
-          {isShowAlbum && <span className='flex flex-1 text-xs text-black-#FFFFFF80 font-normal'>{item?.album?.title}</span>}
+          {isShowAlbum && <span className='hidden sm:flex flex-1 text-xs text-black-#FFFFFF80 font-normal'>{item?.album?.title}</span>}
           <div className='flex-none ml-[10px] group-hover:hidden'>{moment.unix(item?.duration).format("mm:ss")}</div>
         </div>
       ))}

@@ -7,7 +7,7 @@ import { FiRadio, FiSearch, FiSettings, FiPauseCircle } from 'react-icons/fi'
 import { MdOutlineLibraryMusic, MdOutlineFeed, MdSkipNext, MdSkipPrevious, MdMusicVideo, MdOutlineQueueMusic } from 'react-icons/md'
 import { GiChart, GiMicrophone } from 'react-icons/gi'
 import { GrVolumeMute, GrVolume } from 'react-icons/gr'
-import { RiVipDiamondLine, RiVipCrown2Line } from 'react-icons/ri'
+import { RiVipDiamondLine, RiVipCrown2Line, RiMenu2Fill } from 'react-icons/ri'
 import { RxShuffle, RxBorderSolid } from 'react-icons/rx'
 import { SlHeart, SlVolumeOff, SlVolume2, SlStar, SlUserFollow } from 'react-icons/sl'
 import { TbShirt, TbRepeat, TbWorldOff, TbRepeatOnce } from 'react-icons/tb'
@@ -50,6 +50,7 @@ const icons = {
   MdSkipNext,
   RiVipDiamondLine,
   RiVipCrown2Line,
+  RiMenu2Fill,
   RxShuffle,
   RxBorderSolid,
   TbShirt,

@@ -9,7 +9,7 @@ const { BsArrowLeft, BsArrowRight, VscDesktopDownload, TbShirt, RiVipDiamondLine
 const Header = ({ headerColor, isTransparent }) => {
   const { isShowPlaylist } = useSelector(state => state.app)
   return (
-    <div className={`h-[70px] px-[29px] lg:px-[59px] flex items-center fixed top-0 left-[63px] min-[1130px]:left-[240px] gap-2 sm:gap-4
+    <div className={`h-[70px] ml-[-63px] min-[600px]:ml-0 pl-[63px] pr-[10px] min-[600px]:pr-[29px] min-[600px]:px-[29px] lg:px-[59px] flex items-center fixed top-0 left-[63px] min-[1130px]:left-[240px] gap-2 sm:gap-4
     justify-between bg-[${headerColor}] z-50 ${!isTransparent && 'backdrop-blur-[50px]'}  shadow-[0_3px_5px_rgba(0,0,0,0.08)]
     ${isShowPlaylist ? 'right-0 2xl:right-[329px]' : 'right-0'}
     `}>
@@ -45,8 +45,7 @@ const Header = ({ headerColor, isTransparent }) => {
           </button>
         </div>
         <div>
-          <button className='flex items-center justify-center h-10 w-10'>
-            {/* <FiSettings size={18} /> */}
+          <button className='hidden min-[600px]:flex items-center justify-center h-10 w-10'>
             <img
               src='https://thuthuatnhanh.com/wp-content/uploads/2019/07/hinh-hot-girl-trung-quoc-trang-phuc-kiem-hiep.jpg'
               alt='avatar user'

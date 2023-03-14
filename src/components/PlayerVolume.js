@@ -41,23 +41,23 @@ const PlayerVolume = ({ volume, setVolume }) => {
   }
 
   return (
-    <div className='flex items-center justify-between gap-[6px] text-white'>
+    <div className='hidden min-[500px]:flex items-center justify-between gap-[6px] text-white'>
       <div
-        className='flex items-center justify-center w-8 h-8 hover:bg-[#2d2d2d] rounded-full'
+        className='hidden md:flex items-center justify-center w-8 h-8 hover:bg-[#2d2d2d] rounded-full'
       >
         <div className='px-[7px] py-[7px]'>
           <MdMusicVideo size={18} />
         </div>
       </div>
       <div
-        className='flex items-center justify-center w-8 h-8 hover:bg-[#2d2d2d] rounded-full'
+        className='hidden md:flex items-center justify-center w-8 h-8 hover:bg-[#2d2d2d] rounded-full'
       >
         <div className='px-[7px] py-[7px]'>
           <GiMicrophone size={18} />
         </div>
       </div>
       <div
-        className='flex items-center justify-center w-8 h-8 hover:bg-[#2d2d2d] rounded-full'
+        className='hidden md:flex items-center justify-center w-8 h-8 hover:bg-[#2d2d2d] rounded-full'
       >
         <div className='px-[7px] py-[7px]'>
           <VscChromeRestore size={18} />
@@ -74,7 +74,7 @@ const PlayerVolume = ({ volume, setVolume }) => {
         </div>
       </div>
       {/* volume bar */}
-      <div className='flex-1 flex items-center relative w-[70px] group'>
+      <div className='flex-1 hidden min-[1170px]:flex items-center relative w-[70px] group'>
         {/* Slider container::before */}
         <div className='absolute bg-black-#FFFFFF80 w-[99%] group-hover:h-[6px] h-[3px] block rounded-[4px] top-1/2 left-0 transform translate-y-[-50%] pointer-events-none opacity-100 '></div>
         {/* progress bar cover */}

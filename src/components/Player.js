@@ -206,14 +206,14 @@ const Player = () => {
   return (
     <div className='h-full flex'>
       {/* Song Info */}
-      <div className='w-[30%] flex-auto flex items-center'>
+      <div className='hidden min-[500px]:flex w-[30%] flex-grow-0 md:flex-shrink-0 items-center'>
         {songInfo && <div className='flex flex-auto items-center'>
           <img src={songInfo?.thumbnail} alt='thumbnail' className='w-16 h-16 object-cover rounded-[5px] mr-3' />
-          <div className='flex flex-col mr-5'>
-            <span className='text-primary-text-color font-medium text-[14px]'>{songInfo?.title}</span>
-            <h3 className='text-player-text-color font-normal text-[12px]'>{songInfo?.artistsNames}</h3>
+          <div className='hidden sm:flex flex-col mr-5'>
+            <span className='text-primary-text-color font-medium text-[14px] line-clamp-1'>{songInfo?.title}</span>
+            <h3 className='text-player-text-color font-normal text-[12px] line-clamp-1'>{songInfo?.artistsNames}</h3>
           </div>
-          <div className='flex items-center justify-center gap-1'>
+          <div className='hidden sm:flex items-center justify-center gap-1'>
             <Tippy placement='top' delay={[0, 50]}
               render={attrs => (
                 <WrapperButton>
@@ -230,7 +230,7 @@ const Player = () => {
                 </div>
               </div>
             </Tippy>
-            <div className='flex items-center justify-center text-primary-text-color hover:bg-[#2d2d2d] rounded-full'>
+            <div className='hidden lg:flex items-center justify-center text-primary-text-color hover:bg-[#2d2d2d] rounded-full'>
               <div className='px-[8px] py-[8px]'>
                 <BsThreeDots size={16} />
               </div>
@@ -239,7 +239,7 @@ const Player = () => {
         </div>}
       </div>
       {/* Music Player */}
-      <div className='w-[30%] flex-auto flex flex-col items-center justify-center text-primary-text-color'>
+      <div className='max-w-[40vh] w-full flex-grow flex flex-col items-center justify-center text-primary-text-color'>
         {/* Control music player */}
         <div className='flex justify-center items-center h-[50px] gap-[14px]'>
           {/* Shuffle */}
@@ -343,7 +343,7 @@ const Player = () => {
         </div>
       </div>
       {/* Control */}
-      <div className='w-[30%] flex-auto flex items-center justify-end'>
+      <div className='w-[30%] md:flex-shrink-0 flex-auto flex items-center justify-end'>
         <PlayerVolume volume={volume} setVolume={setVolume} />
         <div className='h-[33px] w-[1px] mx-5 bg-black-#ffffff1a'></div>
         {/* On/Off playlist music player */}
