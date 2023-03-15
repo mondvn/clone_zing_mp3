@@ -51,7 +51,7 @@ const SearchAll = () => {
     <div className='mx-[29px] lg:mx-[59px]'>
       <div className='mt-7 flex flex-col'>
         <div className='mb-5 text-white text-xl font-bold'>Nổi Bật</div>
-        <div className='grid grid-cols-3 gap-x-7 rounded-md'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 rounded-md'>
           <div
             className='flex text-player-text-color p-[10px] text-xs group rounded-[4px] bg-[#292929] hover:bg-black-#ffffff1a cursor-pointer'
             onClick={() => handleNavigate(searchData?.artists[0])}
@@ -122,7 +122,7 @@ const SearchAll = () => {
             <AiOutlineRight size={17} />
           </Link>
         </div>
-        <div className='grid grid-cols-2 gap-x-7'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 gap-x-7'>
           {searchData?.songs.slice(0, 6).map(item => (
             <div className='flex items-center justify-between text-player-text-color p-[10px] text-xs group rounded-[4px] border-b border-black-#ffffff1a hover:bg-black-#ffffff1a'>
               <div className='flex items-center'>
@@ -153,7 +153,7 @@ const SearchAll = () => {
                       </button>}
                   </div>
                 </div>
-                <div className='flex flex-col justify-evenly text-xs font-medium text-black-#FFFFFF80'>
+                <div className='flex flex-1 flex-col justify-evenly text-xs font-medium text-black-#FFFFFF80'>
                   <div className='text-sm text-white font-semibold line-clamp-1'>{item.title}</div>
                   <h3 className='flex gap-1'>
                     {item?.artists?.map((artist, index) => (
@@ -176,7 +176,7 @@ const SearchAll = () => {
             <AiOutlineRight size={17} />
           </Link>
         </div>
-        <div className='grid grid-cols-5 gap-x-7'>
+        <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 min-[1350px]:grid-cols-5 gap-7'>
           {searchData?.playlists.slice(0, 5).map(item => (
             <AlbumItem
               key={item?.encodeId}
@@ -194,7 +194,7 @@ const SearchAll = () => {
             <AiOutlineRight size={17} />
           </Link>
         </div>
-        <div className='grid grid-cols-5 gap-x-7'>
+        <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 min-[1350px]:grid-cols-5 gap-7'>
           {searchData?.artists.map((item, index) => (
             <div key={item?.Id || index}>
               <div className='flex flex-col items-center justify-center'>

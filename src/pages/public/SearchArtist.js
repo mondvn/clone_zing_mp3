@@ -16,7 +16,7 @@ const SearchArtist = () => {
         <div className='mb-5 flex justify-between items-center'>
           <span className='text-xl text-white font-bold'>Nghệ Sĩ/OA</span>
         </div>
-        <div className='grid grid-cols-5 gap-x-7'>
+        <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 min-[1350px]:grid-cols-5 gap-7'>
           {searchData?.artists.map(item => (
             <div key={item?.encodeId}>
               <div className='flex flex-col items-center justify-center'>

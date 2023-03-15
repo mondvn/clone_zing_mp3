@@ -94,10 +94,10 @@ const Album = () => {
 
   console.log('Album Component re-render')
   return (
-    <div className='relative pt-[40px] flex flex-1 mx-[29px] lg:mx-[59px] h-full'>
-      <div className='fixed flex flex-col w-[300px]'>
+    <div className='relative flex-col lg:flex-row pt-[40px] flex flex-1 mx-[29px] lg:mx-[59px] h-full'>
+      <div className='lg:fixed flex flex-col min-[550px]:flex-row lg:flex-col w-full lg:w-[300px]'>
         <div
-          className='overflow-hidden rounded-lg cursor-pointer relative group'
+          className='overflow-hidden rounded-lg cursor-pointer relative group min-[550px]:mr-10 lg:mr-0'
           onClick={pid === curPlaylistId ? handleTogglePlayMusic : handlePlayRandomMusic}
         >
           <div className='absolute z-10 w-1/4 top-0 bottom-0 right-0 items-center justify-end hidden group-hover:flex '>
@@ -142,60 +142,68 @@ const Album = () => {
             </button>
           </div>
         </div>
-        <div className='mt-3 flex flex-col items-center justify-center'>
-          <h3 className='font-bold text-[20px] text-primary-text-color text-center'>{playListData?.title}</h3>
-          {playListData?.isAlbum && <span className='flex items-center text-xs text-player-text-color leading-[21px]'>
-            {playListData?.artistsNames}
-            <BsDot size={24} />
-            {moment.unix(playListData?.contentLastUpdate).format("DD/MM/YYYY")}
-          </span>}
-          {!playListData?.isAlbum && <span className='flex items-center text-xs text-player-text-color leading-[21px]'>
-            Cập nhật: {moment.unix(playListData?.contentLastUpdate).format("DD/MM/YYYY")}
-          </span>}
-          {!playListData?.isAlbum && <span className='text-xs text-player-text-color leading-[21px]'>{playListData?.artistsNames}</span>}
-          <span className='text-xs text-player-text-color leading-[21px]'>{`${Math.floor(playListData?.like / 1000)}k người yêu thích`}</span>
-        </div>
-        <div className='mt-4 flex flex-col items-center justify-center'>
-          {pid !== curPlaylistId &&
-            <button
-              onClick={handlePlayRandomMusic}
-              className='flex items-center justify-center gap-[5px] text-primary-text-color bg-button-primary-bg 
-            rounded-full text-sm py-[9px] px-[20px] hover:brightness-90 uppercase'>
-              <BsFillPlayFill size={20} />
-              Phát Ngẫu Nhiên
-            </button>}
-          {(pid === curPlaylistId && isPlaying) &&
-            <button
-              onClick={handleTogglePlayMusic}
-              className='flex items-center justify-center gap-[5px] text-primary-text-color bg-button-primary-bg 
-              rounded-full text-sm py-[9px] px-[20px] hover:brightness-90'>
-              <BsFillPlayFill size={20} />
-              TẠM DỪNG
-            </button>}
-          {(pid === curPlaylistId && !isPlaying) &&
-            <button
-              onClick={handleTogglePlayMusic}
-              className='flex items-center justify-center gap-[5px] text-primary-text-color bg-button-primary-bg 
-              rounded-full text-sm py-[9px] px-[20px] hover:brightness-90'>
-              <BsFillPlayFill size={20} />
-              TIẾP TỤC PHÁT
-            </button>}
-          <div className='flex items-center justify-center mt-4 gap-[10px]'>
-            <div className=' flex items-center justify-center text-primary-text-color bg-[#2d2d2d] rounded-full hover:brightness-90 cursor-pointer'>
-              <div className='px-[11px] py-[11px]'>
-                <SlHeart size={14} />
+        <div >
+          <div className='mt-3 flex flex-col items-center min-[550px]:items-start lg:items-center justify-center'>
+            <h3 className='font-bold text-[20px] text-primary-text-color text-center'>{playListData?.title}</h3>
+            {playListData?.isAlbum && <span className='flex items-center text-xs text-player-text-color leading-[21px]'>
+              {playListData?.artistsNames}
+              <BsDot size={24} />
+              {moment.unix(playListData?.contentLastUpdate).format("DD/MM/YYYY")}
+            </span>}
+            {!playListData?.isAlbum && <span className='flex items-center text-xs text-player-text-color leading-[21px]'>
+              Cập nhật: {moment.unix(playListData?.contentLastUpdate).format("DD/MM/YYYY")}
+            </span>}
+            {!playListData?.isAlbum && <span className='text-xs text-player-text-color leading-[21px]'>{playListData?.artistsNames}</span>}
+            <span className='text-xs text-player-text-color leading-[21px]'>{`${Math.floor(playListData?.like / 1000)}k người yêu thích`}</span>
+          </div>
+          <div className='mt-4 flex flex-col md:flex-row lg:flex-col items-center min-[550px]:items-start md:items-center lg:justify-center gap-x-[10px]'>
+            {pid !== curPlaylistId &&
+              <button
+                onClick={handlePlayRandomMusic}
+                className='flex items-center justify-center gap-[5px] text-primary-text-color bg-button-primary-bg 
+              rounded-full text-sm py-[9px] px-[20px] hover:brightness-90 uppercase'>
+                <BsFillPlayFill size={20} />
+                Phát Ngẫu Nhiên
+              </button>}
+            {(pid === curPlaylistId && isPlaying) &&
+              <button
+                onClick={handleTogglePlayMusic}
+                className='flex items-center justify-center gap-[5px] text-primary-text-color bg-button-primary-bg 
+                rounded-full text-sm py-[9px] px-[20px] hover:brightness-90'>
+                <BsFillPlayFill size={20} />
+                TẠM DỪNG
+              </button>}
+            {(pid === curPlaylistId && !isPlaying) &&
+              <button
+                onClick={handleTogglePlayMusic}
+                className='flex items-center justify-center gap-[5px] text-primary-text-color bg-button-primary-bg 
+                rounded-full text-sm py-[9px] px-[20px] hover:brightness-90'>
+                <BsFillPlayFill size={20} />
+                TIẾP TỤC PHÁT
+              </button>}
+            <div className='flex items-center justify-center mt-4 md:mt-0 lg:mt-4 gap-[10px]'>
+              <div className=' flex items-center justify-center text-primary-text-color bg-[#2d2d2d] rounded-full hover:brightness-90 cursor-pointer'>
+                <div className='px-[11px] py-[11px]'>
+                  <SlHeart size={14} />
+                </div>
               </div>
-            </div>
-            <div className='flex items-center justify-center text-primary-text-color bg-[#2d2d2d] rounded-full hover:brightness-90 cursor-pointer'>
-              <div className='px-[11px] py-[11px]'>
-                <BsThreeDots size={14} />
+              <div className='flex items-center justify-center text-primary-text-color bg-[#2d2d2d] rounded-full hover:brightness-90 cursor-pointer'>
+                <div className='px-[11px] py-[11px]'>
+                  <BsThreeDots size={14} />
+                </div>
               </div>
             </div>
           </div>
+          <div className='flex lg:hidden mt-[10px] gap-1'>
+            <span className='text-primary-text-color text-sm'>
+              <span className='text-player-text-color text-sm mr-1'>Lời tựa</span>
+              {playListData?.description}
+            </span>
+          </div>
         </div>
       </div>
-      <div className='ml-[330px] flex flex-col flex-auto'>
-        <div className='flex mb-[10px] gap-1'>
+      <div className='lg:ml-[330px] flex flex-col flex-auto'>
+        <div className='hidden lg:flex mb-[10px] gap-1'>
           <span className='text-primary-text-color text-sm'>
             <span className='text-player-text-color text-sm mr-1'>Lời tựa</span>
             {playListData?.description}

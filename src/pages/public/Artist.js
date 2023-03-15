@@ -92,11 +92,11 @@ const Artist = () => {
         })}
         <div className='mt-12 flex flex-col'>
           <h3 className='mb-5 text-xl text-white font-bold'>Về {artistData?.name}</h3>
-          <div className='flex gap-[30px]'>
+          <div className='flex flex-col md:flex-row gap-[30px]'>
             <img
               src={artistData?.thumbnailM}
               alt='avatar artist'
-              className='w-[40%] object-cover rounded-[8px]'
+              className='w-full md:w-[40%] object-cover rounded-[8px]'
             />
             <div className='flex flex-col'>
               <div className='mb-12 flex flex-col '>

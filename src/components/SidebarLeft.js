@@ -41,7 +41,9 @@ const SidebarLeft = () => {
   }
 
   return (
-    <div className='fixed min-[600px]:relative z-[999] flex flex-col min-[1130px]:w-[240px] min-[600px]:bg-[hsla(0,0%,100%,0.05)] h-[700px] min-[600px]:h-full pb-[90px] '>
+    <div className={`fixed min-[600px]:relative z-[999] flex flex-col min-[1130px]:w-[240px] min-[600px]:bg-[hsla(0,0%,100%,0.05)] min-[600px]:h-full pb-[90px]
+    ${isShowNavbarMobile ? 'h-[470px]' : 'h-[70px]'}
+    `}>
       {/* Logo */}
       <Link
         to={path.HOME}

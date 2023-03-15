@@ -70,7 +70,7 @@ const SearchSongs = () => {
                     </button>}
                 </div>
               </div>
-              <div className='flex flex-col justify-evenly text-xs font-medium text-black-#FFFFFF80'>
+              <div className='flex flex-1 flex-col justify-evenly text-xs font-medium text-black-#FFFFFF80'>
                 <div className='text-sm text-white font-semibold line-clamp-1'>{item.title}</div>
                 <h3 className='flex gap-1'>
                   {item?.artists?.map((artist, index) => (
@@ -79,7 +79,7 @@ const SearchSongs = () => {
                 </h3>
               </div>
             </div>
-            <Link to={item?.album?.link.split('.')[0]} className='flex flex-start flex-1 text-xs text-black-#FFFFFF80 cursor-pointer hover:text-pink-#c86dd7'>
+            <Link to={item?.album?.link.split('.')[0]} className='hidden md:flex flex-start flex-1 text-xs text-black-#FFFFFF80 cursor-pointer hover:text-pink-#c86dd7'>
               {item?.album?.title}
             </Link>
             <div className='flex-none'>{moment.unix(item?.duration).format("mm:ss")}</div>

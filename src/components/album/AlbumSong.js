@@ -161,7 +161,7 @@ const AlbumSong = ({ song, isAlbum, pid }) => {
           </h3>
         </div>
       </div>
-      {!isAlbum && <div className='flex-1 line-clamp-1 hover:text-pink-#c86dd7 hover:underline'>
+      {!isAlbum && <div className='hidden min-[550px]:flex flex-1 min-[550px]:line-clamp-1 hover:text-pink-#c86dd7 hover:underline'>
         <Link to={song?.album?.link.split('.')[0]}>{song?.album?.title}</Link>
       </div>}
       <div className='flex group-hover:hidden flex-none'>{moment.unix(song?.duration).format("mm:ss")}</div>

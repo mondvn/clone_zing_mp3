@@ -17,7 +17,7 @@ const AlbumPlayList = ({ songs, isAlbum, pid }) => {
           <BiSort size={14} />
           BÀI HÁT
         </div>
-        {!isAlbum && <div>ALBUM</div>}
+        {!isAlbum && <div className='hidden min-[550px]:block'>ALBUM</div>}
         <div>THỜI GIAN</div>
       </div>
       <div className='flex flex-col'>

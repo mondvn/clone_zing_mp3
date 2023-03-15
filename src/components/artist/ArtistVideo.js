@@ -21,7 +21,7 @@ const ArtistVideo = ({ videos, thumbnail }) => {
             <AiOutlineRight size={17} />
           </Link>}
       </div>
-      <div className='grid grid-cols-3 gap-x-7'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-7'>
         {videos.items.slice(0, 3).map(item => (
           <div key={item?.encodeId}>
             <div className='flex flex-col'>

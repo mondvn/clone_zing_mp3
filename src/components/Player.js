@@ -239,7 +239,7 @@ const Player = () => {
         </div>}
       </div>
       {/* Music Player */}
-      <div className='max-w-[40vh] w-full flex-grow flex flex-col items-center justify-center text-primary-text-color'>
+      <div className=' w-full flex-grow flex flex-col items-center justify-center text-primary-text-color'>
         {/* Control music player */}
         <div className='flex justify-center items-center h-[50px] gap-[14px]'>
           {/* Shuffle */}
